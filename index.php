@@ -2,7 +2,6 @@
 include "path.php";
 require_once ROOT_PATH . "/app/Controllers/AuthController.php";
 require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
-
 ?>
 <!doctype html>
 <html lang="en">

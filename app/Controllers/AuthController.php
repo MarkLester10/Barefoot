@@ -1,5 +1,6 @@
 <?php
 require ROOT_PATH . "/app/config/db.php";
+
 require_once ROOT_PATH . "/app/Requests/AuthFormRequests.php";
 require_once ROOT_PATH . "/app/Controllers/EmailController.php";
 

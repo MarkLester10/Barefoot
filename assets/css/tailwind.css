@@ -3,4 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+  .darkmode-btn {
+    @apply fixed flex hover:bg-gray-100 items-center justify-center shadow-2xl bottom-12 right-10 z-10 rounded-full bg-gray-300 px-3 py-1 h-12 w-12 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-500 ease-in-out focus:outline-none;
+  }
 }
