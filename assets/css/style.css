@@ -1,0 +1,26 @@
+li {
+  list-style: none;
+}
+
+.form-div {
+  margin: 50px auto 50px;
+  padding: 25px 15px 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #80ced7;
+}
+
+.form-div.login {
+  margin-top: 100px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+form p {
+  font-size: 0.89em;
+}
+
+.logout {
+  color: rgb(245, 79, 79);
+}
