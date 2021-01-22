@@ -9,7 +9,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barefoot | Create Account</title>
+  <title>Barefoot | Reset Password</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/imgs/favicon/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/imgs/favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -37,7 +37,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
           clip-rule="evenodd"></path>
       </svg>
     </button>
-    <!-- login area -->
+    <!-- Reset area -->
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900 font-poppins">
       <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div class="flex flex-col overflow-y-auto md:flex-row">
@@ -48,19 +48,9 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
           <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
               <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
-                Login
+                Reset password
               </h1>
-              <form action="login.php" method="post">
-                <label class="block text-sm">
-                  <span class="text-gray-700 dark:text-gray-400">Username or Email</span>
-                  <input
-                    class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
-                    <?php echo (count($errors) > 0 && array_key_exists('username', $errors)) ? 'border border-red-500' : '' ?>"
-                    placeholder=" janedoe" name="username" value="<?php echo $username ?>" />
-                  <?php if (count($errors) > 0 && array_key_exists('username', $errors)) : ?>
-                  <small class="block mt-2 text-red-500"><?php echo $errors['username'] ?></small>
-                  <?php endif; ?>
-                </label>
+              <form action="reset-password.php" method="post">
 
                 <label class="block mt-4 text-sm">
                   <span class="text-gray-700 dark:text-gray-400">Password</span>
@@ -72,26 +62,21 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                   <small class="block mt-2 text-red-500"><?php echo $errors['password'] ?></small>
                   <?php endif; ?>
                 </label>
+
+                <label class="block mt-4 text-sm">
+                  <span class="text-gray-700 dark:text-gray-400">
+                    Confirm password
+                  </span>
+                  <input
+                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                    placeholder="***************" type="password" name="passwordConf" />
+                </label>
                 <button
                   class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent rounded-lg active:bg-purple-600 hover:bg-gray-900 focus:outline-none focus:shadow-outline-none"
-                  type="submit" name="login-btn">
-                  Login
+                  type="submit" name="reset-password-btn">
+                  Reset Password
                 </button>
               </form>
-
-              <hr class="my-8" />
-
-              <p class="mt-4">
-                <a class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
-                  href="forgot-password.php">
-                  Forgot your password?
-                </a>
-              </p>
-              <p class="mt-1">
-                <a class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline" href="signup.php">
-                  Create account
-                </a>
-              </p>
             </div>
           </div>
         </div>

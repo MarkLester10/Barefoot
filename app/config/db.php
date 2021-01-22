@@ -10,7 +10,6 @@ function dump($value) // to be deleted soon
   echo "<pre>", print_r($value, true), "</pre>";
   die();
 }
-// SELECT FUNCTIONS
 
 function execQuery($sql, $data)
 {
@@ -22,6 +21,8 @@ function execQuery($sql, $data)
   $stmt->execute();
   return $stmt;
 }
+
+// SELECT FUNCTIONS
 
 function selectAll($table, $conditions = [])
 {
@@ -112,9 +113,9 @@ function create($table, $data)
 }
 
 //UPDATE FUNCTION
-function update($table, $id, $data, $type = [])
+function update($table, $column = '', $columnData, $data)
 {
-  //$sql ="UPDATE users SET username=?, admin=?, email=?, password=? WHERE id=?"
+  //$sql ="UPDATE users SET username=?, admin=?, email=?, password=? WHERE type=?"
   $sql = "UPDATE $table SET";
 
   $i = 0;
@@ -126,8 +127,8 @@ function update($table, $id, $data, $type = [])
     }
     $i++;
   }
-  $sql = $type ? "{$sql} WHERE {$type}=?" : "{$sql} WHERE id=?";
-  $data['id'] = $id;
+  $sql = "{$sql} WHERE {$column}=?";
+  $data[$column] = $columnData;
   $stmt = execQuery($sql, $data);
   return $stmt->affected_rows;
 }

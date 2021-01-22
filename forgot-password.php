@@ -3,13 +3,13 @@ include "path.php";
 require_once ROOT_PATH . "/app/Controllers/AuthController.php";
 require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barefoot | Create Account</title>
+  <title>Barefoot | Forgot Password</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/imgs/favicon/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/imgs/favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -37,61 +37,54 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
           clip-rule="evenodd"></path>
       </svg>
     </button>
-    <!-- login area -->
-    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900 font-poppins">
+
+    <!-- Forgot password Area -->
+    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div class="flex flex-col overflow-y-auto md:flex-row">
           <div class="h-32 md:h-auto md:w-1/2">
             <img aria-hidden="true" class="object-cover w-full h-full"
-              src="<?php echo BASE_URL . '/assets/imgs/auth/login-office.jpeg' ?>" alt="Office" />
+              src="<?php echo BASE_URL . '/assets/imgs/auth/forgot-password-office.jpeg' ?>" alt="Office" />
           </div>
           <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
               <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
-                Login
+                Recover your password
               </h1>
-              <form action="login.php" method="post">
+              <?php if (isset($_SESSION['message'])) : ?>
+              <p
+                class="py-2 px-2 text-white rounded <?php echo ($_SESSION['type'] == 'success') ? 'bg-green-400' : 'bg-red-400' ?>">
+                <?php
+                  echo $_SESSION['message'];
+                  unset($_SESSION['message']);
+                  unset($_SESSION['type']);
+                  ?>
+              </p>
+              <?php else : ?>
+              <p class="py-2 text-gray-400">
+                Please enter the email address you've registered in our website, so we can assist you in recovering your
+                password.
+              </p>
+              <?php endif; ?>
+              <form action="forgot-password.php" class="mt-6" method="post">
                 <label class="block text-sm">
-                  <span class="text-gray-700 dark:text-gray-400">Username or Email</span>
+                  <span class="text-gray-700 dark:text-gray-400">Email</span>
                   <input
                     class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
-                    <?php echo (count($errors) > 0 && array_key_exists('username', $errors)) ? 'border border-red-500' : '' ?>"
-                    placeholder=" janedoe" name="username" value="<?php echo $username ?>" />
-                  <?php if (count($errors) > 0 && array_key_exists('username', $errors)) : ?>
-                  <small class="block mt-2 text-red-500"><?php echo $errors['username'] ?></small>
+                    <?php echo (count($errors) > 0 && array_key_exists('email', $errors)) ? 'border border-red-500' : '' ?>"
+                    placeholder="janedoe@email.com" type="email" name="email" />
+                  <?php if (count($errors) > 0 && array_key_exists('email', $errors)) : ?>
+                  <small class="block mt-2 text-red-500"><?php echo $errors['email'] ?></small>
                   <?php endif; ?>
                 </label>
 
-                <label class="block mt-4 text-sm">
-                  <span class="text-gray-700 dark:text-gray-400">Password</span>
-                  <input
-                    class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
-                    <?php echo (count($errors) > 0 && array_key_exists('password', $errors)) ? 'border border-red-500' : '' ?>"
-                    placeholder="***************" type="password" name="password" />
-                  <?php if (count($errors) > 0 && array_key_exists('password', $errors)) : ?>
-                  <small class="block mt-2 text-red-500"><?php echo $errors['password'] ?></small>
-                  <?php endif; ?>
-                </label>
-                <button
+                <!-- You should use a button here, as the anchor is only used for the example  -->
+                <button type="submit"
                   class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent rounded-lg active:bg-purple-600 hover:bg-gray-900 focus:outline-none focus:shadow-outline-none"
-                  type="submit" name="login-btn">
-                  Login
+                  name="forgot-password-btn">
+                  Recover password
                 </button>
               </form>
-
-              <hr class="my-8" />
-
-              <p class="mt-4">
-                <a class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
-                  href="forgot-password.php">
-                  Forgot your password?
-                </a>
-              </p>
-              <p class="mt-1">
-                <a class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline" href="signup.php">
-                  Create account
-                </a>
-              </p>
             </div>
           </div>
         </div>

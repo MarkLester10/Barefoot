@@ -59,7 +59,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                     <?php echo (count($errors) > 0 && array_key_exists('username', $errors)) ? 'border border-red-500' : '' ?>"
                     placeholder=" janedoe" name="username" value="<?php echo $username ?>" />
                   <?php if (count($errors) > 0 && array_key_exists('username', $errors)) : ?>
-                  <small class="text-red-500"><?php echo $errors['username'] ?></small>
+                  <small class="block mt-2 text-red-500"><?php echo $errors['username'] ?></small>
                   <?php endif; ?>
                 </label>
 
@@ -70,7 +70,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                     <?php echo (count($errors) > 0 && array_key_exists('email', $errors)) ? 'border border-red-500' : '' ?>"
                     placeholder="janedoe@email.com" type="email" name="email" value="<?php echo $email ?>" />
                   <?php if (count($errors) > 0 && array_key_exists('email', $errors)) : ?>
-                  <small class="text-red-500"><?php echo $errors['email'] ?></small>
+                  <small class="block mt-2 text-red-500"><?php echo $errors['email'] ?></small>
                   <?php endif; ?>
 
                 </label>
@@ -83,7 +83,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                     <?php echo (count($errors) > 0 && array_key_exists('password', $errors)) ? 'border border-red-500' : '' ?>"
                     placeholder="***************" type="password" name="password" />
                   <?php if (count($errors) > 0 && array_key_exists('password', $errors)) : ?>
-                  <small class="text-red-500"><?php echo $errors['password'] ?></small>
+                  <small class="block mt-2 text-red-500"><?php echo $errors['password'] ?></small>
                   <?php endif; ?>
                 </label>
 
