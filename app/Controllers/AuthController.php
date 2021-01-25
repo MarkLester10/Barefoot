@@ -1,6 +1,7 @@
 <?php
 require ROOT_PATH . "/app/config/db.php";
-require_once ROOT_PATH . "/app/Requests/AuthFormRequests.php";
+require_once ROOT_PATH . "/app/helpers/Sanitize.php";
+require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 require_once ROOT_PATH . "/app/Controllers/EmailController.php";
 
 $errors = array();
@@ -11,13 +12,16 @@ $email = '';
 
 // SIGN UP
 if (isset($_POST['signup-btn'])) {
-  $request = [
-    'username' => $_POST['username'],
-    'email' => $_POST['email'],
-    'password' => $_POST['password'],
-    'passwordConf' => $_POST['passwordConf'],
+  unset($_POST['signup-btn']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'username' => [RULE_REQUIRED],
+    'email' => [RULE_REQUIRED, RULE_EMAIL, [RULE_UNIQUE, 'unique' => 'email', 'table' => 'users']],
+    'password' => [RULE_REQUIRED, [RULE_MIN, 'min' => 8], [RULE_MAX, 'max' => 24]],
+    'passwordConf' => [RULE_REQUIRED, [RULE_MATCH, 'match' => 'password']]
   ];
-  $errors = validateSignUp($request);
+
+  $errors = validate($request, $rules);
 
   if (count($errors) === 0) {
     $request['password'] = password_hash($request['password'], PASSWORD_DEFAULT);
@@ -39,11 +43,13 @@ if (isset($_POST['signup-btn'])) {
 
 // LOG IN
 if (isset($_POST['login-btn'])) {
-  $request = [
-    'username' => $_POST['username'],
-    'password' => $_POST['password'],
+  unset($_POST['login-btn']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'username' => [RULE_REQUIRED],
+    'password' => [RULE_REQUIRED],
   ];
-  $errors = validateLogin($request);
+  $errors = validate($request, $rules);
   if (count($errors) === 0) {
     $user = selectOneOr('users', ['email' => $request['username'], 'username' => $request['username']]);
     if ($user) {
@@ -92,10 +98,12 @@ if (isset($_GET['token'])) {
 
 //send email
 if (isset($_POST['forgot-password-btn'])) {
-  $request = [
-    'email' => $_POST['email'],
+  unset($_POST['forgot-password-btn']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'email' => [RULE_REQUIRED, RULE_EMAIL, [RULE_EXISTS, 'exists' => 'email', 'table' => 'users']],
   ];
-  $errors = validateForgotPasswordEmail($request);
+  $errors = validate($request, $rules);
   if (count($errors) === 0) {
     $user = selectOne('users', ['email' => $request['email']]);
     $userToken = $user['token'];
@@ -118,11 +126,14 @@ if (isset($_GET['password-token'])) {
 
 //Reset the password
 if (isset($_POST['reset-password-btn'])) {
-  $request = [
-    'password' => $_POST['password'],
-    'passwordConf' => $_POST['passwordConf'],
+  unset($_POST['reset-password-btn']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'password' => [RULE_REQUIRED, [RULE_MIN, 'min' => 8], [RULE_MAX, 'max' => 24]],
+    'passwordConf' => [RULE_REQUIRED, [RULE_MATCH, 'match' => 'password']]
   ];
-  $errors = validatePasswordReset($request);
+
+  $errors = validate($request, $rules);
   $request['password'] = password_hash($request['password'], PASSWORD_DEFAULT);
   unset($request['passwordConf']);
   $email = $_SESSION['email'];

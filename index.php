@@ -30,7 +30,7 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
       <?php include ROOT_PATH . "/app/includes/messages.php"; ?>
       <h3>Welcome, <?php echo $_SESSION['username'] ?> </h3>
       <a href="index.php?logout=1" class="text-red-400">Logout</a>
-      <?php if (isset($_SESSION['verified'])) : ?>
+      <?php if ($_SESSION['verified']) : ?>
       <button class="px-2 py-3 rounded text-white mt-4 bg-green-400 block mx-auto">Your account has been verified! 🙂
       </button>
       <?php else : ?>
