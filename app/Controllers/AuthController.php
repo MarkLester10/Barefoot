@@ -65,7 +65,6 @@ if (isset($_POST['login-btn'])) {
   $username = $request['username'];
 }
 
-
 //login function
 function login($user, $message)
 {

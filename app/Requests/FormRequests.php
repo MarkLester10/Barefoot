@@ -20,7 +20,8 @@ function validate($request, $rulesArray)
       }
 
       if ($ruleName === RULE_REQUIRED && empty($value)) {
-        $errors[$attribute] = "{$attribute} is required.";
+        $attrName = ucfirst($attribute);
+        $errors[$attribute] = "{$attrName} is required.";
       }
 
       if ($ruleName === RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
@@ -37,7 +38,7 @@ function validate($request, $rulesArray)
 
       if ($ruleName === RULE_MATCH && $value !== $request[$rule['match']]) {
         $attr = $rule['match'];
-        $errors[$attr] = "Make sure to match this field with your {$rule['match']}";
+        $errors[$attr] = "Please make sure your passwords match";
       }
 
       if ($ruleName === RULE_UNIQUE) {
@@ -52,7 +53,8 @@ function validate($request, $rulesArray)
         $existsAttr = $rule['exists'];
         $user = selectOne($rule['table'], [$existsAttr => $request[$existsAttr]]);
         if (!$user) {
-          $errors[$attribute] = "{$existsAttr} doesn't exists.";
+          $attrName = ucfirst($existsAttr);
+          $errors[$attribute] = "{$attrName} doesn't exists.";
         }
       }
     }

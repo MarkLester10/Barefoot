@@ -1,7 +1,7 @@
 <?php
 include "path.php";
 require_once ROOT_PATH . "/app/Controllers/AuthController.php";
-require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
+// require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,6 +28,7 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
   <div class="container mx-auto mt-24 w-1/2">
     <div class="px-6 py-6 bg-gray-100">
       <?php include ROOT_PATH . "/app/includes/messages.php"; ?>
+      <?php if (isset($_SESSION['id'])) : ?>
       <h3>Welcome, <?php echo $_SESSION['username'] ?> </h3>
       <a href="index.php?logout=1" class="text-red-400">Logout</a>
       <?php if ($_SESSION['verified']) : ?>
@@ -39,6 +40,9 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
         Sign in to your email account and click on the verification link that we've just emailed to you at
         <strong> <?php echo $_SESSION['email'] ?> </strong>
       </div>
+      <?php endif; ?>
+      <?php else : ?>
+      <p>Travel bloggers are story tellers</p>
       <?php endif; ?>
     </div>
   </div>

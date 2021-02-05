@@ -94,7 +94,7 @@ function commit($sql, $conditions)
 }
 
 //CREATE FUNCTION
-function create($table, $data)
+function create($table, $data) //insert
 {
   // $sql = "INSERT INTO users SET username=?, admin=?, email=?, password=?";
   $sql = "INSERT INTO $table SET ";
