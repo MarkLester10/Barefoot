@@ -3,5 +3,40 @@
  */
 body {
   color: $text-color;
-  font: normal 125% / 1.4 $text-font-stack;
+  font: normal 125% /2rem $poppins;
+  font-size: 1.6rem;
+  min-height: 100vh !important;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+}
+
+.title__text {
+  font: normal 125% /1rem $poppins;
+  letter-spacing: 0.6rem;
+  font-size: 3rem;
+  z-index: 50 !important;
+  font-weight: 600;
+}
+
+.subtitle__text {
+  font: normal 125% /3rem $poppins;
+  letter-spacing: 0.3rem;
+  font-size: 2rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+  }
+}
+
+.para {
+  font: normal 125% /2.5rem $poppins;
+  font-size: 1.5rem;
+  color: $dark-grey;
+  letter-spacing: 2px;
+
+  @media screen and (max-width: 480px) {
+    line-height: 2.3rem;
+  }
 }

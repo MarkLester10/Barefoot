@@ -2,15 +2,10 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
-/// Regular font family
-/// @type List
-$text-font-stack: "Open Sans", "Helvetica Neue Light", "Helvetica Neue",
-  "Helvetica", "Arial", sans-serif !default;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/// Code (monospace) font family
-/// @type List
-$code-font-stack: "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
-  "Monaco", monospace !default;
+/// Regular font family
+$poppins: "Poppins", sans-serif !default;
 
 /// Copy text color
 /// @type Color
@@ -18,15 +13,11 @@ $text-color: rgb(34, 34, 34) !default;
 
 /// Primary  color
 /// @type Color
-$primary-color: #17223b !default;
+$primary-color: #f3f4f6 !default;
 
 /// Secondary  color
 /// @type Color
-$secondary-color: #ff6768 !default;
-
-/// Light grey
-/// @type Color
-$light-grey: #f9fafc !default;
+$secondary-color: #ff3d3d !default;
 
 /// Medium grey
 /// @type Color
@@ -34,4 +25,4 @@ $mid-grey: rgb(153, 153, 153) !default;
 
 /// Dark grey
 /// @type Color
-$dark-grey: rgb(68, 68, 68) !default;
+$dark-grey: #3b4948 !default;
