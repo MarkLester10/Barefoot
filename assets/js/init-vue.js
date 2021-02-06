@@ -5,6 +5,7 @@ new Vue({
     isFilterOpen: false,
     userDropDownOpen: false,
     isDarkModeOn: false,
+    gameTypes: ["Discover", "Trending", "Bookmarks"],
   },
   methods: {
     toggleMainMenu: function () {
@@ -30,7 +31,11 @@ new Vue({
     },
   },
   created: function () {
-    if (localStorage.theme === "dark") {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
       document.querySelector("html").classList.add("dark");
       this.isDarkModeOn = true;
     } else {
@@ -39,6 +44,3 @@ new Vue({
     }
   },
 });
-
-//add this to the as optional condition on if statement above if you want the app theme to match windows theme
-// (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
