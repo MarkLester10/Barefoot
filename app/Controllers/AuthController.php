@@ -72,9 +72,12 @@ function login($user, $message)
   $_SESSION['username'] = $user['username'];
   $_SESSION['email'] = $user['email'];
   $_SESSION['verified'] = $user['verified'];
+  $_SESSION['profile_image'] = $user['profile_image'];
+  $_SESSION['banner_title'] = $user['banner_title'];
+  $_SESSION['banner_image'] = $user['banner_image'];
   $_SESSION['message'] = $message;
   $_SESSION['type'] = 'success';
-  header("Location: " . BASE_URL . '/index.php');
+  header('Location: /');
   exit(0);
 }
 
@@ -109,7 +112,7 @@ if (isset($_POST['forgot-password-btn'])) {
     sendPasswordResetLink($request['email'], $userToken);
     $_SESSION['message'] = "We've successfully sent a reset password link to your email address.";
     $_SESSION['type'] = "success";
-    header("Location: " . BASE_URL . '/forgot-password.php');
+    header('Location:/forgot-password.php');
     exit(0);
   }
 }
@@ -119,7 +122,7 @@ if (isset($_GET['password-token'])) {
   $passwordToken = $_GET['password-token'];
   $user = selectOne('users', ['token' => $passwordToken]);
   $_SESSION['email'] = $user['email'];
-  header("Location: " . BASE_URL . '/reset-password.php');
+  header('Location: /reset-password.php');
   exit(0);
 }
 
@@ -139,7 +142,7 @@ if (isset($_POST['reset-password-btn'])) {
   if (count($errors) === 0) {
     $res = update('users', 'email',  $email, $request);
     if (count($res) > 0) {
-      header('location: ' .  BASE_URL . '/login.php');
+      header('location: login.php');
       exit(0);
     }
   }
@@ -151,7 +154,10 @@ if (isset($_GET['logout'])) {
   unset($_SESSION['username']);
   unset($_SESSION['email']);
   unset($_SESSION['verified']);
-  header('location: ' .  BASE_URL . '/index.php');
+  unset($_SESSION['profile_image']);
+  unset($_SESSION['banner_title']);
+  unset($_SESSION['banner_image']);
+  header('location: index.php');
   session_destroy();
   exit(0);
 }

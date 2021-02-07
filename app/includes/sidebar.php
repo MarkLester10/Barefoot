@@ -41,7 +41,7 @@
                   </path>
                 </svg>
               </div>
-              <a href="#"> <span
+              <a href="/"> <span
                   class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Discover</span></a>
             </label>
             <label class="section-label">

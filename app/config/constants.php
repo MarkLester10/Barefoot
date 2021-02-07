@@ -4,4 +4,4 @@ define('PASSWORD', 'bsitlangmalakas');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', 'marklester10');
-define('DB_NAME', 'webapp');
+define('DB_NAME', 'barefoot');

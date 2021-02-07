@@ -15,6 +15,7 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
 
 <body>
   <div class="app" id="app">
+    <?php include ROOT_PATH . '/app/includes/loader.php' ?>
     <button @click="toggleDarkMode" id="switchTheme" class="darkmode-btn block xl:hidden" href="#">
       <svg v-if="!isDarkModeOn" class="w-6 h-6 text-gray-800" id="moon" fill="currentColor" viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg">
@@ -167,8 +168,9 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
   </div>
   <!-- End Main Area -->
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="./assets/js/init-vue.js"></script>
+
+  <!-- Scripts Area -->
+  <?php include ROOT_PATH . '/app/includes/scripts.php' ?>
 </body>
 
 </html>

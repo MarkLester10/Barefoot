@@ -44,9 +44,6 @@
     @apply ml-3 inline-flex items-center dark:hover:bg-yellow-500  hover:bg-yellow-500 hover:text-white bg-gray-200 dark:bg-gray-700 focus:outline-none rounded-lg  pr-4 pl-3 text-gray-900 dark:text-white;
   }
 
-  .primary-btn {
-    @apply bg-black text-white hover:bg-gray-100 font-semibold px-4 py-2 rounded-md block w-full focus:outline-none sm:w-auto sm:inline-block xl:block xl:w-full;
-  }
   /* End Header area */
 
   /* Sidebar */
