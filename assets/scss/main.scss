@@ -1,13 +1,10 @@
 @charset "UTF-8";
 
-// Configuration and helpers
-@import "abstracts/variables";
-
 // Base stuff
-@import "base/base", "base/typography", "base/helpers";
+@import "base/variables", "base/typography", "base/helpers";
 
 // Components
-@import "components/button";
+@import "components/button", "components/card";
 
 // Layout-related sections
 @import "layout/index", "layout/header", "layout/footer";

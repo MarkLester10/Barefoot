@@ -1,0 +1,79 @@
+// Card for Discover
+.travel__card {
+  position: relative;
+  padding: 5rem 1rem;
+  -webkit-box-shadow: 10px 10px 25px -14px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 10px 10px 25px -14px rgba(0, 0, 0, 0.51);
+  box-shadow: 10px 10px 25px -14px rgba(0, 0, 0, 0.51);
+
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  & .bookmark__icon {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    z-index: 5 !important;
+    color: #fff;
+  }
+
+  &__title {
+    z-index: 5 !important;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+  }
+
+  &__author {
+    position: relative;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+  }
+}
+
+// Card for Trending
+
+.card {
+  transition: all 0.5s ease;
+  &:hover {
+    -webkit-box-shadow: 10px 10px 25px -14px rgba(0, 0, 0, 0.51);
+    -moz-box-shadow: 10px 10px 25px -14px rgba(0, 0, 0, 0.51);
+    box-shadow: 10px 10px 25px -14px rgba(0, 0, 0, 0.51);
+  }
+  &__img {
+    position: relative;
+    & span {
+      position: absolute;
+      top: 2rem;
+      right: 1rem;
+      z-index: 5;
+    }
+
+    & a {
+      position: absolute;
+      bottom: -1.5rem;
+      right: 1rem;
+      z-index: 5;
+    }
+  }
+
+  &__description {
+    padding: 1rem;
+
+    & .title__text {
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+  }
+}

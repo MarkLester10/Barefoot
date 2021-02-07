@@ -26,6 +26,9 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
           clip-rule="evenodd"></path>
       </svg>
     </button>
+    <!-- Header Area -->
+    <?php include ROOT_PATH . '/app/includes/header.php' ?>
+    <!-- End Header Area -->
 
     <!-- Signup Area -->
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900 font-poppins">

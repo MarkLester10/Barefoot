@@ -1,11 +1,11 @@
 new Vue({
   el: "#app",
   data: {
+    travels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     isMainMenuOpen: false,
     isFilterOpen: false,
     userDropDownOpen: false,
     isDarkModeOn: false,
-    gameTypes: ["Discover", "Trending", "Bookmarks"],
   },
   methods: {
     toggleMainMenu: function () {
@@ -32,9 +32,8 @@ new Vue({
   },
   created: function () {
     if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
+      localStorage.theme === "dark"
+      // ||(!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       document.querySelector("html").classList.add("dark");
       this.isDarkModeOn = true;

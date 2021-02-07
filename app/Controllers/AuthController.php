@@ -151,7 +151,7 @@ if (isset($_GET['logout'])) {
   unset($_SESSION['username']);
   unset($_SESSION['email']);
   unset($_SESSION['verified']);
-  header('location: ' .  BASE_URL . '/login.php');
+  header('location: ' .  BASE_URL . '/index.php');
   session_destroy();
   exit(0);
 }
