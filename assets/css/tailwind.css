@@ -25,7 +25,7 @@
   }
 
   .input-web {
-    @apply border border-transparent bg-gray-200 text-gray-900 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:bg-white focus:border-gray-300 focus:text-gray-900 w-full block dark:bg-gray-700 dark:focus:bg-gray-700 dark:focus:text-gray-100 dark:text-gray-100;
+    @apply border rounded-md border-transparent bg-gray-200 text-gray-900 pl-10 pr-4 py-2 focus:outline-none focus:bg-white focus:border-gray-300 focus:text-gray-900 w-full block dark:bg-gray-700 dark:focus:bg-gray-700 dark:focus:text-gray-100 dark:text-gray-100;
   }
 
   .profile-img {

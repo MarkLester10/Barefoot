@@ -6,10 +6,15 @@ new Vue({
     isFilterOpen: false,
     userDropDownOpen: false,
     isDarkModeOn: false,
+    isBannerEdit: false,
   },
   methods: {
     toggleMainMenu: function () {
       this.isMainMenuOpen = !this.isMainMenuOpen;
+    },
+    toggleBannerEdit: function (e) {
+      e.preventDefault();
+      this.isBannerEdit = !this.isBannerEdit;
     },
     toggleFilter: function () {
       this.isFilterOpen = !this.isFilterOpen;

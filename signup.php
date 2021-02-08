@@ -47,10 +47,10 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
               <form action="signup.php" method="post">
                 <label class="block text-sm">
                   <span class="text-gray-700 dark:text-gray-400">Username</span>
-                  <input
+                  <input type="text"
                     class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
                     <?php echo (count($errors) > 0 && array_key_exists('username', $errors)) ? 'border border-red-500' : '' ?>"
-                    placeholder=" janedoe" name="username" value="<?php echo $username ?>" />
+                    placeholder="janedoe" name="username" value="<?php echo $username ?>" />
                   <?php if (count($errors) > 0 && array_key_exists('username', $errors)) : ?>
                   <small class="block mt-2 text-red-500"><?php echo $errors['username'] ?></small>
                   <?php endif; ?>

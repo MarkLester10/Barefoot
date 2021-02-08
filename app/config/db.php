@@ -11,6 +11,7 @@ function dump($value) // to be deleted soon
   die();
 }
 
+
 function execQuery($sql, $data)
 {
   global $conn;
@@ -96,7 +97,7 @@ function commit($sql, $conditions)
 //CREATE FUNCTION
 function create($table, $data) //insert
 {
-  // $sql = "INSERT INTO users SET username=?, admin=?, email=?, password=?";
+  // $sql = "INSERT INTO users SET name=?, size=?, email=?, password=?";
   $sql = "INSERT INTO $table SET ";
   $i = 0;
   foreach ($data as $key => $value) {

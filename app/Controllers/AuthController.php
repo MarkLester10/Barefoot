@@ -23,6 +23,7 @@ if (isset($_POST['signup-btn'])) {
 
   $errors = validate($request, $rules);
 
+
   if (count($errors) === 0) {
     $request['password'] = password_hash($request['password'], PASSWORD_DEFAULT);
     unset($request['passwordConf']);
@@ -69,15 +70,28 @@ if (isset($_POST['login-btn'])) {
 function login($user, $message)
 {
   $_SESSION['id'] = $user['id'];
+  $_SESSION['profileImgRaw'] = $user['profile_image'];
+  $_SESSION['bannerImgRaw'] = $user['banner_image'];
+
+  // TODO: REFACTOR THIS
+  $_SESSION['profile_image'] =  is_null($user['profile_image'])
+    ? "https://ui-avatars.com/api/?name={$user['username']}&size=512"
+    : BASE_URL . "/assets/imgs/auth/profiles/{$user['profile_image']}";
+
+  $_SESSION['banner_image'] = is_null($user['banner_image'])
+    ? BASE_URL . "/assets/imgs/banners/banner.jpg"
+    : BASE_URL . "/assets/imgs/banners/{$user['banner_image']}";
+
   $_SESSION['username'] = $user['username'];
   $_SESSION['email'] = $user['email'];
   $_SESSION['verified'] = $user['verified'];
-  $_SESSION['profile_image'] = $user['profile_image'];
   $_SESSION['banner_title'] = $user['banner_title'];
-  $_SESSION['banner_image'] = $user['banner_image'];
   $_SESSION['message'] = $message;
   $_SESSION['type'] = 'success';
-  header('Location: /');
+
+
+
+  header("Location: " . BASE_URL . '/');
   exit(0);
 }
 
@@ -112,7 +126,7 @@ if (isset($_POST['forgot-password-btn'])) {
     sendPasswordResetLink($request['email'], $userToken);
     $_SESSION['message'] = "We've successfully sent a reset password link to your email address.";
     $_SESSION['type'] = "success";
-    header('Location:/forgot-password.php');
+    header("Location: " . BASE_URL . '/forgot-password.php');
     exit(0);
   }
 }
@@ -122,7 +136,7 @@ if (isset($_GET['password-token'])) {
   $passwordToken = $_GET['password-token'];
   $user = selectOne('users', ['token' => $passwordToken]);
   $_SESSION['email'] = $user['email'];
-  header('Location: /reset-password.php');
+  header("Location: " . BASE_URL . '/reset-password.php');
   exit(0);
 }
 
@@ -142,7 +156,7 @@ if (isset($_POST['reset-password-btn'])) {
   if (count($errors) === 0) {
     $res = update('users', 'email',  $email, $request);
     if (count($res) > 0) {
-      header('location: login.php');
+      header("Location: " . BASE_URL . '/login.php');
       exit(0);
     }
   }
@@ -157,7 +171,7 @@ if (isset($_GET['logout'])) {
   unset($_SESSION['profile_image']);
   unset($_SESSION['banner_title']);
   unset($_SESSION['banner_image']);
-  header('location: index.php');
+  header("Location: " . BASE_URL . '/');
   session_destroy();
   exit(0);
 }

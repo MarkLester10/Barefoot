@@ -40,7 +40,7 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
     <main class="xl:flex-1 xl:overflow-x-hidden">
       <section class="discover__area py-6 px-4 xl:px-0 xl:pr-4">
         <h1 class="title__text text__adaptive">Discover</h1>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 py-8">
           <div class="travel__card rounded-md lg:col-span-2">
             <div class="overlay rounded-md"></div>
             <img src="./assets/imgs/travels/demo1.jpg" class="travel__card__img rounded-md" alt="Beach">
@@ -125,7 +125,7 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
       <!-- Trending -->
       <section class="trending__area py-6 px-4 xl:px-0 xl:pr-4 ">
         <h1 class="title__text text__adaptive">Top 10 Trending 🔥 </h1>
-        <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-6 py-8">
           <div class="card rounded-md" v-for="travel in travels">
             <div class="card__img">
               <span class="pill">7 mins</span>

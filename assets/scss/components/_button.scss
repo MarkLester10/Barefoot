@@ -18,15 +18,33 @@ input:checked ~ .toggle__dot {
   z-index: 500;
 }
 
-//primary button
-.primary-btn {
-  padding: 0.5rem 1rem;
-  background-color: #000;
-  color: #fff;
+//buttons
+
+.btn {
   text-transform: uppercase;
   font-size: 1rem;
   letter-spacing: 1px;
   &:focus {
     outline: none;
   }
+  transition: all 0.2s ease;
+  @media screen and (max-width: 640px) {
+    font-size: 0.8rem;
+  }
 }
+
+.primary__btn {
+  padding: 0.5rem 2rem;
+  border: 1px solid transparent;
+  background-color: #000;
+  color: #fff;
+  @extend .btn;
+}
+
+.secondary__btn {
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #000;
+  @extend .btn;
+}
+//  <button type="submit" name="save-banner" class="secondary__btn border border-black">Edit</button>

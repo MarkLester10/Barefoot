@@ -48,7 +48,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
               <form action="login.php" method="post">
                 <label class="block text-sm">
                   <span class="text-gray-700 dark:text-gray-400">Username or Email</span>
-                  <input
+                  <input type="text"
                     class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
                     <?php echo (count($errors) > 0 && array_key_exists('username', $errors)) ? 'border border-red-500' : '' ?>"
                     placeholder=" janedoe" name="username" value="<?php echo $username ?>" />
@@ -68,7 +68,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                   <?php endif; ?>
                 </label>
                 <button
-                  class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent rounded-lg active:bg-purple-600 hover:bg-gray-900 focus:outline-none focus:shadow-outline-none"
+                  class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent active:bg-purple-600 hover:bg-gray-900 focus:outline-none focus:shadow-outline-none"
                   type="submit" name="login-btn">
                   Login
                 </button>

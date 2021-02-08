@@ -34,18 +34,18 @@
       <?php if (isset($_SESSION['id'])) : ?>
       <div class=" relative px-5 py-5 sm:py-0 sm:ml-4 sm:px-0 md:relative">
         <div class="flex items-center md:flex-row-reverse" @click="toggleUserDropDown">
-          <img class="profile-img" src="https://ui-avatars.com/api/?name=<?php echo $_SESSION['username'] ?>&size=512"
-            alt="" />
+          <img class="profile-img" src="<?php echo $_SESSION['profile_image'] ?>" alt="" />
           <span class="text-black dark:text-gray-200 ml-4 md:ml-0 md:mr-4"><?php echo $_SESSION['username'] ?></span>
         </div>
-        <div class="profile-dropDown" :class="userDropDownOpen ? 'sm:block' : 'sm:hidden'">
+        <div class="profile-dropDown rounded-md" :class="userDropDownOpen ? 'sm:block' : 'sm:hidden'">
           <a class="mt-3 profile-link" href="settings.php">Settings</a>
           <a class="mt-3 profile-link" href="index.php?logout=1"><i class="fab fa-github"></i> Logout</a>
         </div>
       </div>
-      <?php else : ?> <div class="nav-links xl:space-x-4">
+      <?php else : ?>
+      <div class="nav-links xl:space-x-4">
         <a class="nav-link-item" href="login.php">Login</a>
-        <a class="nav-link-item mt-1 sm:mt-0" href="settings.php">Register</a>
+        <a class="nav-link-item mt-1 sm:mt-0" href="signup.php">Register</a>
       </div>
       <?php endif; ?>
     </div>
