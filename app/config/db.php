@@ -94,6 +94,7 @@ function commit($sql, $conditions)
   return $records;
 }
 
+
 //CREATE FUNCTION
 function create($table, $data) //insert
 {

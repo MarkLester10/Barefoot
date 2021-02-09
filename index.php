@@ -16,6 +16,8 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
 <body>
   <div class="app" id="app">
     <?php include ROOT_PATH . '/app/includes/loader.php' ?>
+    <?php include ROOT_PATH . '/app/includes/warning.php' ?>
+
     <button @click="toggleDarkMode" id="switchTheme" class="darkmode-btn block xl:hidden" href="#">
       <svg v-if="!isDarkModeOn" class="w-6 h-6 text-gray-800" id="moon" fill="currentColor" viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg">
@@ -121,11 +123,10 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
           </div>
         </div>
       </section>
-
       <!-- Trending -->
       <section class="trending__area py-6 px-4 xl:px-0 xl:pr-4 ">
         <h1 class="title__text text__adaptive">Top 10 Trending 🔥 </h1>
-        <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-6 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 py-8">
           <div class="card rounded-md" v-for="travel in travels">
             <div class="card__img">
               <span class="pill">7 mins</span>

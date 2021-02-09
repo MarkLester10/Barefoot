@@ -2,6 +2,16 @@
 include "path.php";
 require_once ROOT_PATH . "/app/Controllers/SettingsController.php";
 require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
+
+
+$profileImage = is_null($_SESSION['profile_image'])
+  ? "https://ui-avatars.com/api/?name={$_SESSION['username']}&size=512"
+  : BASE_URL . "/assets/imgs/auth/profiles/{$_SESSION['profile_image']}";
+
+$bannerImage = is_null($_SESSION['banner_image'])
+  ? BASE_URL . "/assets/imgs/banners/banner.jpg"
+  : BASE_URL . "/assets/imgs/banners/{$_SESSION['banner_image']}";
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,7 +25,7 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
 
 <body>
   <div class="app" id="app">
-    <!-- <?php include ROOT_PATH . '/app/includes/loader.php' ?> -->
+    <?php include ROOT_PATH . '/app/includes/warning.php' ?>
     <button @click="toggleDarkMode" id="switchTheme" class="darkmode-btn block xl:hidden" href="#">
       <svg v-if="!isDarkModeOn" class="w-6 h-6 text-gray-800" id="moon" fill="currentColor" viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg">
@@ -39,14 +49,15 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
     <!-- Main area -->
     <main class="xl:flex-1 xl:overflow-x-hidden">
       <section class="profile__area py-6 px-4 xl:px-0 xl:pr-4">
-        <p class="subtitle__text text__adaptive">Profile Settings</p>
-        <form action="settings.php" class="py-4" method="post" enctype="multipart/form-data">
-          <div class="banner">
-            <?php include ROOT_PATH . '/app/includes/messages.php' ?>
-            <div class="overlay rounded-md"></div>
+        <form action="settings.php" class="py-6 bg__adaptive px-4" method="post" enctype="multipart/form-data">
+          <?php include ROOT_PATH . '/app/includes/messages.php' ?>
+          <p class="subtitle__text text__adaptive">Profile Settings</p>
+          <div class="banner mt-4">
+            <div class="overlay opacity-50 rounded-md"></div>
 
+            <!-- Banner Image -->
             <div class="banner__image absolute inset-0">
-              <label v-if="isBannerEdit"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              <label v-if="isBannerEdit"> <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
@@ -54,10 +65,10 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
                 </svg>
                 <input type="file" class="hidden" name="banner_image">
               </label>
-              <img class="h-full w-full object-cover rounded-md" src="<?php echo $_SESSION['banner_image'] ?>" alt="" />
+              <img class="h-full w-full object-cover rounded-md" src="<?php echo $bannerImage; ?>" alt="" />
             </div>
 
-
+            <!-- Banner Title -->
             <div class="banner__title">
               <input v-if="isBannerEdit" type="text" name="banner_title"
                 value="<?php echo $_SESSION['banner_title'] ?>">
@@ -66,8 +77,9 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
                 <?php echo $_SESSION['banner_title'] ?></h1>
             </div>
 
+            <!-- Profile Image -->
             <div class="banner__profile__img">
-              <img class="profile-img w-20 h-20 shadow-lg" src="<?php echo $_SESSION['profile_image'] ?>" alt="" />
+              <img class="profile-img h-20 w-20" src="<?php echo $profileImage; ?>" alt="" />
               <label v-if="isBannerEdit">
                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
@@ -77,16 +89,123 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
                 <input type="file" class="hidden" name="profile_image">
               </label>
             </div>
-
-
           </div>
 
+          <!-- Banner actions -->
           <div class="mt-6">
             <div v-if="isBannerEdit">
               <button type="submit" name="save-banner" class="primary__btn hover:bg-green-400">Save</button>
               <button type="button" @click="toggleBannerEdit" class="secondary__btn border border-black">Cancel</button>
             </div>
             <button type="button" v-else @click="toggleBannerEdit" class="primary__btn hover:bg-green-400">Edit</button>
+          </div>
+        </form>
+      </section>
+      <hr>
+      <!-- Account Settings -->
+      <section class="account__settings py-6 px-4 xl:px-0 xl:pr-4">
+        <form method="post" action="settings.php" class="py-6 bg__adaptive px-4 md:w-1/2">
+          <p class="subtitle__text text__adaptive">Account Settings</p>
+          <label class="block text-sm mt-4">
+            <span class="text-gray-700 dark:text-gray-400">Username</span>
+            <input type="text"
+              class="form__input
+                    <?php echo (count($errors) > 0 && array_key_exists('username', $errors)) ? 'border border-red-500' : '' ?>"
+              placeholder="janedoe" name="username"
+              value="<?php echo !empty($username) ? $username : $_SESSION['username']; ?>" />
+            <?php if (count($errors) > 0 && array_key_exists('username', $errors)) : ?>
+            <small class="block mt-2 text-red-500"><?php echo $errors['username'] ?></small>
+            <?php endif; ?>
+          </label>
+
+          <label class="block text-sm mt-4">
+            <span class="text-gray-700 dark:text-gray-400">Email</span>
+            <input
+              class="form__input
+                    <?php echo (count($errors) > 0 && array_key_exists('email', $errors)) ? 'border border-red-500' : '' ?>"
+              placeholder="janedoe@email.com" type="email" name="email"
+              value="<?php echo !empty($email) ? $email : $_SESSION['email']; ?>" />
+            <?php if (count($errors) > 0 && array_key_exists('email', $errors)) : ?>
+            <small class=" block mt-2 text-red-500"><?php echo $errors['email'] ?></small>
+            <?php endif; ?>
+
+          </label>
+
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Current Password</span>
+            <input
+              class="form__input
+                    <?php echo (count($errors) > 0 && array_key_exists('current_password', $errors)) ? 'border border-red-500' : '' ?>"
+              placeholder="***************" type="password" name="current_password" />
+            <?php if (count($errors) > 0 && array_key_exists('current_password', $errors)) : ?>
+            <small class="block mt-2 text-red-500"><?php echo $errors['current_password'] ?></small>
+            <?php endif; ?>
+          </label>
+
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">
+              New password
+            </span>
+            <input class="form__input" placeholder="***************" type="password" name="password" />
+          </label>
+
+          <div class="mt-6 relative">
+            <button type="submit" name="save-account" class="primary__btn hover:bg-green-400">Save</button>
+          </div>
+        </form>
+      </section>
+      <hr>
+      <!-- Social Links -->
+      <section class="account__settings py-6 px-4 xl:px-0 xl:pr-4">
+        <form method="post" action="settings.php" class="py-6 bg__adaptive px-4 md:w-1/2">
+          <p class="subtitle__text text__adaptive">Social Links</p>
+
+          <label class="block text-sm mt-4">
+            <span class="text-gray-700 dark:text-gray-400">Facebook</span>
+            <input type="text"
+              class="form__input
+                    <?php echo (count($errors) > 0 && array_key_exists('facebook', $errors)) ? 'border border-red-500' : '' ?>"
+              name="facebook" value="<?php echo $facebook ?>" />
+            <?php if (count($errors) > 0 && array_key_exists('facebook', $errors)) : ?>
+            <small class=" block mt-2 text-red-500"><?php echo $errors['facebook'] ?></small>
+            <?php endif; ?>
+          </label>
+
+          <label class="block text-sm mt-4">
+            <span class="text-gray-700 dark:text-gray-400">Instagram</span>
+            <input
+              class="form__input
+                    <?php echo (count($errors) > 0 && array_key_exists('instagram', $errors)) ? 'border border-red-500' : '' ?>"
+              type="text" name="instagram" value="<?php echo $instagram ?>" />
+            <?php if (count($errors) > 0 && array_key_exists('instagram', $errors)) : ?>
+            <small class=" block mt-2 text-red-500"><?php echo $errors['instagram'] ?></small>
+            <?php endif; ?>
+
+          </label>
+
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Twitter</span>
+            <input
+              class="form__input
+                    <?php echo (count($errors) > 0 && array_key_exists('twitter', $errors)) ? 'border border-red-500' : '' ?>"
+              type="text" name="twitter" value="<?php echo $twitter ?>" />
+            <?php if (count($errors) > 0 && array_key_exists('twitter', $errors)) : ?>
+            <small class="block mt-2 text-red-500"><?php echo $errors['twitter'] ?></small>
+            <?php endif; ?>
+          </label>
+
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">
+              Youtube
+            </span>
+            <input class="form__input" type="text" name="youtube" />
+            <?php if (count($errors) > 0 && array_key_exists('youtube', $errors)) : ?>
+            <small class="block mt-2 text-red-500"><?php echo $errors['youtube'] ?></small>
+            <?php endif; ?>
+          </label>
+
+          <div class="mt-6 relative">
+            <button type="submit" name="save-socials" class="primary__btn hover:bg-green-400">Save</button>
           </div>
         </form>
       </section>

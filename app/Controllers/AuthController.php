@@ -70,27 +70,14 @@ if (isset($_POST['login-btn'])) {
 function login($user, $message)
 {
   $_SESSION['id'] = $user['id'];
-  $_SESSION['profileImgRaw'] = $user['profile_image'];
-  $_SESSION['bannerImgRaw'] = $user['banner_image'];
-
-  // TODO: REFACTOR THIS
-  $_SESSION['profile_image'] =  is_null($user['profile_image'])
-    ? "https://ui-avatars.com/api/?name={$user['username']}&size=512"
-    : BASE_URL . "/assets/imgs/auth/profiles/{$user['profile_image']}";
-
-  $_SESSION['banner_image'] = is_null($user['banner_image'])
-    ? BASE_URL . "/assets/imgs/banners/banner.jpg"
-    : BASE_URL . "/assets/imgs/banners/{$user['banner_image']}";
-
+  $_SESSION['profile_image'] = $user['profile_image'];
+  $_SESSION['banner_image'] = $user['banner_image'];
   $_SESSION['username'] = $user['username'];
   $_SESSION['email'] = $user['email'];
   $_SESSION['verified'] = $user['verified'];
   $_SESSION['banner_title'] = $user['banner_title'];
   $_SESSION['message'] = $message;
   $_SESSION['type'] = 'success';
-
-
-
   header("Location: " . BASE_URL . '/');
   exit(0);
 }

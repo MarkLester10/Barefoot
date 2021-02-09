@@ -13,7 +13,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
 
 <body>
   <div id="app">
-    <?php include ROOT_PATH . '/app/includes/loader.php' ?>
+    <!-- <?php include ROOT_PATH . '/app/includes/loader.php' ?> -->
     <button @click="toggleDarkMode" id="switchTheme" class="darkmode-btn" href="#">
       <svg v-if="!isDarkModeOn" class="w-6 h-6 text-gray-800" id="moon" fill="currentColor" viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                 <label class="block text-sm">
                   <span class="text-gray-700 dark:text-gray-400">Username or Email</span>
                   <input type="text"
-                    class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
+                    class="form__input
                     <?php echo (count($errors) > 0 && array_key_exists('username', $errors)) ? 'border border-red-500' : '' ?>"
                     placeholder=" janedoe" name="username" value="<?php echo $username ?>" />
                   <?php if (count($errors) > 0 && array_key_exists('username', $errors)) : ?>
@@ -60,16 +60,14 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                 <label class="block mt-4 text-sm">
                   <span class="text-gray-700 dark:text-gray-400">Password</span>
                   <input
-                    class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
+                    class="form__input
                     <?php echo (count($errors) > 0 && array_key_exists('password', $errors)) ? 'border border-red-500' : '' ?>"
                     placeholder="***************" type="password" name="password" />
                   <?php if (count($errors) > 0 && array_key_exists('password', $errors)) : ?>
                   <small class="block mt-2 text-red-500"><?php echo $errors['password'] ?></small>
                   <?php endif; ?>
                 </label>
-                <button
-                  class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent active:bg-purple-600 hover:bg-gray-900 focus:outline-none focus:shadow-outline-none"
-                  type="submit" name="login-btn">
+                <button class="w-full mt-4 primary__btn" type="submit" name="login-btn">
                   Login
                 </button>
               </form>

@@ -32,7 +32,7 @@
           <div class="sm:flex sm:-mx-2 lg:block lg:mx-0">
             <label class="section-label">
               <div class="p-2 rounded-md 
-              <?php echo ($_SERVER['REQUEST_URI'] === '/') ? 'bg-yellow-500 dark:bg-yellow-500' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
+              <?php echo ($_SERVER['REQUEST_URI'] === '/') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@
                   class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Discover</span></a>
             </label>
             <label class="section-label">
-              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/trending.php') ? 'bg-yellow-500 dark:bg-yellow-500' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/trending.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@
                   class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Trending</span></a>
             </label>
             <label class="section-label">
-              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/bookmarks.php') ? 'bg-yellow-500 dark:bg-yellow-500' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/bookmarks.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">

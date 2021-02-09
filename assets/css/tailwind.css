@@ -64,12 +64,6 @@
   }
   /* end Sidebar */
 
-  /* main-area */
-  .pill {
-    @apply inline-block px-2 py-1 leading-none bg-gray-700 text-white rounded-full tracking-wide text-xs;
-  }
-  /* end main-area */
-
   .footer {
     @apply bg-white text-center flex p-6 items-center justify-center dark:bg-gray-800 dark:text-white border-t border-gray-400 transition-all duration-500 ease-in-out;
   }
@@ -82,4 +76,13 @@
   .bg__adaptive {
     @apply bg-gray-100 dark:bg-gray-800;
   }
+  /* Components */
+  .pill {
+    @apply inline-block px-2 py-1 leading-none bg-gray-700 text-white rounded-full tracking-wide text-xs;
+  }
+
+  .form__input {
+    @apply block w-full mt-1 text-sm dark:text-gray-300 dark:bg-gray-700;
+  }
+  /* end components*/
 }
