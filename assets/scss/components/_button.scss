@@ -22,15 +22,12 @@ input:checked ~ .toggle__dot {
 
 .btn {
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   &:focus {
     outline: none;
   }
   transition: all 0.2s ease;
-  @media screen and (max-width: 640px) {
-    font-size: 0.8rem;
-  }
 }
 
 .primary__btn {
@@ -47,4 +44,13 @@ input:checked ~ .toggle__dot {
   color: #000;
   @extend .btn;
 }
+
+.danger__btn {
+  padding: 0.5rem 2rem;
+  border: 1px solid transparent;
+  background-color: $danger;
+  color: #fff;
+  @extend .btn;
+}
+
 //  <button type="submit" name="save-banner" class="secondary__btn border border-black">Edit</button>

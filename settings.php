@@ -49,9 +49,10 @@ $bannerImage = is_null($_SESSION['banner_image'])
     <!-- Main area -->
     <main class="xl:flex-1 xl:overflow-x-hidden">
       <section class="profile__area py-6 px-4 xl:px-0 xl:pr-4">
-        <form action="settings.php" class="py-6 bg__adaptive px-4" method="post" enctype="multipart/form-data">
+        <form action="settings.php" class="py-6 bg__adaptive px-4 shadow-md" method="post"
+          enctype="multipart/form-data">
           <?php include ROOT_PATH . '/app/includes/messages.php' ?>
-          <p class="subtitle__text text__adaptive">Profile Settings</p>
+          <h1 class="subtitle__text text__adaptive">Profile Settings</h1>
           <div class="banner mt-4">
             <div class="overlay opacity-50 rounded-md"></div>
 
@@ -104,8 +105,8 @@ $bannerImage = is_null($_SESSION['banner_image'])
       <hr>
       <!-- Account Settings -->
       <section class="account__settings py-6 px-4 xl:px-0 xl:pr-4">
-        <form method="post" action="settings.php" class="py-6 bg__adaptive px-4 md:w-1/2">
-          <p class="subtitle__text text__adaptive">Account Settings</p>
+        <form method="post" action="settings.php" class="py-6 bg__adaptive px-4 md:w-1/2 shadow-md">
+          <h1 class="subtitle__text text__adaptive">Account Settings</h1>
           <label class="block text-sm mt-4">
             <span class="text-gray-700 dark:text-gray-400">Username</span>
             <input type="text"
@@ -156,9 +157,9 @@ $bannerImage = is_null($_SESSION['banner_image'])
       </section>
       <hr>
       <!-- Social Links -->
-      <section class="account__settings py-6 px-4 xl:px-0 xl:pr-4">
-        <form method="post" action="settings.php" class="py-6 bg__adaptive px-4 md:w-1/2">
-          <p class="subtitle__text text__adaptive">Social Links</p>
+      <section class="account__socials py-6 px-4 xl:px-0 xl:pr-4">
+        <form method="post" action="settings.php" class="py-6 bg__adaptive px-4 md:w-1/2 shadow-md">
+          <h1 class="subtitle__text text__adaptive">Social Links</h1>
 
           <label class="block text-sm mt-4">
             <span class="text-gray-700 dark:text-gray-400">Facebook</span>
@@ -198,7 +199,7 @@ $bannerImage = is_null($_SESSION['banner_image'])
             <span class="text-gray-700 dark:text-gray-400">
               Youtube
             </span>
-            <input class="form__input" type="text" name="youtube" />
+            <input class="form__input" type="text" value="<?php echo $youtube; ?>" name="youtube" />
             <?php if (count($errors) > 0 && array_key_exists('youtube', $errors)) : ?>
             <small class="block mt-2 text-red-500"><?php echo $errors['youtube'] ?></small>
             <?php endif; ?>
@@ -209,10 +210,43 @@ $bannerImage = is_null($_SESSION['banner_image'])
           </div>
         </form>
       </section>
+
+      <hr>
+      <!-- Account Deletion -->
+      <section class="account__deletion py-6 px-4 xl:px-0 xl:pr-4">
+        <div class="py-6 bg__adaptive px-4 md:w-1/2 shadow-md">
+          <h1 class="subtitle__text text__adaptive">Account Deletion</h1>
+          <p class="para mt-6 px-4 py-2 border">
+            Hello, after deleting the account, the account
+            will be destroyed and all post and comments related
+            to this account will be deleted. <br> <br>
+            <strong>Please note:</strong> This operation cannot be undone.
+          </p>
+          <div class="mt-6 relative">
+            <button type="button" @click="toggleModal" name="save-socials" class="danger__btn hover:bg-red-400">Delete
+              Immediately</button>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
   <!-- End Main Area -->
+
+  <!-- Modal -->
+  <div class="confirmation__modal" :class="{'active':isModalOpen}">
+    <form action="settings.php" class="rounded-md" method="post">
+      <p class="subtitle__text">
+        Are you sure you want to delete your account?
+      </p>
+      <div class="mt-4 space-x-4">
+        <button type="button" class="secondary__btn border border-black" @click="toggleModal">Cancel</button>
+        <button type="submit" name="delete-account" class="danger__btn hover:bg-red-400">Delete</button>
+      </div>
+    </form>
   </div>
+  </div>
+
+
 
   <!-- Scripts Area -->
   <?php include ROOT_PATH . '/app/includes/scripts.php' ?>

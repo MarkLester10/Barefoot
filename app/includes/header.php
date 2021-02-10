@@ -42,7 +42,7 @@
         </div>
         <div class="profile-dropDown rounded-md" :class="userDropDownOpen ? 'sm:block' : 'sm:hidden'">
           <a class="mt-3 profile-link" href="settings.php">Settings</a>
-          <a class="mt-3 profile-link" href="index.php?logout=1"><i class="fab fa-github"></i> Logout</a>
+          <a class="mt-3 profile-link" href="/logout.php"><i class="fab fa-github"></i> Logout</a>
         </div>
       </div>
       <?php else : ?>

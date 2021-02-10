@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <section class="bg-gray-100 xl:bg-white dark:bg-gray-800 xl:dark:bg-gray-900 xl:w-72 xl:pl-4 xl:pr-8">
+  <section class="sidebar__section">
     <div class="flex justify-between px-4 py-3 xl:hidden">
       <?php if ($_SERVER['REQUEST_URI'] !== '/login.php' || '/signup.php' || '/forgot-password.php' || '/reset-password') : ?>
       <div class="relative mr-4 max-w-md w-full">
@@ -28,11 +28,11 @@
 
         <!-- First Section -->
         <div class="section pb-6">
-          <span class="text-lg font-semibold text-gray-900 dark:text-gray-100 tracking-widest">Menu</span>
+          <span class="sidebar__section__title">Menu</span>
           <div class="sm:flex sm:-mx-2 lg:block lg:mx-0">
             <label class="section-label">
               <div class="p-2 rounded-md 
-              <?php echo ($_SERVER['REQUEST_URI'] === '/') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
+              <?php echo ($_SERVER['REQUEST_URI'] === '/') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -41,11 +41,11 @@
                   </path>
                 </svg>
               </div>
-              <a href="/"> <span
-                  class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Discover</span></a>
+              <a href="/"> <span class="sidebar__link">Discover</span></a>
             </label>
+
             <label class="section-label">
-              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/trending.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/trending.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -53,11 +53,23 @@
                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                 </svg>
               </div>
-              <a href="trending.php"> <span
-                  class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Trending</span></a>
+              <a href="trending.php"> <span class="sidebar__link">Trending</span></a>
             </label>
+
             <label class="section-label">
-              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/bookmarks.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text-gray-900 dark:text-white  dark:bg-gray-800' ?>
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/blogs/collection.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
+              ">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+              </div>
+              <a href="/blogs/collection.php"> <span class="sidebar__link">My Travels</span></a>
+            </label>
+
+            <label class="section-label">
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/bookmarks.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -65,8 +77,7 @@
                     d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                 </svg>
               </div>
-              <a href="#"> <span
-                  class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Bookmarks</span></a>
+              <a href="#"> <span class="sidebar__link">Bookmarks</span></a>
             </label>
 
           </div>
@@ -75,11 +86,11 @@
 
         <!-- Second Section -->
         <div class="section sm:pb-6">
-          <span class="text-lg font-semibold text-gray-900 dark:text-gray-100 tracking-widest">Travel
+          <span class="sidebar__section__title">Travel
             Categories</span>
           <div class="sm:flex sm:-mx-2 lg:block lg:mx-0">
             <label class="section-label">
-              <div class="p-2 rounded-md text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800">
+              <div class="section-label-container">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -89,11 +100,10 @@
                     d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
                 </svg>
               </div>
-              <a href="#"> <span
-                  class="ml-2 text-gray-900 font-medium dark:text-white tracking-widest">Styles</span></a>
+              <a href="#"> <span class="sidebar__link">Styles</span></a>
             </label>
             <label class="section-label">
-              <div class="p-2 rounded-md text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800">
+              <div class="section-label-container">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -101,11 +111,10 @@
                   </path>
                 </svg>
               </div>
-              <a href="#"> <span
-                  class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Activities</span></a>
+              <a href="#"> <span class="sidebar__link">Activities</span></a>
             </label>
             <label class="section-label">
-              <div class="p-2 rounded-md text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800">
+              <div class="section-label-container">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -113,11 +122,10 @@
                   </path>
                 </svg>
               </div>
-              <a href="#"> <span
-                  class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Planning</span></a>
+              <a href="#"> <span class="sidebar__link">Planning</span></a>
             </label>
             <label class="section-label">
-              <div class="p-2 rounded-md text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800">
+              <div class="section-label-container">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -125,8 +133,7 @@
                   </path>
                 </svg>
               </div>
-              <a href="#"> <span
-                  class="ml-2 font-medium text-gray-900 dark:text-white tracking-widest">Inspiration</span></a>
+              <a href="#"> <span class="sidebar__link">Inspiration</span></a>
             </label>
           </div>
         </div>

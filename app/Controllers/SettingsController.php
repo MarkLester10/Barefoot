@@ -1,19 +1,21 @@
 <?php
 require ROOT_PATH . "/app/config/db.php";
+require_once ROOT_PATH . "/app/helpers/Redirect.php";
 require_once ROOT_PATH . "/app/helpers/Sanitize.php";
 require_once ROOT_PATH . "/app/helpers/ImageHelper.php";
 require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 
+$userId = $_SESSION['id'];
+$socials = selectOne('socials', ['user_id' => $userId]);
 
 $errors = array();
+
 $username = '';
 $email = '';
-$facebook = '';
-$instagram = '';
-$twitter = '';
-$youtube = '';
-
-$userId = $_SESSION['id'];
+$facebook = empty($socials) ? '' : $socials['facebook'];
+$instagram = empty($socials) ? '' : $socials['instagram'];
+$twitter = empty($socials) ? '' : $socials['twitter'];
+$youtube = empty($socials) ? '' : $socials['youtube'];
 
 // SAVE PROFILE BANNER
 if (isset($_POST['save-banner'])) {
@@ -27,13 +29,11 @@ if (isset($_POST['save-banner'])) {
   // Banner Title
   if (count($errors) === 0) {
     $res = update('users', 'id', $userId, ['banner_title' =>  $request['banner_title']]);
-    if ($res > 0) {
-      $_SESSION['banner_title'] = $request['banner_title'];
-      $_SESSION['message'] = "Banner updated 🥳";
-      $_SESSION['type'] = "success";
-      header("Location: " . BASE_URL . '/settings.php');
-      exit(0);
+    if ($res < 0) {
+      redirectWithMessage('settings', ['error' => 'There is an error updating your banner ❌']);
     }
+    $_SESSION['banner_title'] = $request['banner_title'];
+    redirectWithMessage('settings', ['success' => 'Banner updated 🥳']);
   }
 
   // Profile Image
@@ -43,13 +43,11 @@ if (isset($_POST['save-banner'])) {
     }
     $profileImage = upload($_FILES, 'profile_image', 'auth/profiles');
     $res = update('users', 'id', $userId, ['profile_image' => $profileImage]);
-    if ($res > 0) {
-      $_SESSION['profile_image'] = $profileImage;
-      $_SESSION['message'] = "Profile updated 🤩";
-      $_SESSION['type'] = "success";
-      header("Location: " . BASE_URL . '/settings.php');
-      exit(0);
+    if ($res < 0) {
+      redirectWithMessage('settings', ['error' => 'There is an error updating your profile ❌']);
     }
+    $_SESSION['profile_image'] = $profileImage;
+    redirectWithMessage('settings', ['success' => 'Profile updated 🤩']);
   }
 
   // Banner Image
@@ -59,13 +57,11 @@ if (isset($_POST['save-banner'])) {
     }
     $bannerImage = upload($_FILES, 'banner_image', 'banners');
     $res = update('users', 'id', $userId, ['banner_image' => $bannerImage]);
-    if ($res > 0) {
-      $_SESSION['banner_image'] = $bannerImage;
-      $_SESSION['message'] = "Profile updated 🤩";
-      $_SESSION['type'] = "success";
-      header("Location: " . BASE_URL . '/settings.php');
-      exit(0);
+    if ($res < 0) {
+      redirectWithMessage('settings', ['error' => 'There is an error updating your banner image ❌']);
     }
+    $_SESSION['banner_image'] = $bannerImage;
+    redirectWithMessage('settings', ['success' => 'Banner updated 🤩']);
   }
 }
 
@@ -107,14 +103,12 @@ function changePassword($request, $userId)
     'email' => $request['email'],
     'password' => password_hash($request['password'], PASSWORD_DEFAULT)
   ]);
-  if ($res >  0) {
-    $_SESSION['username'] = $request['username'];
-    $_SESSION['email'] = $request['email'];
-    $_SESSION['message'] = "Account updated 🤩";
-    $_SESSION['type'] = "success";
-    header("Location: " . BASE_URL . '/settings.php');
-    exit(0);
+  if ($res < 0) {
+    redirectWithMessage('settings', ['error' => 'There is an error updating your credentials ❌']);
   }
+  $_SESSION['username'] = $request['username'];
+  $_SESSION['email'] = $request['email'];
+  redirectWithMessage('settings', ['success' => 'Account updated 🤩']);
 }
 
 
@@ -131,8 +125,31 @@ if (isset($_POST['save-socials'])) {
   $errors = validate($request, $rules);
 
   if (count($errors) === 0) {
-    $userSocial = selectOne('socials', ['id' => $userId]);
-    // TODO: UPDATE OR CREATE
+    //TODO: create a createOrUpdate helper
+    $res = '';
+    if (empty($socials)) {
+      $res = create(
+        'socials',
+        [
+          'user_id' => $userId,
+          'facebook' => $request['facebook'],
+          'twitter' => $request['twitter'],
+          'instagram' => $request['instagram'],
+          'youtube' => $request['youtube']
+        ]
+      );
+    }
+    $res = update('socials', 'user_id', $userId, [
+      'facebook' => $request['facebook'],
+      'twitter' => $request['twitter'],
+      'instagram' => $request['instagram'],
+      'youtube' => $request['youtube']
+    ]);
+
+    if ($res < 0) {
+      redirectWithMessage('settings', ['error' => 'There is an error updating your socials ❌']);
+    }
+    redirectWithMessage('settings', ['success' => 'Socials Added Successfully 💟']);
   }
   $facebook = $request['facebook'];
   $instagram = $request['instagram'];
@@ -140,12 +157,14 @@ if (isset($_POST['save-socials'])) {
   $youtube = $request['youtube'];
 }
 
-// TODO: REFACTOR
-// redirectWithMessage($message, $type, $url);
-// redirect($url);
 
+//ACCOUNT DELETION
 
-// $_SESSION['message'] = "Social links added 🚀";
-// $_SESSION['type'] = "success";
-// header("Location: " . BASE_URL . '/settings.php');
-// exit(0);
+// TODO: Add Password Confirmation before deletion
+if (isset($_POST['delete-account'])) {
+  $res = delete('users',  $userId);
+  if ($res < 0) {
+    redirectWithMessage('settings', ['error' => 'There is an error deleting your account ❌']);
+  }
+  redirect('logout');
+}

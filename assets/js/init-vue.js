@@ -7,10 +7,14 @@ new Vue({
     userDropDownOpen: false,
     isDarkModeOn: false,
     isBannerEdit: false,
+    isModalOpen: false,
   },
   methods: {
     toggleMainMenu: function () {
       this.isMainMenuOpen = !this.isMainMenuOpen;
+    },
+    toggleModal: function () {
+      this.isModalOpen = !this.isModalOpen;
     },
     toggleBannerEdit: function (e) {
       e.preventDefault();

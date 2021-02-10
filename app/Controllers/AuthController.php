@@ -1,5 +1,6 @@
 <?php
 require ROOT_PATH . "/app/config/db.php";
+require_once ROOT_PATH . "/app/helpers/Redirect.php";
 require_once ROOT_PATH . "/app/helpers/Sanitize.php";
 require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 require_once ROOT_PATH . "/app/Controllers/EmailController.php";
@@ -76,10 +77,7 @@ function login($user, $message)
   $_SESSION['email'] = $user['email'];
   $_SESSION['verified'] = $user['verified'];
   $_SESSION['banner_title'] = $user['banner_title'];
-  $_SESSION['message'] = $message;
-  $_SESSION['type'] = 'success';
-  header("Location: " . BASE_URL . '/');
-  exit(0);
+  redirectWithMessage('/', ['success' => $message]);
 }
 
 //account verification token
@@ -111,10 +109,7 @@ if (isset($_POST['forgot-password-btn'])) {
     $user = selectOne('users', ['email' => $request['email']]);
     $userToken = $user['token'];
     sendPasswordResetLink($request['email'], $userToken);
-    $_SESSION['message'] = "We've successfully sent a reset password link to your email address.";
-    $_SESSION['type'] = "success";
-    header("Location: " . BASE_URL . '/forgot-password.php');
-    exit(0);
+    redirectWithMessage('forgot-password', ['success' => 'We\'ve successfully sent a reset password link to your email address.']);
   }
 }
 
@@ -123,8 +118,7 @@ if (isset($_GET['password-token'])) {
   $passwordToken = $_GET['password-token'];
   $user = selectOne('users', ['token' => $passwordToken]);
   $_SESSION['email'] = $user['email'];
-  header("Location: " . BASE_URL . '/reset-password.php');
-  exit(0);
+  redirect('reset-password');
 }
 
 //Reset the password
@@ -143,22 +137,7 @@ if (isset($_POST['reset-password-btn'])) {
   if (count($errors) === 0) {
     $res = update('users', 'email',  $email, $request);
     if (count($res) > 0) {
-      header("Location: " . BASE_URL . '/login.php');
-      exit(0);
+      redirect('login');
     }
   }
-}
-
-//LOGOUT
-if (isset($_GET['logout'])) {
-  unset($_SESSION['id']);
-  unset($_SESSION['username']);
-  unset($_SESSION['email']);
-  unset($_SESSION['verified']);
-  unset($_SESSION['profile_image']);
-  unset($_SESSION['banner_title']);
-  unset($_SESSION['banner_image']);
-  header("Location: " . BASE_URL . '/');
-  session_destroy();
-  exit(0);
 }
