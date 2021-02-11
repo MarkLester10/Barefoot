@@ -17,4 +17,11 @@
 
 p.para {
   font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.text__danger {
+  color: $danger;
+  opacity: 0.8;
+  font-style: italic;
 }

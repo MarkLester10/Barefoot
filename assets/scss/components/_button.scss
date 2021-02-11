@@ -24,8 +24,12 @@ input:checked ~ .toggle__dot {
   text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 1px;
+  transition: all 0.5 ease;
   &:focus {
     outline: none;
+  }
+  &:active {
+    transform: scale(0.9);
   }
   transition: all 0.2s ease;
 }

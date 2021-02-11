@@ -63,7 +63,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                 <label class="block text-sm">
                   <span class="text-gray-700 dark:text-gray-400">Email</span>
                   <input
-                    class="block w-full mt-1 text-sm dark:bg-gray-700 focus:border-none focus:outline-none focus:shadow-outline-none dark:text-gray-300 dark:focus:shadow-outline-gray form-input
+                    class="form__input
                     <?php echo (count($errors) > 0 && array_key_exists('email', $errors)) ? 'border border-red-500' : '' ?>"
                     placeholder="janedoe@email.com" type="email" name="email" />
                   <?php if (count($errors) > 0 && array_key_exists('email', $errors)) : ?>
@@ -72,9 +72,7 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
                 </label>
 
                 <!-- You should use a button here, as the anchor is only used for the example  -->
-                <button type="submit"
-                  class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent rounded-lg active:bg-purple-600 hover:bg-gray-900 focus:outline-none focus:shadow-outline-none"
-                  name="forgot-password-btn">
+                <button type="submit" class="w-full mt-4 primary__btn" name="forgot-password-btn">
                   Recover password
                 </button>
               </form>

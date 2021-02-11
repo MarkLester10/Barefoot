@@ -2,8 +2,10 @@
   <div class="px-4 py-3 flex justify-between xl:w-72 xl:justify-center">
     <div>
       <a href="/">
-        <img src="./assets/imgs/logo__dark.png" v-if="!isDarkModeOn" class="w-1/2 lg:w-7/12" alt="Avatar Icon" />
-        <img src="./assets/imgs/logo__white.png" v-else class="w-1/2 lg:w-7/12" alt="Avatar Icon" />
+        <img src="<?php echo BASE_URL . '/assets/imgs/logo__dark.png"' ?> v-if=" !isDarkModeOn" class="w-1/2 lg:w-7/12"
+          alt="Avatar Icon" />
+        <img src="<?php echo BASE_URL . '/assets/imgs/logo__white.png' ?>" v-else class="w-1/2 lg:w-7/12"
+          alt="Avatar Icon" />
       </a>
     </div>
     <div class="flex sm:hidden">
@@ -41,7 +43,7 @@
           <span class="text-black dark:text-gray-200 ml-4 md:ml-0 md:mr-4"><?php echo $_SESSION['username'] ?></span>
         </div>
         <div class="profile-dropDown rounded-md" :class="userDropDownOpen ? 'sm:block' : 'sm:hidden'">
-          <a class="mt-3 profile-link" href="settings.php">Settings</a>
+          <a class="mt-3 profile-link" href="/account/settings.php">Settings</a>
           <a class="mt-3 profile-link" href="/logout.php"><i class="fab fa-github"></i> Logout</a>
         </div>
       </div>

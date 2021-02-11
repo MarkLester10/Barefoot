@@ -135,6 +135,22 @@ function update($table, $column = '', $columnData, $data)
   return $stmt->affected_rows;
 }
 
+//CREATE OR UPDATE FUNCTION
+function createOrUpdate($table, $selectedData, $column, $data)
+{
+
+  $isUpdating = ($selectedData) ? 1 : 0;
+  $uniqueColumn = key($column);
+  $uniqueColumnVal = current($column);
+  $createdData = array_merge($data, [$uniqueColumn => $uniqueColumnVal]);
+  $res = ($isUpdating)
+    ? update($table, $uniqueColumn, $uniqueColumnVal, $data)
+    : create($table, $createdData);
+
+  return $res;
+}
+
+
 
 //DELETE FUNCTION
 function delete($table, $id)

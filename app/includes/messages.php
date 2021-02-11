@@ -1,5 +1,5 @@
 <?php if (isset($_SESSION['message'])) : ?>
-<p class="py-2 px-2 mb-4 inline-block text-white <?php echo ($_SESSION['type'] == 'success') ? 'bg-green-400' : 'bg-red-400' ?>"
+<p class="py-2 px-2 rounded-md mb-4 inline-block text-white <?php echo ($_SESSION['type'] == 'success') ? 'bg-green-400' : 'bg-red-400' ?>"
   id="message">
   <?php
     echo $_SESSION['message'];
