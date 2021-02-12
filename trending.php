@@ -1,7 +1,8 @@
 <?php
 include "path.php";
 require_once ROOT_PATH . "/app/Controllers/AuthController.php";
-// require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
+require_once ROOT_PATH . "/app/Controllers/HomeController.php";
+
 ?>
 <!doctype html>
 <html lang="en">

@@ -37,28 +37,18 @@ require_once ROOT_PATH . "/app/middlewares/GuestsMiddleware.php";
         <div class="flex flex-col overflow-y-auto md:flex-row">
           <div class="h-32 md:h-auto md:w-1/2">
             <img aria-hidden="true" class="object-cover w-full h-full"
-              src="<?php echo BASE_URL . '/assets/imgs/auth/forgot-password-office.jpeg' ?>" alt="Office" />
+              src="<?php echo BASE_URL . '/assets/imgs/auth/forgot-password.png' ?>" alt="Office" />
           </div>
           <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
               <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Recover your password
               </h1>
-              <?php if (isset($_SESSION['message'])) : ?>
-              <p
-                class="py-2 px-2 text-white rounded <?php echo ($_SESSION['type'] == 'success') ? 'bg-green-400' : 'bg-red-400' ?>">
-                <?php
-                  echo $_SESSION['message'];
-                  unset($_SESSION['message']);
-                  unset($_SESSION['type']);
-                  ?>
-              </p>
-              <?php else : ?>
+              <?php include ROOT_PATH . '/app/includes/messages.php' ?>
               <p class="py-2 text-sm text-gray-400">
                 Please enter the email address you've registered in our website, so we can assist you in recovering your
                 password.
               </p>
-              <?php endif; ?>
               <form action="forgot-password.php" class="mt-6" method="post">
                 <label class="block text-sm">
                   <span class="text-gray-700 dark:text-gray-400">Email</span>

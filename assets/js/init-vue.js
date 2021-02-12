@@ -1,7 +1,18 @@
 new Vue({
   el: "#app",
   data: {
-    travels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    travelBlogs: [
+      "styles",
+      "activities",
+      "planning",
+      "inspiration",
+      "styles",
+      "inspiration",
+      "planning",
+      "activities",
+      "activities",
+      "styles",
+    ],
     isMainMenuOpen: false,
     isFilterOpen: false,
     userDropDownOpen: false,
@@ -17,7 +28,6 @@ new Vue({
       this.isModalOpen = !this.isModalOpen;
     },
     toggleBannerEdit: function (e) {
-      e.preventDefault();
       this.isBannerEdit = !this.isBannerEdit;
     },
     toggleFilter: function () {

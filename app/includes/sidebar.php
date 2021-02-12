@@ -53,11 +53,12 @@
                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                 </svg>
               </div>
-              <a href="trending.php"> <span class="sidebar__link">Trending</span></a>
+              <a href="/trending.php"> <span class="sidebar__link">Trending</span></a>
             </label>
 
+            <?php if (isset($_SESSION['id'])) : ?>
             <label class="section-label">
-              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/blogs/collection.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/collections/travels.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +66,20 @@
                     d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                 </svg>
               </div>
-              <a href="/blogs/collection.php"> <span class="sidebar__link">My Travels</span></a>
+              <a href="/collections/travels.php"> <span class="sidebar__link">My Travels</span></a>
+            </label>
+
+            <label class="section-label">
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/travels/create.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
+              ">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-line join="round" stroke-width="2"
+                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+
+              </div>
+              <a href="/travels/create.php"> <span class="sidebar__link">Create Story</span></a>
             </label>
 
             <label class="section-label">
@@ -79,6 +93,7 @@
               </div>
               <a href="#"> <span class="sidebar__link">Bookmarks</span></a>
             </label>
+            <?php endif; ?>
 
           </div>
         </div>
@@ -89,52 +104,18 @@
           <span class="sidebar__section__title">Travel
             Categories</span>
           <div class="sm:flex sm:-mx-2 lg:block lg:mx-0">
+            <?php foreach ($categories as $category) : ?>
             <label class="section-label">
-              <div class="section-label-container">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z">
-                  </path>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
-                </svg>
+              <div
+                class="section-label-container <?php echo ($_GET['category'] === $category['slug']) ? 'bg-red-400 dark:bg-red-400' : '' ?>">
+                <img class="w-6 h-6" src='<?php echo BASE_URL . "/assets/imgs/categoryicons/{$category['icon']}" ?>'
+                  alt="Styles">
               </div>
-              <a href="#"> <span class="sidebar__link">Styles</span></a>
+              <a
+                href="/travels/collections.php?category=<?php echo $category['slug'] ?>&id=<?php echo $category['id'] ?>">
+                <span class="sidebar__link"><?php echo $category['name'] ?></span></a>
             </label>
-            <label class="section-label">
-              <div class="section-label-container">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
-                  </path>
-                </svg>
-              </div>
-              <a href="#"> <span class="sidebar__link">Activities</span></a>
-            </label>
-            <label class="section-label">
-              <div class="section-label-container">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z">
-                  </path>
-                </svg>
-              </div>
-              <a href="#"> <span class="sidebar__link">Planning</span></a>
-            </label>
-            <label class="section-label">
-              <div class="section-label-container">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
-                  </path>
-                </svg>
-              </div>
-              <a href="#"> <span class="sidebar__link">Inspiration</span></a>
-            </label>
+            <?php endforeach; ?>
           </div>
         </div>
         <!-- end second Section -->

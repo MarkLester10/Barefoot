@@ -1,5 +1,5 @@
 <?php
-require ROOT_PATH . "/app/config/db.php";
+require_once ROOT_PATH . "/app/config/db.php";
 require_once ROOT_PATH . "/app/helpers/Redirect.php";
 require_once ROOT_PATH . "/app/helpers/Sanitize.php";
 require_once ROOT_PATH . "/app/helpers/ImageHelper.php";
@@ -7,6 +7,7 @@ require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 
 $userId = $_SESSION['id'];
 $socials = selectOne('socials', ['user_id' => $userId]);
+$user = selectOne('users', ['id' => $userId]);
 $errors = array();
 
 $username = '';
@@ -77,9 +78,8 @@ if (isset($_POST['save-account'])) {
   $errors = validate($request, $rules);
 
   if (count($errors) === 0) {
-    $user = selectOne('users', ['id' => $userId]);
     if ($user) {
-      (password_verify($request['current_password'], $user['password']))
+      (passwordVerify($request['current_password'], $user['password']))
         ? changePassword($request, $userId)
         : $errors['current_password'] = 'Password do not match in our database.';
     } else {
@@ -90,23 +90,6 @@ if (isset($_POST['save-account'])) {
   $username =  $request['username'];
   $email =  $request['email'];
 }
-
-
-function changePassword($request, $userId)
-{
-  $res = update('users', 'id', $userId, [
-    'username' => $request['username'],
-    'email' => $request['email'],
-    'password' => password_hash($request['password'], PASSWORD_DEFAULT)
-  ]);
-  if ($res < 0) {
-    redirectWithMessage('account/settings', ['error' => 'There is an error updating your credentials ❌']);
-  }
-  $_SESSION['username'] = $request['username'];
-  $_SESSION['email'] = $request['email'];
-  redirectWithMessage('account/settings', ['success' => 'Account updated 🤩']);
-}
-
 
 // EDIT SOCIALS
 if (isset($_POST['save-socials'])) {
@@ -133,11 +116,44 @@ if (isset($_POST['save-socials'])) {
 
 
 //ACCOUNT DELETION
-
-// TODO: Add Password Confirmation before deletion
 if (isset($_POST['delete-account'])) {
-  $res = delete('users',  $userId);
-  ($res !== 1)
-    ? redirectWithMessage('account/account/settings', ['error' => 'There is an error deleting your account ❌'])
-    : redirect('logout');
+  unset($_POST['save-account']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'password' => [RULE_REQUIRED],
+  ];
+
+  $errors = validate($request, $rules);
+  if (count($errors) === 0) {
+    if (passwordVerify($request['password'], $user['password'])) {
+      $res = delete('users',  $userId);
+      ($res !== 1)
+        ? redirectWithMessage('account/settings', ['error' => 'There is an error deleting your account ❌'])
+        : redirect('logout');
+    } else {
+      $errors['password'] = 'Password do not match in our database.';
+    }
+  }
+}
+
+// Password verification helper
+function passwordVerify($password, $hashpassword)
+{
+  return password_verify($password, $hashpassword);
+}
+
+// Change Password
+function changePassword($request, $userId)
+{
+  $res = update('users', 'id', $userId, [
+    'username' => $request['username'],
+    'email' => $request['email'],
+    'password' => password_hash($request['password'], PASSWORD_DEFAULT)
+  ]);
+  if ($res < 0) {
+    redirectWithMessage('account/settings', ['error' => 'There is an error updating your credentials ❌']);
+  }
+  $_SESSION['username'] = $request['username'];
+  $_SESSION['email'] = $request['email'];
+  redirectWithMessage('account/settings', ['success' => 'Account updated 🤩']);
 }

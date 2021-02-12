@@ -1,5 +1,5 @@
 <?php
-require ROOT_PATH . "/app/config/db.php";
+require_once ROOT_PATH . "/app/config/db.php";
 require_once ROOT_PATH . "/app/helpers/Redirect.php";
 require_once ROOT_PATH . "/app/helpers/Sanitize.php";
 require_once ROOT_PATH . "/app/Requests/FormRequests.php";
@@ -89,7 +89,7 @@ if (isset($_GET['token'])) {
       login($user, 'Your email has been verified!');
     }
   } else {
-    echo "user not found";
+    redirectWithMessage('/', ['error' => 'User not found']);
   }
 }
 

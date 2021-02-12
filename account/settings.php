@@ -1,6 +1,7 @@
 <?php
 include "../path.php";
 require_once ROOT_PATH . "/app/Controllers/SettingsController.php";
+require_once ROOT_PATH . "/app/Controllers/HomeController.php";
 require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
 
 
@@ -26,6 +27,7 @@ $bannerImage = is_null($_SESSION['banner_image'])
 <body>
   <div class="app" id="app">
     <?php include ROOT_PATH . '/app/includes/warning.php' ?>
+    <?php include ROOT_PATH . '/app/includes/messages.php' ?>
     <button @click="toggleDarkMode" id="switchTheme" class="darkmode-btn block xl:hidden" href="#">
       <svg v-if="!isDarkModeOn" class="w-6 h-6 text-gray-800" id="moon" fill="currentColor" viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +53,6 @@ $bannerImage = is_null($_SESSION['banner_image'])
       <section class="profile__area py-6 px-4 xl:px-0 xl:pr-4">
         <form action="settings.php" class="py-6 bg__adaptive px-4 shadow-md" method="post"
           enctype="multipart/form-data">
-          <?php include ROOT_PATH . '/app/includes/messages.php' ?>
           <h1 class="subtitle__text text__adaptive">Profile Settings</h1>
           <div class="banner mt-4">
             <div class="overlay opacity-50 rounded-md"></div>
@@ -96,9 +97,11 @@ $bannerImage = is_null($_SESSION['banner_image'])
           <div class="mt-6">
             <div v-if="isBannerEdit">
               <button type="submit" name="save-banner" class="primary__btn hover:bg-green-400">Save</button>
-              <button type="button" @click="toggleBannerEdit" class="secondary__btn border border-black">Cancel</button>
+              <button type="button" @click.prevent="toggleBannerEdit"
+                class="secondary__btn border border-black">Cancel</button>
             </div>
-            <button type="button" v-else @click="toggleBannerEdit" class="primary__btn hover:bg-green-400">Edit</button>
+            <button type="button" v-else @click.prevent="toggleBannerEdit"
+              class="primary__btn hover:bg-green-400">Edit</button>
           </div>
         </form>
       </section>
@@ -217,14 +220,15 @@ $bannerImage = is_null($_SESSION['banner_image'])
         <div class="py-6 bg__adaptive px-4 md:w-1/2 shadow-md">
           <h1 class="subtitle__text text__adaptive">Account Deletion - <span class="text__danger">Danger Zone</span>
           </h1>
-          <p class="para mt-6 px-4 py-2 text__adaptive">
+          <p class="para mt-6 py-2 text__adaptive">
             Hello, after deleting the account, the account
             will be destroyed and all post and comments related
             to this account will be deleted. <br> <br>
             <strong>Please note:</strong> This operation cannot be undone.
           </p>
           <div class="mt-6 relative">
-            <button type="button" @click="toggleModal" name="save-socials" class="danger__btn hover:bg-red-400">Delete
+            <button type="button" @click.prevent="toggleModal" name="save-socials"
+              class="danger__btn hover:bg-red-400">Delete
               Immediately</button>
           </div>
         </div>
@@ -235,15 +239,15 @@ $bannerImage = is_null($_SESSION['banner_image'])
 
   <!-- Modal -->
   <div class="confirmation__modal" :class="{'active':isModalOpen}">
-    <form action="settings.php" class="rounded-md bg__adaptive" method="post">
+    <div class="modal__body rounded-md bg__adaptive px-4 py-4 w-11/12 md:w-auto md:px-6 md:py-6">
       <p class="subtitle__text text__adaptive">
         Are you sure you want to delete your account?
       </p>
       <div class="mt-4 space-x-4">
-        <button type="button" class="secondary__btn border border-black" @click="toggleModal">Cancel</button>
-        <button type="submit" name="delete-account" class="danger__btn hover:bg-red-400">Delete</button>
+        <button type="button" class="secondary__btn border border-black" @click.prevent="toggleModal">Cancel</button>
+        <a href="/account/delete.php" class="danger__btn hover:bg-red-400">Delete</a>
       </div>
-    </form>
+    </div>
   </div>
   </div>
 

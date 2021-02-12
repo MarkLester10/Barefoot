@@ -30,7 +30,9 @@
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
-      <input class="input-web" type="text" placeholder="Search . . ." />
+      <form action="#" method="GET">
+        <input class="input-web" name="search" type="text" placeholder="Global Search . . ." />
+      </form>
     </div>
     <div class="sm:flex sm:items-center border-t border-gray-200 sm:border-t-0">
       <?php if (isset($_SESSION['id'])) : ?>
@@ -49,8 +51,8 @@
       </div>
       <?php else : ?>
       <div class="nav-links xl:space-x-4">
-        <a class="nav-link-item" href="login.php">Login</a>
-        <a class="nav-link-item mt-1 sm:mt-0" href="signup.php">Register</a>
+        <a class="nav-link-item" href="/login.php">Login</a>
+        <a class="nav-link-item mt-1 sm:mt-0" href="/signup.php">Register</a>
       </div>
       <?php endif; ?>
     </div>

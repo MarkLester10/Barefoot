@@ -1,7 +1,7 @@
 <?php
 include "path.php";
 require_once ROOT_PATH . "/app/Controllers/AuthController.php";
-// require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
+require_once ROOT_PATH . "/app/Controllers/HomeController.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,6 +17,7 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
   <div class="app" id="app">
     <?php include ROOT_PATH . '/app/includes/loader.php' ?>
     <?php include ROOT_PATH . '/app/includes/warning.php' ?>
+    <?php include ROOT_PATH . '/app/includes/messages.php' ?>
 
     <button @click="toggleDarkMode" id="switchTheme" class="darkmode-btn block xl:hidden" href="#">
       <svg v-if="!isDarkModeOn" class="w-6 h-6 text-gray-800" id="moon" fill="currentColor" viewBox="0 0 20 20"
@@ -126,21 +127,35 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
       <!-- Trending -->
       <section class="trending__area py-6 px-4 xl:px-0 xl:pr-4 ">
         <h1 class="title__text text__adaptive">Top 10 Trending 🔥 </h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 py-8">
-          <div class="card rounded-md" v-for="travel in travels">
+        <div class="py-2 mt-4 border-b">
+          <ul class="blogs_categories list">
+            <li class="cursor-pointer text__adaptive tracking-widest" data-filter="all">All</li>
+            <?php foreach ($categories as $category) : ?>
+            <li class="cursor-pointer text__adaptive tracking-widest" data-filter=".<?php echo $category['slug'] ?>">
+              <?php echo $category['name'] ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="collection__grid">
+          <div class="card rounded-md mix" :class="travelog" v-for="travelog in travelBlogs">
             <div class="card__img">
               <span class="pill">7 mins</span>
               <img src="./assets/imgs/travels/demo.jpg" class="rounded-t-md" alt="">
               <a href="#"><img src="./assets/imgs/auth/avatar.png" class="profile-img" alt=""></a>
             </div>
             <div class="card__description bg__adaptive rounded-b-md">
-              <h1 class="subtitle__text text__adaptive">
+              <h1 class="subtitle__text text__adaptive mb-2">
                 Jane Doe
               </h1>
+              <p class="para text-red-400 font-medium italic">{{ travelog }}</p>
               <a href="#hehe">
-                <h1 class="title__text text__adaptive py-6">Lorem ipsum dolor sit amet consectetur, adipisicing
-                  elit. Aut, maiores?</h1>
+                <h1 class="title__text text__adaptive py-2">Lorem ipsum dolor sit amet.</h1>
               </a>
+              <ul class="mb-2 text-xs text-gray-500 list space-x-2 py-0">
+                <li>#lorem</li>
+                <li>#lorem</li>
+                <li>#lorem</li>
+              </ul>
               <div class="flex items-center justify-between text__adaptive">
                 <small class="flex items-center space-x-2">
                   <a href="#">

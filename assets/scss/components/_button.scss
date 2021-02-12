@@ -25,6 +25,7 @@ input:checked ~ .toggle__dot {
   font-size: 0.8rem;
   letter-spacing: 1px;
   transition: all 0.5 ease;
+  text-align: center;
   &:focus {
     outline: none;
   }
@@ -35,7 +36,7 @@ input:checked ~ .toggle__dot {
 }
 
 .primary__btn {
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
   border: 1px solid transparent;
   background-color: #000;
   color: #fff;

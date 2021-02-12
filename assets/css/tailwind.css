@@ -71,7 +71,7 @@
   }
 
   .section-label-container {
-    @apply p-2 rounded-md text__adaptive bg-gray-200 dark:bg-gray-800;
+    @apply p-2 rounded-md text__adaptive bg-gray-800;
   }
   /* end Sidebar */
 
@@ -86,6 +86,14 @@
 
   .bg__adaptive {
     @apply bg-gray-100 dark:bg-gray-800;
+  }
+
+  .collection__grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 py-8 overflow-hidden;
+  }
+
+  .list {
+    @apply flex flex-wrap items-center space-x-6 py-4;
   }
   /* Components */
   .pill {
