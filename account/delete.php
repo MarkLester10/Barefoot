@@ -28,7 +28,7 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
       </svg>
     </button>
 
-    <!-- Forgot password Area -->
+    <!--Delete Account Area -->
     <div :class="isDarkModeOn ? 'bg__img__dark' : 'bg__img__light'">
       <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div class="flex flex-col overflow-y-auto md:flex-row">
