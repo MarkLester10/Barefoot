@@ -24,8 +24,9 @@ input:checked ~ .toggle__dot {
   text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 1px;
-  transition: all 0.5 ease;
   text-align: center;
+  transition: all 0.5s ease;
+  cursor: pointer;
   &:focus {
     outline: none;
   }
@@ -36,26 +37,26 @@ input:checked ~ .toggle__dot {
 }
 
 .primary__btn {
+  @extend .btn;
   padding: 0.5rem 1rem;
   border: 1px solid transparent;
   background-color: #000;
   color: #fff;
-  @extend .btn;
 }
 
 .secondary__btn {
+  @extend .btn;
   padding: 0.5rem 1rem;
   background-color: #fff;
   color: #000;
-  @extend .btn;
 }
 
 .danger__btn {
+  @extend .btn;
   padding: 0.5rem 2rem;
   border: 1px solid transparent;
   background-color: $danger;
   color: #fff;
-  @extend .btn;
 }
 
 //  <button type="submit" name="save-banner" class="secondary__btn border border-black">Edit</button>

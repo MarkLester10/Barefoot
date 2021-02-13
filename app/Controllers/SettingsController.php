@@ -17,6 +17,10 @@ $instagram = empty($socials) ? '' : $socials['instagram'];
 $twitter = empty($socials) ? '' : $socials['twitter'];
 $youtube = empty($socials) ? '' : $socials['youtube'];
 
+$bannerImage = is_null($_SESSION['banner_image'])
+  ? BASE_URL . "/assets/imgs/banners/banner.jpg"
+  : BASE_URL . "/assets/imgs/banners/{$_SESSION['banner_image']}";
+
 // SAVE PROFILE BANNER
 if (isset($_POST['save-banner'])) {
   unset($_POST['save-banner']);

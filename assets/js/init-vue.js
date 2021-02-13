@@ -19,13 +19,15 @@ new Vue({
     isDarkModeOn: false,
     isBannerEdit: false,
     isModalOpen: false,
+    postId: null,
   },
   methods: {
     toggleMainMenu: function () {
       this.isMainMenuOpen = !this.isMainMenuOpen;
     },
-    toggleModal: function () {
+    toggleModal: function (id = null) {
       this.isModalOpen = !this.isModalOpen;
+      this.postId = id;
     },
     toggleBannerEdit: function (e) {
       this.isBannerEdit = !this.isBannerEdit;

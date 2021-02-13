@@ -14,6 +14,7 @@ $email = '';
 // SIGN UP
 if (isset($_POST['signup-btn'])) {
   unset($_POST['signup-btn']);
+  $_POST['username'] = str_replace(' ', '', $_POST['username']);
   $request = sanitize($_POST, 'post');
   $rules = [
     'username' => [RULE_REQUIRED],
