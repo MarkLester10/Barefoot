@@ -1,6 +1,7 @@
 <?php
 include "../path.php";
 require_once ROOT_PATH . "/app/Controllers/BlogPostController.php";
+require_once ROOT_PATH . "/app/Controllers/HomeController.php";
 require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
 
 $title = "{$_SESSION['username']} Travel Collections";
@@ -58,17 +59,17 @@ include ROOT_PATH . '/app/includes/sidebar.php';
           <hr>
           <div class="mt-4 space-x-4">
             <button type="button" data-id="1" class="btn" @click.prevent="toggleModal(1)">
-              <svg class="w-6 h-6 text__adaptive inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <svg class="w-6 h-6 text__adaptive inline hover:text-red-500" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                 </path>
               </svg>
             </button>
-            <a type="#" class="btn" @click.prevent="toggleModal">
-              <svg class="w-6 h-6 text__adptive inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            <a type="#" class="btn inline-block" @click.prevent="toggleModal">
+              <svg class="w-6 h-6 text__adaptive inline hover:text-green-500" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                 </path>
               </svg>
@@ -79,7 +80,8 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       </div>
       <!-- Modal -->
       <div class="confirmation__modal" :class="{'active':isModalOpen}">
-        <form class="modal__body rounded-md bg__adaptive px-4 py-4 w-11/12 md:w-auto md:px-6 md:py-6">
+        <form method="post" action="#"
+          class="modal__body rounded-md bg__adaptive px-4 py-4 w-11/12 md:w-auto md:px-6 md:py-6">
           <p class="subtitle__text text__adaptive">
             Are you sure you want to delete this post?
           </p>

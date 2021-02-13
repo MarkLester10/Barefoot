@@ -32,7 +32,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
             <span class="pill">7 mins</span>
           </a>
           <div class="travel__card__author space-x-3">
-            <a href="#"><img src="./assets/imgs/auth/avatar.png" class="profile-img" alt=""></a>
+            <a href="/user/profile.php"><img src="./assets/imgs/auth/avatar.png" class="profile-img" alt=""></a>
             <div class="travel__card__desc">
               <h1 class="subtitle__text">
                 Jane Doe
@@ -72,7 +72,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
             <span class="pill">7 mins</span>
           </a>
           <div class="travel__card__author space-x-3">
-            <a href="#"><img src="./assets/imgs/auth/avatar.png" class="profile-img" alt=""></a>
+            <a href="/user/profile.php"><img src="./assets/imgs/auth/avatar.png" class="profile-img" alt=""></a>
             <div class="travel__card__desc">
               <h1 class="subtitle__text">
                 Jane Doe
@@ -112,7 +112,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
         <div class="card__img">
           <span class="pill">7 mins</span>
           <img src="./assets/imgs/travels/demo.jpg" class="rounded-t-md" alt="">
-          <a href="#"><img src="./assets/imgs/auth/avatar.png" class="profile-img" alt=""></a>
+          <a href="/user/profile.php"><img src="./assets/imgs/auth/avatar.png" class="profile-img" alt=""></a>
         </div>
         <div class="card__description bg__adaptive rounded-b-md">
           <h1 class="subtitle__text text__adaptive mb-2">
