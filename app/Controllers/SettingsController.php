@@ -109,7 +109,7 @@ if (isset($_POST['save-socials'])) {
   if (count($errors) === 0) {
     $res = createOrUpdate('socials', $socials, ['user_id' => $userId], $request);
     ($res > 0)
-      ? redirectWithMessage('account/settings', ['success' => 'Socials Added Successfully 💟'])
+      ? redirectWithMessage('account/settings', ['success' => 'Socials Updated Successfully 💟'])
       : redirectWithMessage('account/settings', ['error' => 'There is an error updating your socials ❌']);
   }
   $facebook = $request['facebook'];
@@ -130,6 +130,8 @@ if (isset($_POST['delete-account'])) {
   $errors = validate($request, $rules);
   if (count($errors) === 0) {
     if (passwordVerify($request['password'], $user['password'])) {
+      remove($user['profile_image'], 'auth/profiles');
+      remove($user['banner_image'], 'banners');
       $res = delete('users',  $userId);
       ($res !== 1)
         ? redirectWithMessage('account/settings', ['error' => 'There is an error deleting your account ❌'])
