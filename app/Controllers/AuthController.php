@@ -57,7 +57,7 @@ if (isset($_POST['login-btn'])) {
     $user = selectOneOr('users', ['email' => $request['username'], 'username' => $request['username']]);
     if ($user) {
       (password_verify($request['password'], $user['password']))
-        ? login($user, 'Welcome Back 👍')
+        ? login($user, 'Hey, Welcome back! Have a tour now 😁')
         : $errors['password'] = 'Invalid password';
     } else {
       $errors['username'] = 'User with that username or email doesn\'t exist';
