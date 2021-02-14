@@ -107,7 +107,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
         <?php endforeach; ?>
       </ul>
     </div>
-    <div class="collection__grid">
+    <div class="collection__grid mixitup">
       <div class="card rounded-md mix" :class="travelog" v-for="travelog in travelBlogs">
         <div class="card__img">
           <span class="pill">7 mins</span>
@@ -151,7 +151,14 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       </div>
     </div>
   </section>
+  <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
 <!-- End Main Area -->
 
+</div>
+<!-- End of Sidebar -->
+</div>
+<!-- End of App -->
+
+<!-- Scripts Area -->
 <?php include ROOT_PATH . '/app/includes/layoutBottom.php' ?>

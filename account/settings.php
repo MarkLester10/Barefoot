@@ -20,15 +20,16 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 
         <!-- Banner Image -->
         <div class="banner__image absolute inset-0">
+          <img class="h-full w-full object-cover rounded-md" id="bannerPreview" src="<?php echo $bannerImage; ?>"
+            alt="" />
           <label v-if="isBannerEdit"> <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
               </path>
             </svg>
-            <input type="file" class="hidden" name="banner_image">
+            <input type="file" class="hidden" name="banner_image" onchange="displayImage(this, '#bannerPreview')">
           </label>
-          <img class="h-full w-full object-cover rounded-md" src="<?php echo $bannerImage; ?>" alt="" />
         </div>
 
         <!-- Banner Title -->
@@ -41,14 +42,14 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 
         <!-- Profile Image -->
         <div class="banner__profile__img">
-          <img class="profile-img h-20 w-20" src="<?php echo $profileImage; ?>" alt="" />
+          <img class="profile-img h-20 w-20" id="profilePreview" src="<?php echo $profileImage; ?>" alt="" />
           <label v-if="isBannerEdit">
             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
                 clip-rule="evenodd"></path>
             </svg>
-            <input type="file" class="hidden" name="profile_image">
+            <input type="file" class="hidden" name="profile_image" onchange="displayImage(this,'#profilePreview')">
           </label>
         </div>
       </div>
@@ -113,7 +114,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
         <input class="form__input" placeholder="***************" type="password" name="password" />
       </label>
 
-      <div class="mt-6 relative">
+      <div class="mt-6">
         <button type="submit" name="save-account" class="primary__btn hover:bg-green-400">Save</button>
       </div>
     </form>
@@ -193,6 +194,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       </div>
     </div>
   </section>
+  <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
 <!-- End Main Area -->
 
@@ -209,4 +211,22 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   </div>
 </div>
 
+</div>
+<!-- End of Sidebar -->
+</div>
+<!-- End of App -->
+
+<!-- Scripts Area -->
+<script>
+function displayImage(e, display) {
+  if (e.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      document.querySelector(display).setAttribute('src', e.target.result);
+    }
+    reader.readAsDataURL(e.files[0]);
+  }
+}
+</script>
 <?php include ROOT_PATH . '/app/includes/layoutBottom.php' ?>

@@ -13,7 +13,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   <section class="trending__area py-6 px-4 xl:px-0 xl:pr-4 ">
     <h1 class="title__text text__adaptive">Travel <span
         class="italic text-red-400"><?php echo $_GET['category'] ?></span></h1>
-    <div class="collection__grid">
+    <div class="collection__grid mixitup">
       <div class="card rounded-md mix" :class="travelog" v-for="travelog in travelBlogs">
         <div class="card__img">
           <span class="pill">7 mins</span>
@@ -57,7 +57,14 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       </div>
     </div>
   </section>
-
+  <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
+
+</div>
+<!-- End of Sidebar -->
+</div>
+<!-- End of App -->
+
+<!-- Scripts Area -->
 
 <?php include ROOT_PATH . '/app/includes/layoutBottom.php' ?>

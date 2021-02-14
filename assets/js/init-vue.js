@@ -20,6 +20,8 @@ new Vue({
     isBannerEdit: false,
     isModalOpen: false,
     postId: null,
+    slug: "",
+    categories: [],
   },
   methods: {
     toggleMainMenu: function () {

@@ -84,8 +84,15 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       </div>
     </div>
   </section>
+  <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
 <!-- End Main Area -->
 
+</div>
+<!-- End of Sidebar -->
+</div>
+<!-- End of App -->
+
+<!-- Scripts Area -->
 
 <?php include ROOT_PATH . '/app/includes/layoutBottom.php' ?>

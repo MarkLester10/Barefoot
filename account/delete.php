@@ -46,4 +46,9 @@ include ROOT_PATH . '/app/includes/layoutTop.php';
     </div>
   </div>
 </div>
+
+</div>
+<!-- End of App -->
+
+<!-- Scripts Area -->
 <?php include ROOT_PATH . '/app/includes/layoutBottom.php' ?>

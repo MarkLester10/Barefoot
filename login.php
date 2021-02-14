@@ -65,5 +65,12 @@ include ROOT_PATH . '/app/includes/layoutTop.php';
     </div>
   </div>
 </div>
+<div class="py-6 dark:bg-gray-900"></div>
+<?php include ROOT_PATH . '/app/includes/footer.php' ?>
+</div>
+<!-- End of Sidebar -->
+</div>
+<!-- End of App -->
 
+<!-- Scripts Area -->
 <?php include ROOT_PATH . '/app/includes/layoutBottom.php' ?>

@@ -70,7 +70,7 @@
             </label>
 
             <label class="section-label">
-              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/travels/create.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/collections/create.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +79,7 @@
                 </svg>
 
               </div>
-              <a href="/travels/create.php"> <span class="sidebar__link">Create Story</span></a>
+              <a href="/collections/create.php"> <span class="sidebar__link">Create Story</span></a>
             </label>
 
             <label class="section-label">

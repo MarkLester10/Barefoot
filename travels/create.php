@@ -1,3 +1,0 @@
-<?php
-
-// TODO: CREATE TRAVEL BLOGS
