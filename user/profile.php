@@ -49,8 +49,8 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   <hr>
   <!-- Blog Collections -->
   <section class="py-6 px-4 xl:px-0 xl:pr-4">
-    <div class="collection__grid">
-      <div class="card rounded-md" v-for="travel in travels">
+    <div class="collection__grid mixitup">
+      <div class="card rounded-md" v-for="travel in travelBlogs">
         <div class="card__img">
           <span class="pill">7 mins</span>
           <img src='<?php echo  BASE_URL . "/assets/imgs/travels/demo.jpg" ?>' class="rounded-t-md" alt="">
