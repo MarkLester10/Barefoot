@@ -31,10 +31,10 @@ if (isset($_POST['save-banner'])) {
   $errors = validate($request, $rules);
   // Profile Image
   if (!empty($_FILES['profile_image']['name'])) {
+    $profileImage = upload($_FILES, 'profile_image', 'auth/profiles');
     if (!is_null($_SESSION['profile_image'])) {
       remove($_SESSION['profile_image'], 'auth/profiles');
     }
-    $profileImage = upload($_FILES, 'profile_image', 'auth/profiles');
     $_SESSION['profile_image'] = $profileImage;
     $res = update('users', 'id', $userId, ['profile_image' => $profileImage]);
     if ($res < 0) {
@@ -45,10 +45,10 @@ if (isset($_POST['save-banner'])) {
 
   // Banner Image
   if (!empty($_FILES['banner_image']['name'])) {
+    $bannerImage = upload($_FILES, 'banner_image', 'banners');
     if (!is_null($_SESSION['banner_image'])) {
       remove($_SESSION['banner_image'], 'banners');
     }
-    $bannerImage = upload($_FILES, 'banner_image', 'banners');
     $res = update('users', 'id', $userId, ['banner_image' => $bannerImage]);
     if ($res < 0) {
       redirectWithMessage('account/settings', ['error' => 'There is an error updating your banner image ❌']);
@@ -132,6 +132,10 @@ if (isset($_POST['delete-account'])) {
     if (passwordVerify($request['password'], $user['password'])) {
       remove($user['profile_image'], 'auth/profiles');
       remove($user['banner_image'], 'banners');
+      $userPosts = selectAll('posts', ['user_id' => $userId]);
+      foreach ($userPosts as $post) {
+        remove($post['image'], 'travels');
+      }
       $res = delete('users',  $userId);
       ($res !== 1)
         ? redirectWithMessage('account/settings', ['error' => 'There is an error deleting your account ❌'])

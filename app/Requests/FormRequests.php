@@ -21,7 +21,8 @@ function validate($request, $rulesArray)
 
       if ($ruleName === RULE_REQUIRED && empty($value)) {
         $attrName = ucfirst($attribute);
-        $errors[$attribute] = "{$attrName} is required.";
+        // $errors[$attribute] = "{$attrName} is required.";
+        $errors[$attribute] = "This field is required.";
       }
 
       if ($ruleName === RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {

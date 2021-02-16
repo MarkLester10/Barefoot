@@ -18,6 +18,7 @@ window.addEventListener("load", function () {
 new TomSelect("#tags", {
   plugins: ["remove_button"],
   create: true,
+  maxItems: 3,
 });
 
 //CK EDitors

@@ -17,7 +17,7 @@ if (isset($_POST['signup-btn'])) {
   $_POST['username'] = str_replace(' ', '', $_POST['username']);
   $request = sanitize($_POST, 'post');
   $rules = [
-    'username' => [RULE_REQUIRED],
+    'username' => [RULE_REQUIRED, [RULE_UNIQUE, 'unique' => 'username', 'table' => 'users']],
     'email' => [RULE_REQUIRED, RULE_EMAIL, [RULE_UNIQUE, 'unique' => 'email', 'table' => 'users']],
     'password' => [RULE_REQUIRED, [RULE_MIN, 'min' => 8], [RULE_MAX, 'max' => 24]],
     'passwordConf' => [RULE_REQUIRED, [RULE_MATCH, 'match' => 'password']]
@@ -36,7 +36,7 @@ if (isset($_POST['signup-btn'])) {
     $userData = selectOne('users', ['id' => $userId]);
 
     if ($userData) {
-      sendVerificationEmail($userData['email'], $userData['token']);
+      sendVerificationEmail($userData['email'], $userData['username'], $userData['token']);
       login($userData, 'You are now logged in 👍');
     }
   }
