@@ -6,20 +6,34 @@ require_once ROOT_PATH . "/app/helpers/ImageHelper.php";
 require_once ROOT_PATH . "/app/helpers/ViewFormatter.php";
 require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 require_once ROOT_PATH . "/app/Controllers/EmailController.php";
+$userId = $_SESSION['id'];
+$allPosts = selectPublicPosts(['p.user_id' => $userId]);
 $categories = selectAll('categories');
 $tags = selectAll('tags');
 $errors = array();
-$postTitle = '';
-$slug = '';
-$categoryId = '';
-$readingTime =  '';
-$youtube = '';
-$isPublished = '';
-$body = '';
-$userId = $_SESSION['id'];
+$editingStory = array();
+$editingStoryTags = array();
+$createdStoryTags = array();
 
-$allPosts = selectAllPostsWithRelations($userId);
 
+
+// EDIT FORM
+if (isset($_GET['title']) && isset($_GET['id'])) {
+  $storyId = $_GET['id'];
+  $storySlug = $_GET['title'];
+  $editingStory = selectOnePublicPost(['p.id' => $storyId, 'p.slug' => $storySlug]);
+  $editingStoryTags = getTags($storyId);
+}
+
+// EDIT AND CREATE FIELDS
+$postTitle =  ($editingStory['title']) ?? '';
+$slug = ($editingStory['slug']) ?? '';
+$categoryId = ($editingStory['catId']) ?? '';
+$readingTime = ($editingStory['reading_time']) ?? '';
+$youtube = ($editingStory['youtube_url']) ?? '';
+$isPublished = ($editingStory['is_published']) ?? '';
+$body = ($editingStory['body']) ?? '';
+$image = ($editingStory['image']) ?? '';
 
 
 //CREATE POST
@@ -40,19 +54,8 @@ if (isset($_POST['create-post'])) {
 
   if (count($errors) === 0) {
     $postImage = upload($_FILES, 'image', 'travels');
-    $tagsIds = array();
     $tags = $_POST['tags'];
-    // Create Tags
-    foreach ($tags as $tag) {
-      $existingid = selectOne('tags', ['name' => $tag]);
-      if ($existingid) {
-        array_push($tagsIds, $existingid['id']);
-      }
-      $id = create('tags', ['name' => $tag]);
-      if ($id > 0) {
-        array_push($tagsIds, $id);
-      }
-    }
+    $tagsIds = createTags($tags);
     // Create Post
     $postId = create('posts', [
       'user_id' => $userId,
@@ -65,28 +68,78 @@ if (isset($_POST['create-post'])) {
       'body' => $request['body'],
       'is_published' => isset($request['is_published']) ? 1 : 0
     ]);
-
     // Create Post tags
-    foreach ($tagsIds as $tagId) {
-      create('posts_tags', [
-        'post_id' => $postId,
-        'tag_id' => $tagId
-      ]);
-    }
+    createPostsTags($postId, $tagsIds);
 
     ($postId > 0)
       ? redirectWithMessage('collections/travels', ['success' => 'New Story Created! 💟'])
-      : redirectWithMessage('collections/create', ['error' => 'Sorry, something went worong creating your story 😞']);
+      : redirectWithMessage('collections/create', ['error' => 'Sorry, something went wrong creating your story 😞']);
   }
 
   $postTitle = $request['title'];
   $slug = $request['slug'];
   $categoryId =  $request['category_id'];
   $readingTime =  $request['reading_time'];
+  $createdStoryTags = $_POST['tags'];
   $youtube =  $request['youtube_url'];
   $isPublished = isset($request['is_published']) ? 1 : 0;
   $body =  htmlentities($request['body']);
 }
+
+
+//EDIT POST
+if (isset($_POST['edit-post'])) {
+  unset($_POST['edit-post']);
+  $postId = $_POST['post_id'];
+  $postImage = $_POST['image'];
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'title' => [RULE_REQUIRED, [RULE_MAX, 'max' => 255]],
+    'category_id' => [RULE_REQUIRED],
+    'reading_time' => [RULE_REQUIRED],
+    'body' => [RULE_REQUIRED],
+  ];
+  $errors = validate($request, $rules);
+  if (count($errors) === 0) {
+
+    if (!empty($_FILES['image']['name'])) {
+      remove($editingStory['image'], 'travels');
+      $postImage = upload($_FILES, 'image', 'travels');
+    }
+    $tags = $_POST['tags'];
+    $tagsIds = createTags($tags);
+
+    // Update Post
+    $res = update('posts', 'id', $postId, [
+      'user_id' => $userId,
+      'title' => $request['title'],
+      'slug' => $request['slug'],
+      'reading_time' => $request['reading_time'],
+      'youtube_url' => $request['youtube_url'],
+      'category_id' => $request['category_id'],
+      'image' => $postImage,
+      'body' => $request['body'],
+      'is_published' => isset($request['is_published']) ? 1 : 0
+    ]);
+
+    // Create Post tags
+    createPostsTags($postId, $tagsIds);
+
+    ($res > 0)
+      ? redirectWithMessage('collections/travels', ['success' => 'Story Updated Successfully! 🚀'])
+      : redirectWithMessage('collections/travels', ['error' => 'Sorry, something went wrong updating your story 😞']);
+  }
+
+  $postTitle = $request['title'];
+  $slug = $request['slug'];
+  $categoryId =  $request['category_id'];
+  $readingTime =  $request['reading_time'];
+  $createdStoryTags = $_POST['tags'];
+  $youtube =  $request['youtube_url'];
+  $isPublished = isset($request['is_published']) ? 1 : 0;
+  $body =  htmlentities($request['body']);
+}
+
 
 // DELETE POST
 if (isset($_POST['delete-post'])) {
@@ -97,4 +150,32 @@ if (isset($_POST['delete-post'])) {
   ($res === 1)
     ? redirectWithMessage('collections/travels', ['success' => 'Post deleted successfully 🚀'])
     : redirectWithMessage('collections/travels', ['error' => 'Something went wrong ❌']);
+}
+
+//CREATE TAGS
+function createTags($tags)
+{
+  $tagsIds = array();
+  foreach ($tags as $tag) {
+    $existingid = selectOne('tags', ['name' => $tag]);
+    if ($existingid) {
+      array_push($tagsIds, $existingid['id']);
+    }
+    $id = create('tags', ['name' => $tag]);
+    if ($id > 0) {
+      array_push($tagsIds, $id);
+    }
+  }
+  return $tagsIds;
+}
+
+// CREATE POSTS_TAGS
+function createPostsTags($postId, $tagsIds)
+{
+  foreach ($tagsIds as $tagId) {
+    create('posts_tags', [
+      'post_id' => $postId,
+      'tag_id' => $tagId
+    ]);
+  }
 }

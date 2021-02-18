@@ -6,8 +6,8 @@
   </div>
   <div class="card__description bg__adaptive rounded-b-md">
     <p class="para text-red-400 font-medium italic"><?php echo $post['category'] ?></p>
-    <a href="#hehe">
-      <h1 class="title__text text__adaptive py-2"><?php echo $post['title'] ?></h1>
+    <a href="/travels/story.php?title=<?php echo $post['slug'] ?>&id=<?php echo $post['id'] ?>">
+      <h1 class="title__text text__adaptive py-2 hover:underline"><?php echo $post['title'] ?></h1>
     </a>
     <ul class="mb-2 text-sm text-gray-500 list space-x-2 py-0">
       <?php $tags = getTags($post['id']) ?>
@@ -40,7 +40,8 @@
           </path>
         </svg>
       </button>
-      <a type="#" class="btn inline-block">
+      <a href="/collections/edit.php?title=<?php echo $post['slug'] ?>&id=<?php echo $post['id'] ?>"
+        class="btn inline-block">
         <svg class="w-6 h-6 text__adaptive inline hover:text-green-500" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"

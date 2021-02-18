@@ -1,0 +1,33 @@
+.story__area {
+  .play__btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+  }
+  .comment__box {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & .comment__form {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      & label {
+        width: 100%;
+      }
+
+      & .primary__btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+}

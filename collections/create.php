@@ -72,6 +72,13 @@ include ROOT_PATH . '/app/includes/sidebar.php';
           </span>
           <select id="tags" name="tags[]" class="mt-1" multiple>
             <?php foreach ($tags as $tag) : ?>
+            <?php foreach ($createdStoryTags as $createdStoryTag) : ?>
+            <?php if ($tag['name'] === $createdStoryTag) : ?>
+            <option value="<?php echo $tag['name']; ?>" selected="selected">
+              <?php echo $tag['name'] ?>
+            </option>
+            <?php endif; ?>
+            <?php endforeach ?>
             <option value="<?php echo $tag['name']; ?>">
               <?php echo $tag['name'] ?>
             </option>
@@ -93,10 +100,10 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 
         <label class=" block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">
-            Youtube URL - Optional
+            Youtube Video Id - Optional
           </span>
-          <input type="text" name="youtube_url" class="form__input" min="1"
-            placeholder="https://www.youtube.com/watch?v=DW1lqKsadI0">
+          <input type="text" name="youtube_url" value="<?php echo $youtube ?>" class="form__input" min="1"
+            placeholder="DW1lqKsadI0">
         </label>
       </div>
 

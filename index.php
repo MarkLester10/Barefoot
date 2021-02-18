@@ -109,7 +109,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
     </div>
     <div class="collection__grid mixitup">
       <?php if (count($publicPosts) > 0) : ?>
-      <?php include ROOT_PATH . '/app/includes/collections/travelcardscategory.php'; ?>
+      <?php include ROOT_PATH . '/app/includes/collections/travelcards.php'; ?>
       <?php else : ?>
       <h1 class="title__text text__adaptive">Sorry dear, No Post Added Yet 😞</h1>
       <?php endif; ?>

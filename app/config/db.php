@@ -196,7 +196,7 @@ function searchPost($keyword)
   return $records;
 }
 
-function selectAllPostsWithRelations($user_id, $status = 1)
+function selectPublicPosts($conditions = [])
 {
   $sql = "SELECT
           p.*,
@@ -214,21 +214,29 @@ function selectAllPostsWithRelations($user_id, $status = 1)
           ON p.user_id = u.id
 
           LEFT JOIN posts_likes
-          ON p.id = posts_likes.post_id
+          ON p.id = posts_likes.post_id";
 
-          WHERE p.user_id = ? AND p.is_published= ?
-          GROUP BY p.id";
-  $stmt = execQuery($sql, ['user_id' => $user_id, 'is_published' => $status]);
+  $i = 0;
+  foreach ($conditions as $key => $value) {
+    if ($i === 0) {
+      $sql = $sql . " WHERE $key=?";
+    } else {
+      $sql = $sql . " AND $key=?";
+    }
+    $i++;
+  }
+  $sql = $sql . " GROUP BY p.id ORDER BY p.id DESC";
+  $stmt = execQuery($sql, $conditions);
   $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
   return $records;
 }
-
-function selectPublicPostsWithCategory($category)
+function selectOnePublicPost($conditions = [])
 {
   $sql = "SELECT
           p.*,
           c.name AS category, 
           c.slug AS catSlug,
+          c.id AS catId,
           u.profile_image,
           u.username,
           COUNT(posts_likes.id) AS likes
@@ -241,48 +249,27 @@ function selectPublicPostsWithCategory($category)
           ON p.user_id = u.id
 
           LEFT JOIN posts_likes
-          ON p.id = posts_likes.post_id
+          ON p.id = posts_likes.post_id";
 
-          WHERE p.is_published= ? AND p.category_id = ?
-          GROUP BY p.id
-          ";
-  $stmt = execQuery($sql, ['is_published' => 1, 'category_id' => $category]);
-  $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
-  return $records;
-}
-
-function selectPublicPosts()
-{
-  $sql = "SELECT
-          p.*,
-          c.name AS category, 
-          c.slug AS catSlug,
-          u.profile_image,
-          u.username,
-          COUNT(posts_likes.id) AS likes
-          FROM posts AS p
-
-          LEFt JOIN categories AS c
-          ON p.category_id = c.id
-
-          LEFT JOIN users as u
-          ON p.user_id = u.id
-
-          LEFT JOIN posts_likes
-          ON p.id = posts_likes.post_id
-
-          WHERE p.is_published= ?
-          GROUP BY p.id
-          ";
-  $stmt = execQuery($sql, ['is_published' => 1]);
-  $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
+  $i = 0;
+  foreach ($conditions as $key => $value) {
+    if ($i === 0) {
+      $sql = $sql . " WHERE $key=?";
+    } else {
+      $sql = $sql . " AND $key=?";
+    }
+    $i++;
+  }
+  $sql = $sql . " GROUP BY p.id ORDER BY p.id DESC LIMIT 1";
+  $stmt = execQuery($sql, $conditions);
+  $records = $stmt->get_result()->fetch_assoc(); //return all values
   return $records;
 }
 
 function getTags($post_id)
 {
   $sql = "SELECT
-          t.name
+          t.*
           FROM posts_tags AS pt
           LEFT JOIN tags as t
           ON pt.tag_id = t.id

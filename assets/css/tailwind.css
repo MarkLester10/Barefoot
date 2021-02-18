@@ -104,4 +104,12 @@
     @apply block w-full mt-1 text-sm dark:text-gray-300 dark:bg-gray-700;
   }
   /* end components*/
+
+  /* Comments */
+  .comment__item {
+    @apply bg-white dark:bg-gray-900 py-4 px-4;
+  }
+  .comment {
+    @apply text-xs tracking-wider mt-4 ml-4 text__adaptive;
+  }
 }
