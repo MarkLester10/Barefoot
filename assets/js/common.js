@@ -14,6 +14,11 @@ window.addEventListener("load", function () {
   loading.classList.add("active");
 });
 
+// Toggle comment action pop up
+function togglePopUp(e) {
+  e.nextElementSibling.classList.toggle("block");
+}
+
 //multi select
 new TomSelect("#tags", {
   plugins: ["remove_button"],

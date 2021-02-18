@@ -5,6 +5,7 @@ require_once ROOT_PATH . "/app/helpers/Sanitize.php";
 require_once ROOT_PATH . "/app/helpers/ViewFormatter.php";
 require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 $categories = selectAll('categories');
+$publicTags = selectAll('tags');
 $publicPosts = array();
 $story = array();
 
@@ -36,9 +37,18 @@ if (isset($_GET['title']) && isset($_GET['id'])) {
 
 
 // HEADER IMAGE
-$profileImage = '';
+$profileImage = BASE_URL . "/assets/imgs/auth/avatar.png";
 if (isset($_SESSION['id'])) {
   $profileImage = is_null($_SESSION['profile_image'])
     ? "https://ui-avatars.com/api/?name={$_SESSION['username']}&size=512"
     : BASE_URL . "/assets/imgs/auth/profiles/{$_SESSION['profile_image']}";
+}
+
+function authenticated()
+{
+  $status = 0;
+  if (isset($_SESSION['id'])) {
+    $status = 1;
+  }
+  return $status;
 }

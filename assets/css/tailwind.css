@@ -103,13 +103,21 @@
   .form__input {
     @apply block w-full mt-1 text-sm dark:text-gray-300 dark:bg-gray-700;
   }
+
+  .modal-sm {
+    @apply absolute right-8 top-4 bg-gray-200 dark:bg-gray-700 py-2 rounded-sm hidden;
+  }
+
+  .btn__link {
+    @apply text__adaptive block w-full hover:bg-gray-100 dark:hover:bg-gray-500 px-4 py-1;
+  }
   /* end components*/
 
   /* Comments */
   .comment__item {
-    @apply bg-white dark:bg-gray-900 py-4 px-4;
+    @apply bg-white dark:bg-gray-900 py-4 px-3;
   }
   .comment {
-    @apply text-xs tracking-wider mt-4 ml-4 text__adaptive;
+    @apply text-xs tracking-wider mt-4 text__adaptive;
   }
 }

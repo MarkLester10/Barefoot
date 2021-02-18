@@ -19,11 +19,15 @@ new Vue({
     isDarkModeOn: false,
     isBannerEdit: false,
     isModalOpen: false,
+    isCommentCollapse: true,
     postId: null,
     slug: "",
     categories: [],
   },
   methods: {
+    toggleCommentCollapse: function () {
+      this.isCommentCollapse = !this.isCommentCollapse;
+    },
     toggleMainMenu: function () {
       this.isMainMenuOpen = !this.isMainMenuOpen;
     },

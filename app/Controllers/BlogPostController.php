@@ -69,7 +69,7 @@ if (isset($_POST['create-post'])) {
       'is_published' => isset($request['is_published']) ? 1 : 0
     ]);
     // Create Post tags
-    createPostsTags($postId, $tagsIds);
+    createOrUpdatePostsTags($postId, $tagsIds);
 
     ($postId > 0)
       ? redirectWithMessage('collections/travels', ['success' => 'New Story Created! 💟'])
@@ -101,13 +101,13 @@ if (isset($_POST['edit-post'])) {
   ];
   $errors = validate($request, $rules);
   if (count($errors) === 0) {
-
     if (!empty($_FILES['image']['name'])) {
-      remove($editingStory['image'], 'travels');
+      remove($postImage, 'travels');
       $postImage = upload($_FILES, 'image', 'travels');
     }
     $tags = $_POST['tags'];
     $tagsIds = createTags($tags);
+    createOrUpdatePostsTags($postId, $tagsIds, true);
 
     // Update Post
     $res = update('posts', 'id', $postId, [
@@ -122,10 +122,7 @@ if (isset($_POST['edit-post'])) {
       'is_published' => isset($request['is_published']) ? 1 : 0
     ]);
 
-    // Create Post tags
-    createPostsTags($postId, $tagsIds);
-
-    ($res > 0)
+    ($res >= 0)
       ? redirectWithMessage('collections/travels', ['success' => 'Story Updated Successfully! 🚀'])
       : redirectWithMessage('collections/travels', ['error' => 'Sorry, something went wrong updating your story 😞']);
   }
@@ -170,12 +167,23 @@ function createTags($tags)
 }
 
 // CREATE POSTS_TAGS
-function createPostsTags($postId, $tagsIds)
+function createOrUpdatePostsTags($postId, $tagsIds, $isUpdating = false)
 {
-  foreach ($tagsIds as $tagId) {
-    create('posts_tags', [
-      'post_id' => $postId,
-      'tag_id' => $tagId
-    ]);
+  if ($isUpdating === true) {
+    foreach ($tagsIds as $tagId) {
+      $postsTags = selectOne('posts_tags', ['post_id' => $postId, 'tag_id' => $tagId]);
+      delete('posts_tags', $postsTags['id']);
+      create('posts_tags', [
+        'post_id' => $postId,
+        'tag_id' => $tagId
+      ]);
+    }
+  } else {
+    foreach ($tagsIds as $tagId) {
+      create('posts_tags', [
+        'post_id' => $postId,
+        'tag_id' => $tagId
+      ]);
+    }
   }
 }
