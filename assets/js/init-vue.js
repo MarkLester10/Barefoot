@@ -20,11 +20,18 @@ new Vue({
     isBannerEdit: false,
     isModalOpen: false,
     isCommentCollapse: true,
+    isHeartOpen: false,
     postId: null,
     slug: "",
     categories: [],
   },
   methods: {
+    toggleHeart: function () {
+      this.isHeartOpen = !this.isHeartOpen;
+      setTimeout(() => {
+        this.isHeartOpen = !this.isHeartOpen;
+      }, 2000);
+    },
     toggleCommentCollapse: function () {
       this.isCommentCollapse = !this.isCommentCollapse;
     },

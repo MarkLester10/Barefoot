@@ -8,9 +8,17 @@ $categories = selectAll('categories');
 $publicTags = selectAll('tags');
 $publicPosts = array();
 $story = array();
-
 $publicPosts = selectPublicPosts(['p.is_published' => 1]);
 
+
+// FOR BOOKMARKS STATE
+if (authenticated()) {
+  $bookmarks = selectAll('bookmarks', ['user_id' => $_SESSION['id']]);
+  $bookmarkPostIds = array();
+  foreach ($bookmarks as $bookmark) {
+    array_push($bookmarkPostIds, $bookmark['post_id']);
+  }
+}
 
 // collections.php
 if (isset($_GET['category']) && isset($_GET['id'])) {
@@ -35,7 +43,6 @@ if (isset($_GET['title']) && isset($_GET['id'])) {
   $story = selectOnePublicPost(['p.id' => $storyId, 'p.slug' => $storySlug]);
 }
 
-
 // HEADER IMAGE
 $profileImage = BASE_URL . "/assets/imgs/auth/avatar.png";
 if (isset($_SESSION['id'])) {
@@ -43,6 +50,20 @@ if (isset($_SESSION['id'])) {
     ? "https://ui-avatars.com/api/?name={$_SESSION['username']}&size=512"
     : BASE_URL . "/assets/imgs/auth/profiles/{$_SESSION['profile_image']}";
 }
+
+// Adding to Bookmark
+if (authenticated() && isset($_GET['bookmark'])) {
+  $uId = $_SESSION['id'];
+  $bookmarkId = $_GET['bookmark'];
+  $isExist = selectOne('bookmarks', ['user_id' => $uId, 'post_id' => $bookmarkId]);
+  if (!empty($isExist)) {
+    delete('bookmarks', $isExist['id']);
+  } else {
+    create('bookmarks', ['user_id' => $uId, 'post_id' => $bookmarkId]);
+  }
+  redirectWithMessage('collections/bookmarks', ['success' => 'Bookmarks updated']);
+}
+
 
 function authenticated()
 {

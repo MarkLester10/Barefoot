@@ -133,7 +133,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
         <small class="block mt-2 text-red-500"><?php echo $errors['body'] ?></small>
         <?php endif; ?>
         <div class="flex items-center space-x-2 py-4">
-          <input type="checkbox" name="is_published" <?php echo ($isPublished) ? 'checked' : '' ?>>
+          <input type="checkbox" name="is_published" <?php echo ($isPublished) ? 'checked' : 'checked' ?>>
           <span class="text-sm text-gray-700 dark:text-gray-400">
             I want to publish this story
           </span>

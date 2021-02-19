@@ -45,6 +45,7 @@ function selectAll($table, $conditions = [])
       }
       $i++;
     }
+    $sql = $sql . " ORDER BY id DESC";
     $stmt = execQuery($sql, $conditions);
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
     return $records;

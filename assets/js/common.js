@@ -23,7 +23,7 @@ function togglePopUp(e) {
 new TomSelect("#tags", {
   plugins: ["remove_button"],
   create: true,
-  maxItems: 3,
+  maxItems: 5,
 });
 
 //CK EDitors

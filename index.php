@@ -18,13 +18,15 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       <div class="travel__card rounded-md lg:col-span-2">
         <div class="overlay rounded-md"></div>
         <img src="./assets/imgs/travels/demo1.jpg" class="travel__card__img rounded-md" alt="Beach">
+        <?php if (authenticated()) : ?>
         <div class="bookmark__icon text__adaptive">
-          <a href="#">
+          <a href="/" class="block btn">
             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path>
             </svg>
           </a>
         </div>
+        <?php endif; ?>
         <div class="travel__card__title">
           <a href="#">
             <h1 class="title__text">Lorem ipsum dolor sit amet consectetur, adipisicing
@@ -38,7 +40,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
                 Jane Doe
               </h1>
               <small class="flex items-center space-x-2">
-                <a href="#">
+                <a href="#" class="btn <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>" @click="toggleHeart">
                   <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -56,8 +58,9 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       <div class="travel__card rounded-md">
         <div class="overlay rounded-md"></div>
         <img src="./assets/imgs/travels/demo.jpg" class="travel__card__img rounded-md" alt="Beach">
+        <?php if (authenticated()) : ?>
         <div class="bookmark__icon text__adaptive">
-          <a href="#">
+          <a href="#" class="block btn <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
@@ -65,6 +68,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
             </svg>
           </a>
         </div>
+        <?php endif; ?>
         <div class="travel__card__title">
           <a href="#hehe">
             <h1 class="title__text">Lorem ipsum dolor sit amet consectetur, adipisicing
@@ -78,7 +82,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
                 Jane Doe
               </h1>
               <small class="flex items-center space-x-2">
-                <a href="#">
+                <a href="#" class="btn <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>" @click="toggleHeart">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
@@ -118,6 +122,8 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
 <!-- End Main Area -->
+
+<?php include ROOT_PATH . '/app/includes/modals/heart.php' ?>
 
 </div>
 <!-- End of Sidebar -->

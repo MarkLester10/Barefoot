@@ -4,7 +4,6 @@ require_once ROOT_PATH . "/app/Controllers/AuthController.php";
 require_once ROOT_PATH . "/app/Controllers/HomeController.php";
 $title = "Barefoot Travel Collections";
 include ROOT_PATH . '/app/includes/layoutTop.php';
-include ROOT_PATH . '/app/includes/loader.php';
 include ROOT_PATH . '/app/includes/sidebar.php';
 ?>
 

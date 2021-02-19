@@ -83,7 +83,7 @@
             </label>
 
             <label class="section-label">
-              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/bookmarks.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
+              <div class="p-2 rounded-md  <?php echo ($_SERVER['REQUEST_URI'] === '/collections/bookmarks.php') ? 'bg-red-400 dark:bg-red-400' : 'bg-gray-200 text__adaptive  dark:bg-gray-800' ?>
               ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@
                     d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                 </svg>
               </div>
-              <a href="#"> <span class="sidebar__link">Bookmarks</span></a>
+              <a href="/collections/bookmarks.php"> <span class="sidebar__link">Bookmarks</span></a>
             </label>
             <?php endif; ?>
 

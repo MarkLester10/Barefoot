@@ -16,7 +16,6 @@ $editingStoryTags = array();
 $createdStoryTags = array();
 
 
-
 // EDIT FORM
 if (isset($_GET['title']) && isset($_GET['id'])) {
   $storyId = $_GET['id'];
