@@ -152,7 +152,6 @@ function createOrUpdate($table, $selectedData, $column, $data)
 }
 
 
-
 //DELETE FUNCTION
 function delete($table, $id)
 {
@@ -161,21 +160,6 @@ function delete($table, $id)
   return $stmt->affected_rows;
 }
 
-function resetAll($table)
-{
-  global $conn;
-  $sql = "TRUNCATE $table";
-  $stmt = $conn->prepare($sql);
-  $res = $stmt->execute();
-
-  if ($res) {
-    $status = 1;
-  } else {
-    $status = 0;
-  }
-
-  return $status;
-}
 
 // Search
 function searchPost($keyword)
@@ -279,4 +263,20 @@ function getTags($post_id)
   $stmt = execQuery($sql, ['post_id' => $post_id]);
   $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
   return $records;
+}
+
+function resetAll($table)
+{
+  global $conn;
+  $sql = "TRUNCATE $table";
+  $stmt = $conn->prepare($sql);
+  $res = $stmt->execute();
+
+  if ($res) {
+    $status = 1;
+  } else {
+    $status = 0;
+  }
+
+  return $status;
 }

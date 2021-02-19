@@ -54,12 +54,12 @@ if (isset($_SESSION['id'])) {
 // Adding to Bookmark
 if (authenticated() && isset($_GET['bookmark'])) {
   $uId = $_SESSION['id'];
-  $bookmarkId = $_GET['bookmark'];
-  $isExist = selectOne('bookmarks', ['user_id' => $uId, 'post_id' => $bookmarkId]);
+  $postId = $_GET['bookmark'];
+  $isExist = selectOne('bookmarks', ['user_id' => $uId, 'post_id' => $postId]);
   if (!empty($isExist)) {
     delete('bookmarks', $isExist['id']);
   } else {
-    create('bookmarks', ['user_id' => $uId, 'post_id' => $bookmarkId]);
+    create('bookmarks', ['user_id' => $uId, 'post_id' => $postId]);
   }
   redirectWithMessage('collections/bookmarks', ['success' => 'Bookmarks updated']);
 }
