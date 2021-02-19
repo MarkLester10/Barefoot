@@ -76,9 +76,9 @@
     <h1 class="subtitle__text text__adaptive">
       Read More Stories About
     </h1>
-    <div class="flex items-center flex-wrap space-x-4 space-y-4 mt-4">
+    <div class="flex items-center flex-wrap space-x-4 mt-4">
       <?php foreach ($publicTags as $tag) : ?>
-      <a href="#" class="btn tags">
+      <a href="#" class="btn tags mb-4">
         <?php echo $tag['name'] ?></a>
       <?php endforeach ?>
     </div>
