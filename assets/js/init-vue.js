@@ -1,18 +1,13 @@
 new Vue({
   el: "#app",
   data: {
-    travelBlogs: [
-      "styles",
-      "activities",
-      "planning",
-      "inspiration",
-      "styles",
-      "inspiration",
-      "planning",
-      "activities",
-      "activities",
-      "styles",
-    ],
+    postId: null,
+    comments: [],
+    newComment: {
+      post_id: parseInt(document.querySelector("#post_id").value),
+      user_id: parseInt(document.querySelector("#user_id").value),
+      comment: "",
+    },
     isMainMenuOpen: false,
     isFilterOpen: false,
     userDropDownOpen: false,
@@ -22,9 +17,6 @@ new Vue({
     isCommentCollapse: true,
     isHeartOpen: false,
     isLiked: false,
-    postId: null,
-    slug: "",
-    categories: [],
   },
   methods: {
     toggleHeart: function () {
@@ -65,6 +57,55 @@ new Vue({
         this.isDarkModeOn = true;
       }
     },
+    toggleCommentBtn: function () {
+      var button = document.getElementById("sendComment");
+      if (this.newComment.comment.length > 0) {
+        button.disabled = false;
+        button.classList.remove("opacity-50");
+      } else {
+        button.disabled = true;
+        button.classList.add("opacity-50");
+      }
+    },
+    addComment: function () {
+      var spinner = document.getElementById("spinner");
+      var formData = this.toFormData(this.newComment);
+      spinner.classList.remove("hidden");
+      axios
+        .post(
+          "http://localhost:8080/app/Controllers/CommentController.php?action=add-comment",
+          formData
+        )
+        .then((res) => {
+          spinner.classList.add("hidden");
+          this.newComment.comment = "";
+          if (res.data.error) {
+            console.log(res.data.message);
+          } else {
+            this.fetchAllComments();
+          }
+        });
+    },
+    fetchAllComments: function () {
+      axios
+        .get(
+          `http://localhost:8080/app/Controllers/CommentController.php?action=fetch-comments&post_id=${this.newComment.post_id}`
+        )
+        .then((res) => {
+          if (res.data.error) {
+            console.log(res.data.message);
+          } else {
+            this.comments = res.data.comments;
+          }
+        });
+    },
+    toFormData: function (obj) {
+      var fd = new FormData();
+      for (var i in obj) {
+        fd.append(i, obj[i]);
+      }
+      return fd;
+    },
   },
   created: function () {
     if (
@@ -77,5 +118,10 @@ new Vue({
       document.querySelector("html").classList.remove("dark");
       this.isDarkModeOn = false;
     }
+    // var button = document.getElementById("sendComment");
+    // button.disabled = true;
+    // button.classList.add("opacity-50");
+
+    // this.fetchAllComments();
   },
 });

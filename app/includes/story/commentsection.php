@@ -1,13 +1,13 @@
 <div class="bg__adaptive px-3 h-auto">
   <h1 class="subtitle__text text__adaptive pt-2">Comments</h1>
-  <form class="bg__adaptive comment__form space-y-3">
-    <input type="hidden" name="user_id" value="<?php echo $_SESSION['id'] ?>">
-    <input type="hidden" name="post_id" value="<?php echo $story['id'] ?>">
+  <form method="#" id="comment_form" class="bg__adaptive comment__form space-y-3">
+    <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id'] ?>">
+    <input type="hidden" id="post_id" name="post_id" value="<?php echo $story['id'] ?>">
     <div class="flex items-center space-x-3">
       <img src='<?php echo $profileImage ?>' class="profile-img h-10 w-10" alt="Profile Image">
       <input class="comment__field text-xs border-b text__adaptive focus:border-green-400"
         <?php echo (authenticated() === 0) ? 'disabled' : '' ?> autocomplete="off" placeholder="Add public comment..."
-        name="comment">
+        id="comment" v-model="newComment.comment" name="comment" @keyup="toggleCommentBtn">
     </div>
 
     <div class="flex items-center justify-between">
@@ -23,7 +23,7 @@
         <span class="text__adaptive ml-2 text-xs">10k Comments</span>
       </div>
       <?php if (authenticated()) : ?>
-      <button type="submit" class="primary__btn">
+      <button type="submit" id="sendComment" class="primary__btn" @click.prevent="addComment">
         Send
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8">
@@ -33,11 +33,19 @@
       <?php endif; ?>
     </div>
   </form>
-
+  <div class="py-4 hidden" id="spinner">
+    <svg class="animate-spin m-auto h-8 w-8 text__adaptive" xmlns="http://www.w3.org/2000/svg" fill="none"
+      viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+      </path>
+    </svg>
+  </div>
   <!-- Comment Box -->
-  <div class="comment__box mt-8" :class="{'active':isCommentCollapse}">
-    <div class="comment__wrapper max-h-screen">
-      <div class="comment__item mb-4 relative" v-for="travel in travelBlogs">
+  <div class="comment__box mt-6" :class="{'active':isCommentCollapse}">
+    <div class="comment__wrapper max-h-screen" id="comment_section">
+      <div class="comment__item mb-4 relative">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-3">
             <a href="/user/profile.php"><img src="../assets/imgs/auth/avatar.png" class="profile-img h-10 w-10"

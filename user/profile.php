@@ -95,5 +95,4 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 <!-- End of App -->
 
 <!-- Scripts Area -->
-
 <?php include ROOT_PATH . '/app/includes/layoutBottom.php' ?>

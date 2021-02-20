@@ -259,6 +259,23 @@ function selectOnePublicPost($conditions = [])
   return $records;
 }
 
+function getComments($postId)
+{
+  $sql = "SELECT
+  c.*,
+  u.profile_image,
+  u.id,
+  u.username
+  FROM comments AS c
+  LEFT JOIN users AS u
+  ON c.user_id = u.id
+  WHERE c.post_id = ?
+  ORDER BY c.id DESC";
+  $stmt = execQuery($sql, ['c.post_id' => $postId]);
+  $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
+  return $records;
+}
+
 function getTags($post_id)
 {
   $sql = "SELECT
