@@ -24,7 +24,6 @@ function execQuery($sql, $data)
 }
 
 // SELECT FUNCTIONS
-
 function selectAll($table, $conditions = [])
 {
   global $conn;
@@ -160,23 +159,32 @@ function delete($table, $id)
   return $stmt->affected_rows;
 }
 
-
 // Search
 function searchPost($keyword)
 {
-  global $conn;
-  // query for joining 2 tables which is users and events
   $searchMatch = '%' . $keyword . '%';
 
-  $sql = "SELECT e.*,
-            u.username
-            FROM events AS e
-            JOIN users AS u
-            ON e.user_id=u.id
-            WHERE e.title LIKE ? AND e.released='1' OR e.description LIKE ?
-            AND e.released='1' ORDER BY e.eventday DESC";
+  $sql = "SELECT
+  p.*,
+  c.name AS category, 
+  c.slug AS catSlug,
+  u.profile_image,
+  u.username,
+  COUNT(posts_likes.id) AS likes
+  FROM posts AS p
 
-  $stmt = execQuery($sql, ['title' => $searchMatch, 'description' => $searchMatch]);
+  LEFt JOIN categories AS c
+  ON p.category_id = c.id
+
+  LEFT JOIN users as u
+  ON p.user_id = u.id
+
+  LEFT JOIN posts_likes
+  ON p.id = posts_likes.post_id
+  WHERE p.title LIKE ? AND p.is_published='1' OR p.body LIKE ?
+  GROUP BY p.id ORDER BY p.id DESC";
+
+  $stmt = execQuery($sql, ['p.title' => $searchMatch, 'p.body' => $searchMatch]);
   $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
   return $records;
 }

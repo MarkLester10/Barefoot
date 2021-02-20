@@ -10,7 +10,9 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
         </div>
-        <input class="input-web" type="text" placeholder="Search" />
+        <form action="/travels/collections.php">
+          <input class="input-web" type="text" name="search" placeholder="Search" />
+        </form>
       </div>
       <?php endif; ?>
       <button @click="toggleFilter" class="filter-btn">

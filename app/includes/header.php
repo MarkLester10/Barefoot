@@ -30,8 +30,8 @@
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
-      <form action="#" method="GET">
-        <input class="input-web" name="search" type="text" placeholder="Global Search . . ." />
+      <form action="/travels/collections.php" method="GET">
+        <input class="input-web" autocomplete="off" name="search" type="text" placeholder="Global Search . . ." />
       </form>
     </div>
     <div class="sm:flex sm:items-center border-t border-gray-200 sm:border-t-0">

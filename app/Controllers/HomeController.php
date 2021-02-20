@@ -7,9 +7,9 @@ require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 $categories = selectAll('categories');
 $publicTags = selectAll('tags');
 $publicPosts = array();
+$trending = array();
 $story = array();
 $publicPosts = selectPublicPosts(['p.is_published' => 1]);
-
 
 // FOR BOOKMARKS STATE
 if (authenticated()) {
@@ -20,10 +20,23 @@ if (authenticated()) {
   }
 }
 
+// Trending.php
+foreach ($publicPosts as $publicPost) {
+  if ($publicPost['likes'] >= 2) {
+    array_push($trending, $publicPost);
+  }
+}
+
 // collections.php
 if (isset($_GET['category']) && isset($_GET['id'])) {
   $categoryId = $_GET['id'];
   $publicPosts = selectPublicPosts(['p.is_published' => 1, 'p.category_id' => $categoryId]);
+}
+
+// Search collections.php
+if (isset($_GET['search'])) {
+  $keyword = $_GET['search'];
+  $publicPosts = searchPost($keyword);
 }
 
 // profile.php

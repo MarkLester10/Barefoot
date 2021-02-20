@@ -9,6 +9,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 
 <!-- Main area -->
 <main class="xl:flex-1 xl:overflow-x-hidden">
+  <?php if (!empty($user)) : ?>
   <section class="profile__area py-6 px-4 xl:px-0 xl:pr-4">
     <div class="py-6 bg__adaptive px-4 shadow-md" enctype="multipart/form-data">
       <div class="banner mt-4">
@@ -77,11 +78,14 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       <?php if (count($publicPosts) > 0) : ?>
       <?php include ROOT_PATH . '/app/includes/collections/travelcards.php'; ?>
       <?php else : ?>
-      <h1 class="title__text text__adaptive">Sorry dear, No Post Added Yet 😞</h1>
+      <h1 class="title__text text__adaptive">No Post Added Yet 😞</h1>
       <?php endif; ?>
     </div>
   </section>
   <?php include ROOT_PATH . '/app/includes/footer.php' ?>
+  <?php else : ?>
+  <h1 class="title__text text__adaptive text-center mt-64">User Not Found 😞</h1>
+  <?php endif; ?>
 </main>
 <!-- End Main Area -->
 

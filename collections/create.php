@@ -102,8 +102,8 @@ include ROOT_PATH . '/app/includes/sidebar.php';
           <span class="text-gray-700 dark:text-gray-400">
             Youtube Video Id - Optional
           </span>
-          <input type="text" name="youtube_url" value="<?php echo $youtube ?>" class="form__input" min="1"
-            placeholder="DW1lqKsadI0">
+          <input type="text" autocomplete="off" name="youtube_url" value="<?php echo $youtube ?>" class="form__input"
+            min="1" placeholder="DW1lqKsadI0">
         </label>
       </div>
 

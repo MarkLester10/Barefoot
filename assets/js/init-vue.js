@@ -21,6 +21,7 @@ new Vue({
     isModalOpen: false,
     isCommentCollapse: true,
     isHeartOpen: false,
+    isLiked: false,
     postId: null,
     slug: "",
     categories: [],
@@ -28,9 +29,10 @@ new Vue({
   methods: {
     toggleHeart: function () {
       this.isHeartOpen = !this.isHeartOpen;
+      this.isLiked = !this.isLiked;
       setTimeout(() => {
         this.isHeartOpen = !this.isHeartOpen;
-      }, 2000);
+      }, 1500);
     },
     toggleCommentCollapse: function () {
       this.isCommentCollapse = !this.isCommentCollapse;

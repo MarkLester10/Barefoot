@@ -12,7 +12,8 @@ function upload($file, $imageName, $target)
       return $newImageName;
     }
   } else {
-    redirectWithMessage('account/settings', ['error' => 'Invalid Image Format ❌ - Valid Extendion (JPEG, PNG, JPG)']);
+    $url = ($_SERVER['REQUEST_URI'] === '/account/settings.php') ? 'account/settings' : 'collections/create';
+    redirectWithMessage($url, ['error' => 'Invalid Image Format ❌ - Valid Extendion (JPEG, PNG, JPG)']);
   }
 }
 

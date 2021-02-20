@@ -35,6 +35,7 @@ $body = ($editingStory['body']) ?? '';
 $image = ($editingStory['image']) ?? '';
 
 
+
 //CREATE POST
 if (isset($_POST['create-post'])) {
   unset($_POST['create-post']);
@@ -85,10 +86,9 @@ if (isset($_POST['create-post'])) {
   $body =  htmlentities($request['body']);
 }
 
-
-//EDIT POST
-if (isset($_POST['edit-post'])) {
-  unset($_POST['edit-post']);
+//Update POST
+if (isset($_POST['update-post'])) {
+  unset($_POST['update-post']);
   $postId = $_POST['post_id'];
   $postImage = $_POST['image'];
   $request = sanitize($_POST, 'post');
@@ -135,7 +135,6 @@ if (isset($_POST['edit-post'])) {
   $isPublished = isset($request['is_published']) ? 1 : 0;
   $body =  htmlentities($request['body']);
 }
-
 
 // DELETE POST
 if (isset($_POST['delete-post'])) {

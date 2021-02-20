@@ -104,8 +104,8 @@ include ROOT_PATH . '/app/includes/sidebar.php';
           <span class="text-gray-700 dark:text-gray-400">
             Youtube Video Id - Optional
           </span>
-          <input type="text" name="youtube_url" value="<?php echo $youtube ?>" class="form__input" min="1"
-            placeholder="DW1lqKsadI0">
+          <input type="text" autocomplete="off" name="youtube_url" value="<?php echo $youtube ?>" class="form__input"
+            min="1" placeholder="DW1lqKsadI0">
         </label>
       </div>
 
@@ -138,7 +138,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
         </div>
         <hr>
         <div class="mt-6 relative">
-          <button type="submit" name="edit-post" class="primary__btn hover:bg-green-400">Save</button>
+          <button type="submit" name="update-post" class="primary__btn hover:bg-green-400">Save</button>
           <a href="/collections/travels.php" class="secondary__btn border inline-block border-black">Cancel</a>
         </div>
       </div>

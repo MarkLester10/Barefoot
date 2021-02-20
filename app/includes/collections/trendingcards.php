@@ -1,4 +1,4 @@
-<?php foreach ($publicPosts as $post) : ?>
+<?php foreach ($trending as $post) : ?>
 <div class="card rounded-md mix <?php echo $post['catSlug'] ?>">
   <div class="card__img">
     <span class="pill"><?php echo $post['reading_time'] ?> mins</span>

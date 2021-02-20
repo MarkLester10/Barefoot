@@ -15,6 +15,8 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   <section class="discover__area py-6 px-4 xl:px-0 xl:pr-4">
     <h1 class="title__text text__adaptive">Discover</h1>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 py-8">
+
+      <!-- First Card -->
       <div class="travel__card rounded-md lg:col-span-2">
         <div class="overlay rounded-md"></div>
         <img src="./assets/imgs/travels/demo1.jpg" class="travel__card__img rounded-md" alt="Beach">
@@ -47,14 +49,21 @@ include ROOT_PATH . '/app/includes/sidebar.php';
                       d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                       clip-rule="evenodd"></path>
                   </svg>
+                  <!-- <svg class="w-6 h-6 text__adaptive" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                    </path>
+                  </svg> -->
                 </a>
                 <span>53k likes &#8226; 1hour ago</span>
               </small>
             </div>
           </div>
         </div>
-
       </div>
+
+      <!-- Second card -->
       <div class="travel__card rounded-md">
         <div class="overlay rounded-md"></div>
         <img src="./assets/imgs/travels/demo.jpg" class="travel__card__img rounded-md" alt="Beach">
@@ -83,12 +92,18 @@ include ROOT_PATH . '/app/includes/sidebar.php';
               </h1>
               <small class="flex items-center space-x-2">
                 <a href="#" class="btn <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>" @click="toggleHeart">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <!-- <svg  class="w-6 h-6 text__adaptive" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                       d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
                     </path>
-                  </svg>
+                  </svg> -->
                 </a>
                 <span>53k likes &#8226; 1hour ago</span>
               </small>
@@ -121,7 +136,6 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   </section>
   <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
-<!-- End Main Area -->
 
 <?php include ROOT_PATH . '/app/includes/modals/heart.php' ?>
 

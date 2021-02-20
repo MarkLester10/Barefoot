@@ -34,7 +34,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   </section>
   <?php else : ?>
   <section class="flex items-center justify-center h-full">
-    <h1 class="title__text text__adaptive">Sorry dear, We cannot find that story 😞</h1>
+    <h1 class="title__text text__adaptive">Oh Snap!, We cannot find that story 😞</h1>
   </section>
   <?php endif; ?>
   <?php include ROOT_PATH . '/app/includes/footer.php' ?>

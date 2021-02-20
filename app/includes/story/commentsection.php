@@ -20,7 +20,7 @@
             </path>
           </svg>
         </button>
-        <span class="text__adaptive ml-2 text-xs">Collapse Comments</span>
+        <span class="text__adaptive ml-2 text-xs">10k Comments</span>
       </div>
       <?php if (authenticated()) : ?>
       <button type="submit" class="primary__btn">
