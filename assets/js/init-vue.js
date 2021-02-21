@@ -184,6 +184,8 @@ new Vue({
     this.$refs.sendCommentBtn.classList.add("opacity-50");
     this.getSinglePost();
     this.fetchAllComments();
+  },
+  created: function () {
     // DARKMODE
     if (
       localStorage.theme === "dark"

@@ -1,8 +1,8 @@
-<div class="story__details px-4 py-6">
+<div class="story__details px-4 py-4">
   <!-- TITLE -->
-  <div class="story__title py-6">
+  <div class="story__title py-4">
+    <span class="pill mb-2"><?php echo $story['reading_time'] ?> mins read</span>
     <h1 class="title__text text__adaptive"><?php echo $story['title'] ?></h1>
-    <span class="pill"><?php echo $story['reading_time'] ?> mins</span>
     <ul class="py-4 text-md text-gray-500 list space-x-2">
       <?php $tags = getTags($story['id']) ?>
       <?php foreach ($tags as $tags) : ?>
