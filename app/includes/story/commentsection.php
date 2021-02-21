@@ -24,14 +24,14 @@
         <span class="text__adaptive ml-2 text-md">{{ commentCount }} {{ commentCount > 1 ?'Comments':'Comment' }}</span>
       </div>
       <?php if (authenticated()) : ?>
-      <button v-if="!isEdit" type="submit" id="sendComment" class="primary__btn" @click.prevent="addComment">
+      <button ref="sendCommentBtn" v-if="!isEdit" type="submit" class="primary__btn" @click.prevent="addComment">
         Send
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8">
           </path>
         </svg>
       </button>
-      <button v-else type="submit" id="sendComment" class="primary__btn" @click.prevent="editComment">
+      <button ref="sendCommentBtn" v-else type="submit" class="primary__btn" @click.prevent="editComment">
         Update
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8">
@@ -41,7 +41,7 @@
       <?php endif; ?>
     </div>
   </form>
-  <div class="py-4 hidden" id="spinner">
+  <div ref="spinner" class="py-4 hidden" id="spinner">
     <svg class="animate-spin m-auto h-8 w-8 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none"
       viewBox="0 0 24 24">
       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

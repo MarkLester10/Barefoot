@@ -39,6 +39,8 @@ new Vue({
       this.isEdit = !this.isEdit;
       this.newComment.comment_id = obj.id;
       this.newComment.comment = obj.comment;
+      this.$refs.sendCommentBtn.disabled = false;
+      this.$refs.sendCommentBtn.classList.remove("opacity-50");
     },
     likeHandler: function () {
       this.isHeartOpen = !this.isHeartOpen;
@@ -101,37 +103,33 @@ new Vue({
       }
     },
     toggleCommentBtn: function () {
-      var button = document.getElementById("sendComment");
       if (this.newComment.comment.length > 0) {
-        button.disabled = false;
-        button.classList.remove("opacity-50");
+        this.$refs.sendCommentBtn.disabled = false;
+        this.$refs.sendCommentBtn.classList.remove("opacity-50");
       } else {
-        button.disabled = true;
-        button.classList.add("opacity-50");
+        this.$refs.sendCommentBtn.disabled = true;
+        this.$refs.sendCommentBtn.classList.add("opacity-50");
       }
     },
     addComment: function () {
-      var button = document.getElementById("sendComment");
-      var spinner = document.getElementById("spinner");
       var formData = this.toFormData(this.newComment);
-      spinner.classList.remove("hidden");
+      this.$refs.spinner.classList.remove("hidden");
       axios
         .post(
           "http://localhost:8080/app/Controllers/CommentController.php?action=add-comment",
           formData
         )
         .then((res) => {
-          spinner.classList.add("hidden");
+          this.$refs.spinner.classList.add("hidden");
           this.newComment.comment = "";
-          button.disabled = true;
-          button.classList.add("opacity-50");
+          this.$refs.sendCommentBtn.disabled = true;
+          this.$refs.sendCommentBtn.classList.add("opacity-50");
           this.fetchAllComments();
         });
     },
     editComment: function () {
-      var spinner = document.getElementById("spinner");
       var formData = this.toFormData(this.newComment);
-      spinner.classList.remove("hidden");
+      this.$refs.spinner.classList.remove("hidden");
       axios
         .post(
           "http://localhost:8080/app/Controllers/CommentController.php?action=edit-comment",
@@ -139,7 +137,9 @@ new Vue({
         )
         .then((res) => {
           this.isEdit = !this.isEdit;
-          spinner.classList.add("hidden");
+          this.$refs.sendCommentBtn.disabled = true;
+          this.$refs.sendCommentBtn.classList.add("opacity-50");
+          this.$refs.spinner.classList.add("hidden");
           this.newComment.comment = "";
           this.fetchAllComments();
         });
@@ -179,10 +179,12 @@ new Vue({
       return fd;
     },
   },
-  created: function () {
+  mounted: function () {
+    this.$refs.sendCommentBtn.disabled = true;
+    this.$refs.sendCommentBtn.classList.add("opacity-50");
     this.getSinglePost();
     this.fetchAllComments();
-    // darkmode
+    // DARKMODE
     if (
       localStorage.theme === "dark"
       // ||(!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
@@ -193,9 +195,5 @@ new Vue({
       document.querySelector("html").classList.remove("dark");
       this.isDarkModeOn = false;
     }
-
-    var button = document.getElementById("sendComment");
-    button.disabled = true;
-    button.classList.add("opacity-50");
   },
 });
