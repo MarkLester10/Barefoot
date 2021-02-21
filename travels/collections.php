@@ -28,7 +28,6 @@ include ROOT_PATH . '/app/includes/sidebar.php';
     </div>
   </section>
 </main>
-<?php include ROOT_PATH . '/app/includes/modals/heart.php' ?>
 </div>
 <!-- End of Sidebar -->
 </div>

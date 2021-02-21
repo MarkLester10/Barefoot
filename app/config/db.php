@@ -264,7 +264,6 @@ function getComments($postId)
   $sql = "SELECT
   c.*,
   u.profile_image,
-  u.id,
   u.username
   FROM comments AS c
   LEFT JOIN users AS u
@@ -287,6 +286,18 @@ function getTags($post_id)
 
   $stmt = execQuery($sql, ['post_id' => $post_id]);
   $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values
+  return $records;
+}
+
+function selectCount($table, $postId)
+{
+  global $conn;
+  $sql = "SELECT
+  COUNT(*) AS count
+  FROM $table
+  WHERE post_id = ?";
+  $stmt = execQuery($sql, ['post_id' => $postId]);
+  $records = $stmt->get_result()->fetch_assoc();
   return $records;
 }
 

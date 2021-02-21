@@ -122,6 +122,6 @@
     @apply bg-white dark:bg-gray-900 py-4 px-3;
   }
   .comment {
-    @apply text-xs tracking-wider mt-4 text__adaptive;
+    @apply text-sm tracking-wider text__adaptive;
   }
 }

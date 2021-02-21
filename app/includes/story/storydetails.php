@@ -43,7 +43,7 @@
             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
           </path>
         </svg>
-        <small class="text__adaptive"><?php echo formattedLikes($story['likes']) ?> </small>
+        <span class="text__adaptive"><?php echo formattedLikes($story['likes']) ?> </span>
       </a>
 
       <?php if (authenticated()) : ?>
@@ -85,7 +85,7 @@
     </h1>
     <div class="flex items-center flex-wrap space-x-4 mt-4">
       <?php foreach ($publicTags as $tag) : ?>
-      <a href="#" class="btn tags mb-4">
+      <a href="/travels/collections.php?search=<?php echo $tag['name'] ?>" class="btn tags mb-4">
         <?php echo $tag['name'] ?></a>
       <?php endforeach ?>
     </div>

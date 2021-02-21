@@ -33,7 +33,6 @@ include ROOT_PATH . '/app/includes/sidebar.php';
   </section>
   <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
-<?php include ROOT_PATH . '/app/includes/modals/heart.php' ?>
 </div>
 <!-- End of Sidebar -->
 </div>

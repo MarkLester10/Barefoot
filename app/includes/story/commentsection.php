@@ -3,9 +3,10 @@
   <form method="#" id="comment_form" class="bg__adaptive comment__form space-y-3">
     <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id'] ?>">
     <input type="hidden" id="post_id" name="post_id" value="<?php echo $story['id'] ?>">
+    <input type="hidden" id="post_user_id" value="<?php echo $story['user_id'] ?>">
     <div class="flex items-center space-x-3">
-      <img src='<?php echo $profileImage ?>' class="profile-img h-10 w-10" alt="Profile Image">
-      <input class="comment__field text-xs border-b text__adaptive focus:border-green-400"
+      <img src='<?php echo $profileImage ?>' class="profile-img h-12 w-12" alt="Profile Image">
+      <input class="comment__field text-sm border-b text__adaptive focus:border-green-400"
         <?php echo (authenticated() === 0) ? 'disabled' : '' ?> autocomplete="off" placeholder="Add public comment..."
         id="comment" v-model="newComment.comment" name="comment" @keyup="toggleCommentBtn">
     </div>
@@ -20,11 +21,19 @@
             </path>
           </svg>
         </button>
-        <span class="text__adaptive ml-2 text-xs">10k Comments</span>
+        <span v-if="commentCount > 1" class="text__adaptive ml-2 text-md">{{ commentCount }} Comments</span>
+        <span v-else class="text__adaptive ml-2 text-md">{{ commentCount }} Comment</span>
       </div>
       <?php if (authenticated()) : ?>
-      <button type="submit" id="sendComment" class="primary__btn" @click.prevent="addComment">
+      <button v-if="!isEdit" type="submit" id="sendComment" class="primary__btn" @click.prevent="addComment">
         Send
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8">
+          </path>
+        </svg>
+      </button>
+      <button v-else type="submit" id="sendComment" class="primary__btn" @click.prevent="editComment">
+        Update
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8">
           </path>
@@ -45,19 +54,21 @@
   <!-- Comment Box -->
   <div class="comment__box mt-6" :class="{'active':isCommentCollapse}">
     <div class="comment__wrapper max-h-screen" id="comment_section">
-      <div class="comment__item mb-4 relative">
+      <div class="comment__item mb-4 relative shadow-md" v-for="comment in comments">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-3">
-            <a href="/user/profile.php"><img src="../assets/imgs/auth/avatar.png" class="profile-img h-10 w-10"
-                alt=""></a>
+            <a :href="'/user/profile.php?username='+comment.username+'&id='+comment.user_id"><img
+                :src="'../assets/imgs/auth/profiles/'+ comment.profile_image" class="profile-img h-10 w-10" alt=""></a>
             <div class="travel__card__desc">
-              <h1 class="subtitle__text text__adaptive">
-                Jane Doe
+              <h1 class="text-sm tracking-wide text-white font-md rounded-full"
+                :class="[comment.user_id == postUserId ? 'bg-gray-500 px-2':'']">
+                {{ comment.username }}
               </h1>
             </div>
+            <span class="text-gray-500 text-sm font-medium">{{comment.created_at}}</span>
           </div>
-          <button type="button" class="btn <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>"
-            onclick="togglePopUp(this)">
+          <button v-if="comment.user_id == newComment.user_id" type="button"
+            class="btn <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>" onclick="togglePopUp(this)">
             <svg class="text__adaptive w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,17 +77,11 @@
             </svg>
           </button>
           <div class="modal-sm">
-            <button type="button" class="btn__link">Edit</button>
-            <form action="#">
-              <button class="btn__link">Delete</button>
-            </form>
+            <button type="button" class="btn__link" @click.prevent="toggleEditComment(comment)">Edit</button>
+            <button class="btn__link" @click.prevent="toggleConfirmModal(comment.id)">Delete</button>
           </div>
         </div>
-        <p class="comment">Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Iusto
-          tempore quas illo odio,
-          earum
-          quis corrupti ab iste fuga autem.</p>
+        <p class=" comment ml-12 mt-2">{{comment.comment}}</p>
       </div>
     </div>
   </div>

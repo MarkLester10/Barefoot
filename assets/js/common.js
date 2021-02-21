@@ -17,6 +17,10 @@ window.addEventListener("load", function () {
 // Toggle comment action pop up
 function togglePopUp(e) {
   e.nextElementSibling.classList.toggle("block");
+
+  setTimeout(() => {
+    e.nextElementSibling.classList.toggle("block");
+  }, 2000);
 }
 
 //multi select

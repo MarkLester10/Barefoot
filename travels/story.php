@@ -50,7 +50,22 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 </div>
 
 <?php include ROOT_PATH . '/app/includes/modals/heart.php' ?>
-
+<!-- Modal -->
+<div class="confirmation__modal" :class="{'active':isConfirmModalOpen}">
+  <form method="post" action="travels.php"
+    class="modal__body rounded-md bg__adaptive px-4 py-4 w-11/12 md:w-auto md:px-6 md:py-6">
+    <p class="subtitle__text text__adaptive">
+      Are you sure you want to delete this comment?
+    </p>
+    <input type="hidden" name="post_id" :value="postId">
+    <div class="mt-4 space-x-4">
+      <button type="button" class="secondary__btn border border-black"
+        @click.prevent="toggleConfirmModal">Cancel</button>
+      <button type="submit" name="delete-post" @click.prevent="deleteComment"
+        class="danger__btn hover:bg-red-400">Delete</button>
+    </div>
+  </form>
+</div>
 
 
 </div>
