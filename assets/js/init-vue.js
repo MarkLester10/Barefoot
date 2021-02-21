@@ -1,6 +1,11 @@
 new Vue({
   el: "#app",
   data: {
+    post: {},
+    postUserId:
+      document.querySelector("#post_user_id") != null
+        ? parseInt(document.querySelector("#post_user_id").value)
+        : "",
     postId: null,
     comments: [],
     commentCount: 0,
@@ -17,10 +22,6 @@ new Vue({
           : "",
       comment: "",
     },
-    postUserId:
-      document.querySelector("#post_user_id") != null
-        ? parseInt(document.querySelector("#post_user_id").value)
-        : "",
     isMainMenuOpen: false,
     isFilterOpen: false,
     userDropDownOpen: false,
@@ -39,12 +40,27 @@ new Vue({
       this.newComment.comment_id = obj.id;
       this.newComment.comment = obj.comment;
     },
-    toggleHeart: function () {
+    likeHandler: function () {
       this.isHeartOpen = !this.isHeartOpen;
       this.isLiked = !this.isLiked;
-      setTimeout(() => {
-        this.isHeartOpen = !this.isHeartOpen;
-      }, 1500);
+      axios
+        .get(
+          `http://localhost:8080/app/Controllers/LikeController.php?action=liked&post_id=${this.newComment.post_id}&user_id=${this.newComment.user_id}`
+        )
+        .then((res) => {
+          this.getSinglePost();
+          this.isHeartOpen = !this.isHeartOpen;
+        });
+    },
+    getSinglePost: function () {
+      axios
+        .get(
+          `http://localhost:8080/app/Controllers/LikeController.php?action=get-post&post_id=${this.newComment.post_id}&user_id=${this.newComment.user_id}`
+        )
+        .then((res) => {
+          this.isLiked = res.data.isPostLiked;
+          this.post = res.data.post;
+        });
     },
     togglePopUp: function (e) {
       e.nextElementSibling.classList.toggle("block");
@@ -95,6 +111,7 @@ new Vue({
       }
     },
     addComment: function () {
+      var button = document.getElementById("sendComment");
       var spinner = document.getElementById("spinner");
       var formData = this.toFormData(this.newComment);
       spinner.classList.remove("hidden");
@@ -106,10 +123,9 @@ new Vue({
         .then((res) => {
           spinner.classList.add("hidden");
           this.newComment.comment = "";
-          if (res.data.error) {
-          } else {
-            this.fetchAllComments();
-          }
+          button.disabled = true;
+          button.classList.add("opacity-50");
+          this.fetchAllComments();
         });
     },
     editComment: function () {
@@ -125,23 +141,16 @@ new Vue({
           this.isEdit = !this.isEdit;
           spinner.classList.add("hidden");
           this.newComment.comment = "";
-          if (res.data.error) {
-          } else {
-            this.fetchAllComments();
-          }
+          this.fetchAllComments();
         });
     },
     deleteComment: function () {
-      var spinner = document.getElementById("spinner");
-      var formData = this.toFormData(this.newComment);
-      spinner.classList.remove("hidden");
       axios
         .get(
           `http://localhost:8080/app/Controllers/CommentController.php?action=delete-comment&comment_id=${this.commentId}`
         )
         .then((res) => {
           this.isConfirmModalOpen = !this.isConfirmModalOpen;
-          spinner.classList.add("hidden");
           if (res.data.error) {
           } else {
             this.fetchAllComments();
@@ -171,6 +180,7 @@ new Vue({
     },
   },
   created: function () {
+    this.getSinglePost();
     this.fetchAllComments();
     // darkmode
     if (

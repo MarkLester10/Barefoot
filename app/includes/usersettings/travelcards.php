@@ -6,7 +6,7 @@
   </div>
   <div class="card__description bg__adaptive rounded-b-md">
     <p class="para text-red-400 font-medium italic"><?php echo $post['category'] ?></p>
-    <a href="/travels/story.php?title=<?php echo $post['slug'] ?>&id=<?php echo $post['id'] ?>">
+    <a href='<?php echo "/travels/story.php?title={$post['slug']}&id={$post['id']}" ?>'>
       <h1 class="title__text text__adaptive py-2 hover:underline"><?php echo $post['title'] ?></h1>
     </a>
     <ul class="mb-2 text-sm text-gray-500 list space-x-2 py-0">

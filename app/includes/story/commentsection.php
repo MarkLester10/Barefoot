@@ -21,8 +21,7 @@
             </path>
           </svg>
         </button>
-        <span v-if="commentCount > 1" class="text__adaptive ml-2 text-md">{{ commentCount }} Comments</span>
-        <span v-else class="text__adaptive ml-2 text-md">{{ commentCount }} Comment</span>
+        <span class="text__adaptive ml-2 text-md">{{ commentCount }} {{ commentCount > 1 ?'Comments':'Comment' }}</span>
       </div>
       <?php if (authenticated()) : ?>
       <button v-if="!isEdit" type="submit" id="sendComment" class="primary__btn" @click.prevent="addComment">
@@ -43,7 +42,7 @@
     </div>
   </form>
   <div class="py-4 hidden" id="spinner">
-    <svg class="animate-spin m-auto h-8 w-8 text__adaptive" xmlns="http://www.w3.org/2000/svg" fill="none"
+    <svg class="animate-spin m-auto h-8 w-8 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none"
       viewBox="0 0 24 24">
       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
       <path class="opacity-75" fill="currentColor"

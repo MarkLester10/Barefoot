@@ -26,8 +26,8 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 
       <!-- Similar Stories -->
       <div class="rounded-md px-3">
-        <h1 class="subtitle__text text__adaptive py-6 md:py-0">Stories that you might also like 💘</h1>
-        <hr class="my-6">
+        <h1 class="text-lg font-semibold tracking-wide text__adaptive py-4 md:py-0">Check out this stories too! 🧐</h1>
+        <div class="border my-4 border-red-400"></div>
         <?php include ROOT_PATH . '/app/includes/story/relatedStories.php' ?>
       </div>
     </div>

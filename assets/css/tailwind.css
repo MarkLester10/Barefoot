@@ -109,7 +109,7 @@
   }
 
   .btn__link {
-    @apply text__adaptive block w-full hover:bg-gray-100 dark:hover:bg-gray-500 px-4 py-1;
+    @apply text__adaptive block w-full hover:bg-gray-100 dark:hover:bg-gray-500 px-4 py-1 focus:outline-none;
   }
 
   .tags {

@@ -53,7 +53,6 @@ if ($action == 'edit-comment') {
 // DELETE COMMENT
 if ($action == 'delete-comment') {
   $commentId = $_GET['comment_id'];
-
   $res = delete('comments', $commentId);
   if ($res === 1) {
     $result['message'] = 'Comment deleted successfully';

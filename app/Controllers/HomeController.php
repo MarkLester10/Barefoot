@@ -10,6 +10,7 @@ $publicPosts = array();
 $trending = array();
 $story = array();
 $publicPosts = selectPublicPosts(['p.is_published' => 1]);
+$randomStories = selectPublicPosts(['p.is_published' => 1], 2);
 
 // FOR BOOKMARKS STATE
 if (authenticated()) {

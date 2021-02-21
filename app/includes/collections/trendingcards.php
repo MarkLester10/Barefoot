@@ -18,7 +18,7 @@
       <?php echo $post['username'] ?>
     </h1>
     <p class="para text-red-400 font-medium italic"><?php echo $post['category'] ?></p>
-    <a href="/travels/story.php?title=<?php echo $post['slug'] ?>&id=<?php echo $post['id'] ?>">
+    <a href='<?php echo "/travels/story.php?title={$post['slug']}&id={$post['id']}" ?>'>
       <h1 class="title__text text__adaptive py-2 hover:underline">
         <?php echo $post['title'] ?></h1>
     </a>

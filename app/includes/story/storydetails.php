@@ -3,6 +3,12 @@
   <div class="story__title py-6">
     <h1 class="title__text text__adaptive"><?php echo $story['title'] ?></h1>
     <span class="pill"><?php echo $story['reading_time'] ?> mins</span>
+    <ul class="py-4 text-md text-gray-500 list space-x-2">
+      <?php $tags = getTags($story['id']) ?>
+      <?php foreach ($tags as $tags) : ?>
+      <li><?php echo "#{$tags['name']}" ?></li>
+      <?php endforeach; ?>
+    </ul>
   </div>
   <!-- Author -->
   <div class="flex md:items-center md:justify-between flex-col md:flex-row">
@@ -30,7 +36,7 @@
 
     <div class="flex items-center space-x-4 ml-14 mt-2 md:ml-0 md:mt-0">
       <a href="#" class="btn flex items-center space-x-1  <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>"
-        @click="toggleHeart">
+        @click.prevent="likeHandler">
         <svg v-if="isLiked" class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -43,7 +49,7 @@
             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
           </path>
         </svg>
-        <span class="text__adaptive"><?php echo formattedLikes($story['likes']) ?> </span>
+        <span class="text__adaptive">{{ post.likes }} {{post.likes > 1 ? 'Likes':'Like'}}</span>
       </a>
 
       <?php if (authenticated()) : ?>
@@ -61,12 +67,11 @@
           </svg>
         </div>
         <?php else : ?>
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-8 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
             d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
         </svg>
         <?php endif; ?>
-
       </a>
       <?php endif; ?>
     </div>
@@ -78,10 +83,11 @@
     <?php echo html_entity_decode($story['body']) ?>
   </div>
 
+
   <!-- Tags -->
-  <div class="py-8">
-    <h1 class="subtitle__text text__adaptive">
-      Read More Stories About
+  <div class="mt-8">
+    <h1 class="text-md tracking-wide text-red-400">
+      Read More Stories About 📖
     </h1>
     <div class="flex items-center flex-wrap space-x-4 mt-4">
       <?php foreach ($publicTags as $tag) : ?>

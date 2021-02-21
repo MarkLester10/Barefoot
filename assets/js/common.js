@@ -20,7 +20,7 @@ function togglePopUp(e) {
 
   setTimeout(() => {
     e.nextElementSibling.classList.toggle("block");
-  }, 2000);
+  }, 1500);
 }
 
 //multi select
