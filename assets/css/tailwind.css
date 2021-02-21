@@ -29,7 +29,7 @@
   }
 
   .profile-img {
-    @apply w-12 h-12 object-cover rounded-full border-2 border-gray-600 cursor-pointer xl:border-gray-300;
+    @apply w-12 h-12 object-cover rounded-full border-2 border-red-400 cursor-pointer;
   }
 
   .profile-dropDown {

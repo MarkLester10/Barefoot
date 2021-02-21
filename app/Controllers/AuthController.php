@@ -14,7 +14,6 @@ $email = '';
 // SIGN UP
 if (isset($_POST['signup-btn'])) {
   unset($_POST['signup-btn']);
-  $_POST['username'] = str_replace(' ', '', $_POST['username']);
   $request = sanitize($_POST, 'post');
   $rules = [
     'username' => [RULE_REQUIRED, [RULE_UNIQUE, 'unique' => 'username', 'table' => 'users']],
@@ -22,9 +21,7 @@ if (isset($_POST['signup-btn'])) {
     'password' => [RULE_REQUIRED, [RULE_MIN, 'min' => 8], [RULE_MAX, 'max' => 24]],
     'passwordConf' => [RULE_REQUIRED, [RULE_MATCH, 'match' => 'password']]
   ];
-
   $errors = validate($request, $rules);
-
 
   if (count($errors) === 0) {
     $request['password'] = password_hash($request['password'], PASSWORD_DEFAULT);
