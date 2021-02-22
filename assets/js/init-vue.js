@@ -164,7 +164,7 @@ new Vue({
         )
         .then((res) => {
           if (res.data.error) {
-            console.log(res.data.message);
+            console.log(res.data.error);
           } else {
             this.comments = res.data.comments;
             this.commentCount = res.data.commentCount;
@@ -182,10 +182,10 @@ new Vue({
   mounted: function () {
     this.$refs.sendCommentBtn.disabled = true;
     this.$refs.sendCommentBtn.classList.add("opacity-50");
-    this.getSinglePost();
-    this.fetchAllComments();
   },
   created: function () {
+    this.getSinglePost();
+    this.fetchAllComments();
     // DARKMODE
     if (
       localStorage.theme === "dark"
