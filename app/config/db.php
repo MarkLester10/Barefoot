@@ -189,7 +189,7 @@ function searchPost($keyword)
   return $records;
 }
 
-function selectPublicPosts($conditions = [], $limit = '')
+function selectPublicPosts($conditions = [], $limit = '', $Page_Start = '', $Per_Page = '')
 {
   $sql = "SELECT
           p.*,
@@ -221,6 +221,9 @@ function selectPublicPosts($conditions = [], $limit = '')
   $sql = $sql . " GROUP BY p.id ORDER BY p.id DESC";
   if (!empty($limit)) {
     $sql = $sql . " LIMIT {$limit}";
+  }
+  if (!empty($Page_Start) && !empty($Per_Page)) {
+    $sql = $sql . " LIMIT {$Page_Start},{$Per_Page}";
   }
   $stmt = execQuery($sql, $conditions);
   $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); //return all values

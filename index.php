@@ -11,7 +11,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 
 
 <!-- Main area -->
-<main class="xl:flex-1 xl:overflow-x-hidden">
+<main class="xl:flex-1 xl:overflow-x-hidden" id="main">
   <section class="discover__area py-6 px-4 xl:px-0 xl:pr-4">
     <h1 class="title__text text__adaptive">Discover</h1>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 py-8">
@@ -96,7 +96,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
         <?php endforeach; ?>
       </ul>
     </div>
-    <div class="collection__grid mixitup">
+    <div class="collection__grid mixitup" id="dynamic-posts">
       <?php if (count($publicPosts) > 0) : ?>
       <?php include ROOT_PATH . '/app/includes/collections/travelcards.php'; ?>
       <?php else : ?>
@@ -104,6 +104,15 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       <?php endif; ?>
     </div>
   </section>
+  <div class="py-4 hidden" id="spinner">
+    <svg class="animate-spin m-auto h-8 w-8 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+      viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+      </path>
+    </svg>
+  </div>
   <?php include ROOT_PATH . '/app/includes/footer.php' ?>
 </main>
 
