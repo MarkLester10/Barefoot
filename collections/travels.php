@@ -22,6 +22,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
     <div class="py-2 mt-4 border-b">
       <ul class="blogs_categories list">
         <li class="cursor-pointer text__adaptive tracking-widest" data-filter="all">All</li>
+        <li class="cursor-pointer text__adaptive tracking-widest" data-filter=".unpublished">Unpublished</li>
         <?php foreach ($categories as $category) : ?>
         <li class="cursor-pointer text__adaptive tracking-widest" data-filter=".<?php echo $category['slug'] ?>">
           <?php echo $category['name'] ?></li>

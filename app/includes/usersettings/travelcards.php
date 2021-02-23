@@ -1,5 +1,6 @@
 <?php foreach ($allPosts as $post) : ?>
-<div class="card rounded-md mix <?php echo $post['catSlug'] ?>">
+<?php $class = ($post['is_published']) ? $post['catSlug'] : 'unpublished' ?>
+<div class="card rounded-md mix <?php echo $class ?>">
   <div class="card__img">
     <span class="pill"><?php echo $post['reading_time'] ?> mins</span>
     <img src='<?php echo  BASE_URL . "/assets/imgs/travels/{$post['image']}" ?>' class="rounded-t-md" alt="">

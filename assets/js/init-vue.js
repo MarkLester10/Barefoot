@@ -8,7 +8,6 @@ new Vue({
         : "",
     postId: null,
     comments: [],
-    commentCount: 0,
     commentId: null,
     newComment: {
       comment_id: null,
@@ -167,7 +166,6 @@ new Vue({
             console.log(res.data.error);
           } else {
             this.comments = res.data.comments;
-            this.commentCount = res.data.commentCount;
           }
         });
     },

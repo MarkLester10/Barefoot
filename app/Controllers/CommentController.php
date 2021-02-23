@@ -11,8 +11,6 @@ if (isset($_GET['action'])) {
 }
 if (isset($_GET['post_id'])) {
   $postId = $_GET['post_id'];
-  $commentCount = selectCount('comments', $postId);
-  $result['commentCount'] =  $commentCount['count'];
 }
 
 // ADD COMMENT

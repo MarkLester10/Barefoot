@@ -21,7 +21,8 @@
             </path>
           </svg>
         </button>
-        <span class="text__adaptive ml-2 text-md">{{ commentCount }} {{ commentCount > 1 ?'Comments':'Comment' }}</span>
+        <span class="text__adaptive ml-2 text-md">{{ comments.length }}
+          {{ comments.length > 1 ?'Comments':'Comment' }}</span>
       </div>
       <?php if (authenticated()) : ?>
       <button ref="sendCommentBtn" v-if="!isEdit" type="submit" class="primary__btn" @click.prevent="addComment">
@@ -62,7 +63,7 @@
               <img v-else :src="'https://ui-avatars.com/api/?name='+ comment.username +'&size=512'"
                 class="profile-img h-10 w-10" alt="Profile Image">
             </a>
-            <div class="travel__card__desc">
+            <div class="flex items-center space-x-2 flex-wrap">
               <h1 class="text-sm tracking-wide text__adaptive font-md rounded-full flex items-center"
                 :class="[comment.user_id == postUserId ? 'bg__adaptive px-2':'']">
                 {{ comment.username }}
@@ -73,8 +74,8 @@
                   </path>
                 </svg>
               </h1>
+              <small class="text-gray-500 font-medium text-xs inline">{{comment.created_at}}</small>
             </div>
-            <span class="text-gray-500 text-sm font-medium">{{comment.created_at}}</span>
           </div>
           <button v-if="comment.user_id == newComment.user_id" type="button"
             class="btn <?php echo (authenticated() === 0) ? 'isDisabled' : '' ?>" onclick="togglePopUp(this)">
