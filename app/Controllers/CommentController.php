@@ -15,6 +15,7 @@ if (isset($_GET['post_id'])) {
 
 // ADD COMMENT
 if ($action == 'add-comment') {
+  require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
   $data = [
     'comment' => $_POST['comment'],
     'user_id' => $_POST['user_id'],
@@ -32,6 +33,7 @@ if ($action == 'add-comment') {
 
 // EDIT COMMENT
 if ($action == 'edit-comment') {
+  require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
   $commentId = $_POST['comment_id'];
   $data = [
     'comment' => $_POST['comment'],
@@ -50,6 +52,7 @@ if ($action == 'edit-comment') {
 
 // DELETE COMMENT
 if ($action == 'delete-comment') {
+  require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
   $commentId = $_GET['comment_id'];
   $res = delete('comments', $commentId);
   if ($res === 1) {

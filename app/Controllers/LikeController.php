@@ -13,6 +13,7 @@ if (isset($_GET['action'])) {
 
 
 if ($action == 'liked') {
+  require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
   $isExist = selectOne('posts_likes', ['user_id' => $userId, 'post_id' => $postId]);
   sleep(1);
   if (!empty($isExist)) {
