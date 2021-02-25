@@ -5,11 +5,11 @@
     <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$relatedStory['image']}" ?>' class="rounded-t-md" alt="">
     <a href='<?php echo "/user/profile.php?username={$relatedStory['username']}&id={$relatedStory['user_id']}" ?>'>
       <?php if (empty($relatedStory['profile_image'])) : ?>
-      <img src="https://ui-avatars.com/api/?name=<?php echo $relatedStory['username'] ?>&size=512" class="profile-img"
-        alt="Profile Image">
+      <img src="https://ui-avatars.com/api/?name=<?php echo $relatedStory['username'] ?>&size=512"
+        class="profile-img w-14 h-14 md:h-10 md:w-10" alt="Profile Image">
       <?php else : ?>
       <img src='<?php echo BASE_URL . "/assets/imgs/auth/profiles/{$relatedStory['profile_image']}" ?>'
-        class="profile-img h-10 w-10" alt="Profile Image">
+        class="profile-img w-14 h-14 md:h-10 md:w-10" alt="Profile Image">
       <?php endif; ?>
     </a>
   </div>
