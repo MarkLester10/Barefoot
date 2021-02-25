@@ -27,7 +27,7 @@ if (isset($_POST['signup-btn'])) {
     $request['password'] = password_hash($request['password'], PASSWORD_DEFAULT);
     unset($request['passwordConf']);
     $token = bin2hex(random_bytes(50));
-    $emailValidation = ['verified' => false, 'token' => $token];
+    $emailValidation = ['verified' => 0, 'token' => $token];
     $data = array_merge($request,  $emailValidation);
     $userId = create('users', $data);
     $userData = selectOne('users', ['id' => $userId]);
