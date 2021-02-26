@@ -44,6 +44,11 @@ new Vue({
     likeHandler: function () {
       this.isHeartOpen = !this.isHeartOpen;
       this.isLiked = !this.isLiked;
+      if (this.isLiked) {
+        this.post.likes++;
+      } else {
+        this.post.likes--;
+      }
       axios
         .get(
           `http://localhost:8080/app/Controllers/LikeController.php?action=liked&post_id=${this.newComment.post_id}&user_id=${this.newComment.user_id}`
