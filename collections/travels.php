@@ -7,7 +7,6 @@ require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
 
 $title = "{$_SESSION['username']} Travel Collections";
 include ROOT_PATH . '/app/includes/layoutTop.php';
-include ROOT_PATH . '/app/includes/loader.php';
 include ROOT_PATH . '/app/includes/sidebar.php';
 ?>
 

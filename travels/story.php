@@ -7,6 +7,7 @@ if (!empty($story)) {
 }
 $title = empty($story['title']) ? 'Barefoot Blog' : $story['title'];
 include ROOT_PATH . '/app/includes/layoutTop.php';
+include ROOT_PATH . '/app/includes/loader.php';
 include ROOT_PATH . '/app/includes/sidebar.php';
 ?>
 
