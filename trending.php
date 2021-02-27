@@ -30,7 +30,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       <?php endif; ?>
     </div>
   </section>
-  <?php include ROOT_PATH . '/app/includes/footer.php' ?>
+  <!-- <?php include ROOT_PATH . '/app/includes/footer.php' ?> -->
 </main>
 </div>
 <!-- End of Sidebar -->

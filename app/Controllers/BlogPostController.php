@@ -80,7 +80,7 @@ if (isset($_POST['create-post'])) {
   $slug = $request['slug'];
   $categoryId =  $request['category_id'];
   $readingTime =  $request['reading_time'];
-  $createdStoryTags = $_POST['tags'];
+  $createdStoryTags = isset($_POST['tags']) ? $_POST['tags'] : [];
   $youtube =  $request['youtube_url'];
   $isPublished = isset($request['is_published']) ? 1 : 0;
   $body =  htmlentities($request['body']);
