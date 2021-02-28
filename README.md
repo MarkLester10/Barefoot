@@ -1,8 +1,5 @@
 # Barefoot
 
-Website Preview
-https://barefootblog.000webhostapp.com/
-
 <p align="center"><a href="https://barefootblog.000webhostapp.com/" target="_blank">
 <img src="./landing_dark.png" width="1000"></a>
 </p>
@@ -10,6 +7,9 @@ https://barefootblog.000webhostapp.com/
 <p align="center">
     <a href="https://barefootblog.000webhostapp.com/" target="_blank"><img src="./landing_light.png" width="1000"></a>
 </p>
+
+Website Preview
+https://barefootblog.000webhostapp.com/
 
 ## About Barefoot
 
