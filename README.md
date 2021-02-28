@@ -4,11 +4,11 @@ Website Preview
 https://barefootblog.000webhostapp.com/
 
 <p align="center"><a href="https://barefootblog.000webhostapp.com/" target="_blank">
-<img src="./landing_dark.png" width="700"></a>
+<img src="./landing_dark.png" width="1000"></a>
 </p>
 
-<p align="center" style="margin-top: 3rem;">
-    <a href="https://barefootblog.000webhostapp.com/" target="_blank"><img src="./landing_light.png" width="700"></a>
+<p align="center">
+    <a href="https://barefootblog.000webhostapp.com/" target="_blank"><img src="./landing_light.png" width="1000"></a>
 </p>
 
 ## About Barefoot
