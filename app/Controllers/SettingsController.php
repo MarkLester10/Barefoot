@@ -1,0 +1,169 @@
+<?php
+require_once ROOT_PATH . "/app/config/db.php";
+require_once ROOT_PATH . "/app/helpers/Redirect.php";
+require_once ROOT_PATH . "/app/helpers/Sanitize.php";
+require_once ROOT_PATH . "/app/helpers/ImageHelper.php";
+require_once ROOT_PATH . "/app/Requests/FormRequests.php";
+
+$userId = $_SESSION['id'];
+$socials = selectOne('socials', ['user_id' => $userId]);
+$user = selectOne('users', ['id' => $userId]);
+$errors = array();
+
+$username = '';
+$email = '';
+$facebook = empty($socials) ? '' : $socials['facebook'];
+$instagram = empty($socials) ? '' : $socials['instagram'];
+$twitter = empty($socials) ? '' : $socials['twitter'];
+$youtube = empty($socials) ? '' : $socials['youtube'];
+
+$bannerImage = is_null($_SESSION['banner_image'])
+  ? BASE_URL . "/assets/imgs/banners/banner.jpg"
+  : BASE_URL . "/assets/imgs/banners/{$_SESSION['banner_image']}";
+
+// SAVE PROFILE BANNER
+if (isset($_POST['save-banner'])) {
+  unset($_POST['save-banner']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'banner_title' => [RULE_REQUIRED]
+  ];
+  $errors = validate($request, $rules);
+  // Profile Image
+  if (!empty($_FILES['profile_image']['name'])) {
+    $profileImage = upload($_FILES, 'profile_image', 'auth/profiles');
+    if (!is_null($_SESSION['profile_image'])) {
+      remove($_SESSION['profile_image'], 'auth/profiles');
+    }
+    $_SESSION['profile_image'] = $profileImage;
+    $res = update('users', 'id', $userId, ['profile_image' => $profileImage]);
+    if ($res < 0) {
+      redirectWithMessage('account/settings', ['error' => 'There is an error updating your profile ❌']);
+    }
+    redirectWithMessage('account/settings', ['success' => 'Profile updated 🤩']);
+  }
+
+  // Banner Image
+  if (!empty($_FILES['banner_image']['name'])) {
+    $bannerImage = upload($_FILES, 'banner_image', 'banners');
+    if (!is_null($_SESSION['banner_image'])) {
+      remove($_SESSION['banner_image'], 'banners');
+    }
+    $res = update('users', 'id', $userId, ['banner_image' => $bannerImage]);
+    if ($res < 0) {
+      redirectWithMessage('account/settings', ['error' => 'There is an error updating your banner image ❌']);
+    }
+    $_SESSION['banner_image'] = $bannerImage;
+    redirectWithMessage('account/settings', ['success' => 'Banner updated 🤩']);
+  }
+
+  // Banner Title
+  if (count($errors) === 0) {
+    $res = update('users', 'id', $userId, ['banner_title' =>  $request['banner_title']]);
+    if ($res < 0) {
+      redirectWithMessage('account/settings', ['error' => 'There is an error updating your banner ❌']);
+    }
+    $_SESSION['banner_title'] = $request['banner_title'];
+    redirectWithMessage('account/settings', ['success' => 'Banner updated 🥳']);
+  }
+}
+
+//EDIT ACCOUNT
+if (isset($_POST['save-account'])) {
+  unset($_POST['save-account']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'username' => [RULE_REQUIRED],
+    'email' => [RULE_REQUIRED, RULE_EMAIL],
+    'current_password' => [RULE_REQUIRED],
+    'password' => [RULE_REQUIRED, [RULE_MIN, 'min' => 8], [RULE_MAX, 'max' => 24]]
+  ];
+
+  $errors = validate($request, $rules);
+
+  if (count($errors) === 0) {
+    if ($user) {
+      (passwordVerify($request['current_password'], $user['password']))
+        ? changePassword($request, $userId)
+        : $errors['current_password'] = 'Password do not match in our database.';
+    } else {
+      $errors['username'] = 'User with that username or email doesn\'t exist';
+    }
+  }
+
+  $username =  $request['username'];
+  $email =  $request['email'];
+}
+
+// EDIT SOCIALS
+if (isset($_POST['save-socials'])) {
+  unset($_POST['save-socials']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'facebook' => [RULE_REQUIRED],
+    'twitter' => [RULE_REQUIRED],
+    'instagram' => [RULE_REQUIRED],
+    'youtube' => [RULE_REQUIRED],
+  ];
+  $errors = validate($request, $rules);
+  if (count($errors) === 0) {
+    $res = createOrUpdate('socials', $socials, ['user_id' => $userId], $request);
+    ($res > 0)
+      ? redirectWithMessage('account/settings', ['success' => 'Socials Updated Successfully 💟'])
+      : redirectWithMessage('account/settings', ['error' => 'There is an error updating your socials ❌']);
+  }
+  $facebook = $request['facebook'];
+  $instagram = $request['instagram'];
+  $twitter = $request['twitter'];
+  $youtube = $request['youtube'];
+}
+
+
+//ACCOUNT DELETION
+if (isset($_POST['delete-account'])) {
+  unset($_POST['save-account']);
+  $request = sanitize($_POST, 'post');
+  $rules = [
+    'password' => [RULE_REQUIRED],
+  ];
+
+  $errors = validate($request, $rules);
+  if (count($errors) === 0) {
+    if (passwordVerify($request['password'], $user['password'])) {
+      remove($user['profile_image'], 'auth/profiles');
+      remove($user['banner_image'], 'banners');
+      $userPosts = selectAll('posts', ['user_id' => $userId]);
+      foreach ($userPosts as $post) {
+        remove($post['image'], 'travels');
+      }
+      $res = delete('users',  $userId);
+      ($res !== 1)
+        ? redirectWithMessage('account/settings', ['error' => 'There is an error deleting your account ❌'])
+        : redirect('logout');
+    } else {
+      $errors['password'] = 'Password do not match in our database.';
+    }
+  }
+}
+
+// Password verification helper
+function passwordVerify($password, $hashpassword)
+{
+  return password_verify($password, $hashpassword);
+}
+
+// Change Password
+function changePassword($request, $userId)
+{
+  $res = update('users', 'id', $userId, [
+    'username' => $request['username'],
+    'email' => $request['email'],
+    'password' => password_hash($request['password'], PASSWORD_DEFAULT)
+  ]);
+  if ($res < 0) {
+    redirectWithMessage('account/settings', ['error' => 'There is an error updating your credentials ❌']);
+  }
+  $_SESSION['username'] = $request['username'];
+  $_SESSION['email'] = $request['email'];
+  redirectWithMessage('account/settings', ['success' => 'Account updated 🤩']);
+}

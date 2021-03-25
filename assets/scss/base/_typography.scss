@@ -1,0 +1,27 @@
+.title__text {
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+
+  @media screen and (max-width: 640px) {
+    font-size: 1.4rem;
+  }
+}
+
+.subtitle__text {
+  letter-spacing: 1px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.para {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.text__danger {
+  color: $danger;
+  opacity: 0.8;
+  font-style: italic;
+}

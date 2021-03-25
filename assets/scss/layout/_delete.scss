@@ -1,0 +1,17 @@
+.bg__set {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg__img__light {
+  background: url(../imgs/banners/banner_light_2.jpg) no-repeat center
+    center/cover;
+  @extend .bg__set;
+}
+.bg__img__dark {
+  background: url(../imgs/banners/banner_dark_2.jpg) no-repeat center
+    center/cover;
+  @extend .bg__set;
+}

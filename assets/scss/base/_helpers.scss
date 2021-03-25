@@ -1,0 +1,129 @@
+// Overlay
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-shadow: inset 200px 0px 165px 144px rgba(0, 0, 0, 0.43);
+  -moz-box-shadow: inset 200px 0px 165px 144px rgba(0, 0, 0, 0.43);
+  box-shadow: inset 200px 0px 165px 144px rgba(0, 0, 0, 0.43);
+  z-index: 1;
+}
+
+//scrollbar hiddens
+// main::-webkit-scrollbar,
+.scrollable-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+//loader
+.loader {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.8s;
+  max-height: 100%;
+
+  &.active {
+    max-height: 0;
+  }
+
+  & .loading__img {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    overflow: hidden;
+    max-height: 100%;
+    transition: all 0.8s ease;
+  }
+  &.active .loading-image {
+    max-height: 0;
+  }
+
+  & img {
+    width: 12rem;
+  }
+}
+
+//warning message
+.warning {
+  text-align: center;
+  background-color: #141620fd;
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+// center
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.confirmation__modal {
+  @extend .modal;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  transform: translateY(-1000px);
+  opacity: 0;
+
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+//animation pop modal
+.animation__modal {
+  @extend .modal;
+  z-index: 900;
+  display: none;
+
+  &.active {
+    display: block !important;
+  }
+
+  & .heart {
+    position: absolute;
+    width: 10%;
+    right: 1rem;
+    top: 2rem;
+    @media screen and (max-width: 640px) {
+      width: 20%;
+    }
+  }
+}
+
+// Disabled Link
+.isDisabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+// Checkmarke
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

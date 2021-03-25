@@ -1,0 +1,62 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+// Toggle button styles
+.toggle__dot {
+  top: -0.25rem;
+  left: -0.25rem;
+  transition: all 0.3s ease-in-out;
+}
+
+input:checked ~ .toggle__dot {
+  transform: translateX(100%);
+}
+
+// Darkmodee btn
+.darkmode-btn {
+  z-index: 500;
+}
+
+//buttons
+
+.btn {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-align: center;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  transition: all 0.2s ease;
+}
+
+.primary__btn {
+  @extend .btn;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  background-color: #000;
+  color: #fff;
+}
+
+.secondary__btn {
+  @extend .btn;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #000;
+}
+
+.danger__btn {
+  @extend .btn;
+  padding: 0.5rem 2rem;
+  border: 1px solid transparent;
+  background-color: $danger;
+  color: #fff;
+}
+
+//  <button type="submit" name="save-banner" class="secondary__btn border border-black">Edit</button>

@@ -1,0 +1,52 @@
+.story__area {
+  .comment__form {
+    & .comment__field {
+      padding-bottom: 0.5rem;
+      background: transparent;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    & .primary__btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .play__btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    transition: all 0.5s ease;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      color: #f87171;
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  .comment__wrapper {
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .comment__box {
+    overflow-y: hidden;
+    max-height: 0;
+    transition: all 0.5s ease;
+
+    &.active {
+      max-height: 100vh;
+    }
+  }
+}
