@@ -27,8 +27,10 @@ Travel blogs introduce you to places, activities and adventures you didn’t eve
 - Light mode and Dark mode
 - CRUD for Travel Stories | Tips | Reviews
 - Youtube Embed
+- Infinite Scroll (BETA) I'm still working on this
 
 ## ToDo
+
 - Add social logins | Facebook | Google | Twitter
 
 ## License
