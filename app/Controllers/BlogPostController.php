@@ -76,6 +76,8 @@ if (isset($_POST['create-post'])) {
       : redirectWithMessage('collections/create', ['error' => 'Sorry, something went wrong creating your story 😞']);
   }
 
+
+
   $postTitle = $request['title'];
   $slug = $request['slug'];
   $categoryId =  $request['category_id'];
