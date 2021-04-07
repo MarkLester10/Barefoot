@@ -1,6 +1,6 @@
 <?php
 include "../path.php";
-require_once ROOT_PATH . "/app/Controllers/AuthController.php";
+// require_once ROOT_PATH . "/app/Controllers/AuthController.php";
 require_once ROOT_PATH . "/app/Controllers/HomeController.php";
 if (!empty($story)) {
   $relatedStories = selectPublicPosts(['p.is_published' => 1, 'p.category_id' => $story['catId']]);
