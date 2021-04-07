@@ -127,7 +127,7 @@ function passwordResetTemplate($token)
           and the link will expire on its own.
         </h4>
   
-        <a style="text-decoration: none;color: #fff;text-align: center;" href="http://localhost/webapp/index.php?password-token=' . $token . '" class="btn">Set New Password</a>
+        <a style="text-decoration: none;color: #fff;text-align: center;" href="' . BASE_URL . '/index.php?password-token=' . $token . '" class="btn">Set New Password</a>
       </div>
   
       <footer>
@@ -273,7 +273,7 @@ function verifyAccountTemplate($token, $username)
           Check the button below to verify your account.
         </h4>
   
-        <a style="text-decoration: none;color: #fff;text-align: center;" href="http://localhost/webapp/index.php?token=' . $token . '" class="btn">Verify</a>
+        <a style="text-decoration: none;color: #fff;text-align: center;" href="' . BASE_URL . '/index.php?token=' . $token . '" class="btn">Verify</a>
       </div>
   
       <footer>

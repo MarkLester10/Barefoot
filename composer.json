@@ -1,6 +1,7 @@
 {
     "require": {
         "swiftmailer/swiftmailer": "^6.0",
-        "nesbot/carbon": "^2.45"
+        "nesbot/carbon": "^2.45",
+        "phpmailer/phpmailer": "^6.4"
     }
 }

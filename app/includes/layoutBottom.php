@@ -12,7 +12,7 @@
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="<?php echo BASE_URL . '/assets/js/init-vue.js' ?>"></script>
 <script src="<?php echo BASE_URL . '/assets/js/common.js' ?>"></script>
-<script src="<?php echo BASE_URL . '/assets/js/infinitescroll.js' ?>"></script>
+<!-- <script src="<?php echo BASE_URL . '/assets/js/infinitescroll.js' ?>"></script> -->
 
 </body>
 

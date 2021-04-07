@@ -1,7 +1,7 @@
 <header class="header">
   <div class="px-4 py-3 flex justify-between xl:w-72 xl:justify-center">
     <div>
-      <a href="/">
+      <a href="<?php echo BASE_URL ?>">
         <img src="<?php echo BASE_URL . '/assets/imgs/logo__dark.png"' ?> v-if=" !isDarkModeOn" class="w-1/2 lg:w-7/12"
           alt="Avatar Icon" />
         <img src="<?php echo BASE_URL . '/assets/imgs/logo__white.png' ?>" v-else class="w-1/2 lg:w-7/12"
@@ -30,7 +30,7 @@
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
-      <form action="/travels/collections.php" method="GET">
+      <form action="<?php echo BASE_URL . '/travels/collections.php' ?>" method="GET">
         <input class="input-web" autocomplete="off" name="search" type="text" placeholder="Global Search . . ." />
       </form>
     </div>
@@ -42,14 +42,16 @@
           <span class="text-black dark:text-gray-200 ml-4 md:ml-0 md:mr-4"><?php echo $_SESSION['username'] ?></span>
         </div>
         <div class="profile-dropDown rounded-md" :class="userDropDownOpen ? 'sm:block' : 'sm:hidden'">
-          <a class="mt-3 profile-link" href="/account/settings.php"><i class="mr-2 fas fa-cog"></i>Settings</a>
-          <a class="mt-3 profile-link" href="/logout.php">Logout<i class="ml-2 fas fa-sign-out-alt"></i></a>
+          <a class="mt-3 profile-link" href="<?php echo BASE_URL . '/account/settings.php' ?>"><i
+              class="mr-2 fas fa-cog"></i>Settings</a>
+          <a class="mt-3 profile-link" href="<?php echo BASE_URL . '/logout.php' ?>">Logout<i
+              class="ml-2 fas fa-sign-out-alt"></i></a>
         </div>
       </div>
       <?php else : ?>
       <div class="nav-links xl:space-x-4">
-        <a class="nav-link-item" href="/login.php">Login</a>
-        <a class="nav-link-item mt-1 sm:mt-0" href="/signup.php">Register</a>
+        <a class="nav-link-item" href="<?php echo BASE_URL . '/login.php' ?>">Login</a>
+        <a class="nav-link-item mt-1 sm:mt-0" href="<?php echo BASE_URL . '/signup.php' ?>">Register</a>
       </div>
       <?php endif; ?>
     </div>

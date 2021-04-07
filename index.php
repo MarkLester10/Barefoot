@@ -97,11 +97,11 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       </ul>
     </div>
     <div class="collection__grid mixitup" id="dynamic-posts">
-      <!-- <?php if (count($publicPosts) > 0) : ?>
+      <?php if (count($publicPosts) > 0) : ?>
       <?php include ROOT_PATH . '/app/includes/collections/travelcards.php'; ?>
       <?php else : ?>
       <h1 class="title__text text__adaptive">Sorry dear, No Post Added Yet 😞</h1>
-      <?php endif; ?> -->
+      <?php endif; ?>
     </div>
   </section>
   <div class="py-4 hidden" id="spinner">
