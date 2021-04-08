@@ -133,7 +133,8 @@ if (isset($_POST['reset-password-btn'])) {
   if (count($errors) === 0) {
     $res = update('users', 'email',  $email, $request);
     if (count($res) > 0) {
-      redirectWithMessage('login', ['success' => 'You\ve successfully change your password 😀. You can now login.']);
+      $user = selectOne('users', ['email' => $email]);
+      login($user, 'Password recovered successfully');
     }
   }
 }
