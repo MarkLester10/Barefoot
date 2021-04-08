@@ -105,7 +105,7 @@ if (isset($_POST['forgot-password-btn'])) {
     $user = selectOne('users', ['email' => $request['email']]);
     $userToken = $user['token'];
     sendPasswordResetLink($request['email'], $userToken);
-    redirectWithMessage('forgot-password', ['success' => 'We\'ve successfully sent a reset password link to your email address.']);
+    redirectWithMessage('forgot-password', ['success' => 'We\'ve successfully sent a reset password link to your email address. If not found, please check your spam folder']);
   }
 }
 
