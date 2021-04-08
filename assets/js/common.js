@@ -6,7 +6,7 @@ const slug = document.querySelector("#slug");
 if (message) {
   setTimeout(() => {
     message.classList.add("hidden");
-  }, 3000);
+  }, 5000);
 }
 
 var mixer = mixitup(containerEl);
