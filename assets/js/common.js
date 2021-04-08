@@ -30,6 +30,7 @@ function togglePopUp(e) {
 //CK EDitors
 const body = document.getElementById("body");
 if (body) {
+  CKFinder.setupCKEditor();
   CKEDITOR.replace("body");
 }
 
