@@ -1,8 +1,9 @@
 <?php foreach ($relatedStories as $relatedStory) : ?>
 <div class="card rounded-md mix mb-4 shadow-md<?php echo $relatedStory['catSlug'] ?>">
-  <div class="card__img">
+  <div class="card__img h-52 w-full">
     <span class="pill"><?php echo $relatedStory['reading_time'] ?> mins</span>
-    <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$relatedStory['image']}" ?>' class="rounded-t-md" alt="">
+    <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$relatedStory['image']}" ?>'
+      class="rounded-t-md w-full h-full object-cover" alt="">
     <a href='<?php echo "/user/profile.php?username={$relatedStory['username']}&id={$relatedStory['user_id']}" ?>'>
       <?php if (empty($relatedStory['profile_image'])) : ?>
       <img src="https://ui-avatars.com/api/?name=<?php echo $relatedStory['username'] ?>&size=512"

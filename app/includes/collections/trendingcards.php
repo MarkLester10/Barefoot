@@ -1,8 +1,9 @@
 <?php foreach ($trending as $post) : ?>
 <div class="card rounded-md mix <?php echo $post['catSlug'] ?>">
-  <div class="card__img">
+  <div class="card__img h-52 w-full">
     <span class="pill"><?php echo $post['reading_time'] ?> mins</span>
-    <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$post['image']}" ?>' class="rounded-t-md" alt="">
+    <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$post['image']}" ?>'
+      class="rounded-t-md h-full w-full object-cover" alt="">
     <a href='<?php echo "/user/profile.php?username={$post['username']}&id={$post['user_id']}" ?>'>
       <?php if (empty($post['profile_image'])) : ?>
       <img src="https://ui-avatars.com/api/?name=<?php echo $post['username'] ?>&size=512" class="profile-img"

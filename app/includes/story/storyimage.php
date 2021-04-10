@@ -1,6 +1,5 @@
 <div class="relative">
-  <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$story['image']}" ?>' class="h-full w-full object-cover"
-    alt="#">
+  <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$story['image']}" ?>' class="h-96 w-full object-cover" alt="#">
   <button type="button" class="play__btn <?php echo empty($story['youtube_url']) ? 'hidden' : 'block' ?>"
     @click="toggleModal">
     <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
