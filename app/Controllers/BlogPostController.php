@@ -6,6 +6,7 @@ require_once ROOT_PATH . "/app/helpers/ImageHelper.php";
 require_once ROOT_PATH . "/app/helpers/ViewFormatter.php";
 require_once ROOT_PATH . "/app/Requests/FormRequests.php";
 require_once ROOT_PATH . "/app/Controllers/EmailController.php";
+require_once ROOT_PATH . "/app/middlewares/AuthMiddleware.php";
 $userId = $_SESSION['id'];
 $allPosts = selectPublicPosts(['p.user_id' => $userId]);
 $categories = selectAll('categories');

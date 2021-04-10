@@ -32,6 +32,8 @@ new Vue({
     isHeartOpen: false,
     isLiked: false,
     isEdit: false,
+    likeUrl: "http://localhost:8080/app/Controllers/LikeController.php",
+    commentUrl: "http://localhost:8080/app/Controllers/CommentController.php",
   },
   methods: {
     clamp: function () {
@@ -59,7 +61,7 @@ new Vue({
       }
       axios
         .get(
-          `http://localhost:8080/app/Controllers/LikeController.php?action=liked&post_id=${this.newComment.post_id}&user_id=${this.newComment.user_id}`
+          `${this.likeUrl}?action=liked&post_id=${this.newComment.post_id}&user_id=${this.newComment.user_id}`
         )
         .then((res) => {
           this.getSinglePost();
@@ -69,7 +71,7 @@ new Vue({
     getSinglePost: function () {
       axios
         .get(
-          `http://localhost:8080/app/Controllers/LikeController.php?action=get-post&post_id=${this.newComment.post_id}&user_id=${this.newComment.user_id}`
+          `${this.likeUrl}?action=get-post&post_id=${this.newComment.post_id}&user_id=${this.newComment.user_id}`
         )
         .then((res) => {
           this.isLiked = res.data.isPostLiked;
@@ -127,10 +129,7 @@ new Vue({
       var formData = this.toFormData(this.newComment);
       this.$refs.spinner.classList.remove("hidden");
       axios
-        .post(
-          "http://localhost:8080/app/Controllers/CommentController.php?action=add-comment",
-          formData
-        )
+        .post(`${this.commentUrl}?action=add-comment`, formData)
         .then((res) => {
           this.$refs.spinner.classList.add("hidden");
           this.newComment.comment = "";
@@ -143,10 +142,7 @@ new Vue({
       var formData = this.toFormData(this.newComment);
       this.$refs.spinner.classList.remove("hidden");
       axios
-        .post(
-          "http://localhost:8080/app/Controllers/CommentController.php?action=edit-comment",
-          formData
-        )
+        .post(`${this.commentUrl}?action=edit-comment`, formData)
         .then((res) => {
           this.isEdit = !this.isEdit;
           this.$refs.sendCommentBtn.disabled = true;
@@ -159,7 +155,7 @@ new Vue({
     deleteComment: function () {
       axios
         .get(
-          `http://localhost:8080/app/Controllers/CommentController.php?action=delete-comment&comment_id=${this.commentId}`
+          `${this.commentUrl}?action=delete-comment&comment_id=${this.commentId}`
         )
         .then((res) => {
           this.isConfirmModalOpen = !this.isConfirmModalOpen;
@@ -172,7 +168,7 @@ new Vue({
     fetchAllComments: function () {
       axios
         .get(
-          `http://localhost:8080/app/Controllers/CommentController.php?action=fetch-comments&post_id=${this.newComment.post_id}`
+          `${this.commentUrl}?action=fetch-comments&post_id=${this.newComment.post_id}`
         )
         .then((res) => {
           if (res.data.error) {
