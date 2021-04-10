@@ -30,7 +30,8 @@ include ROOT_PATH . '/app/includes/sidebar.php'; ?>
     </p>
     <div class="mt-4 space-x-4">
       <button type="button" class="secondary__btn border border-black" @click.prevent="toggleModal">Cancel</button>
-      <a href="/account/delete.php" class="inline-block danger__btn hover:bg-red-400">Delete</a>
+      <a href="<?php echo BASE_URL . '/account/delete.php' ?>"
+        class="inline-block danger__btn hover:bg-red-400">Delete</a>
     </div>
   </div>
 </div>
