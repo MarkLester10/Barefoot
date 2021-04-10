@@ -29,6 +29,7 @@ function selectAll($table, $conditions = [])
   global $conn;
   $sql = "SELECT * FROM $table";
   if (empty($conditions)) {
+        $sql = "{$sql} ORDER BY id DESC";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
