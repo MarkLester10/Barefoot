@@ -9,7 +9,7 @@ include ROOT_PATH . '/app/includes/layoutTop.php';
 
 
 <!-- login area -->
-<div class="flex items-center dark:bg-gray-900 p-6">
+<div class="flex items-center justify-center dark:bg-gray-900 p-6">
   <div class="flex-1 max-w-4xl mx-auto overflow-hidden rounded-lg shadow-xl bg__adaptive">
     <div class="flex flex-col overflow-y-auto md:flex-row">
       <div class="h-32 md:h-full md:w-1/2">
@@ -65,8 +65,8 @@ include ROOT_PATH . '/app/includes/layoutTop.php';
     </div>
   </div>
 </div>
-<div class="py-6 dark:bg-gray-900"></div>
-<?php include ROOT_PATH . '/app/includes/footer.php' ?>
+<!-- <div class="py-6 dark:bg-gray-900"></div>
+<?php include ROOT_PATH . '/app/includes/footer.php' ?> -->
 </div>
 <!-- End of Sidebar -->
 </div>
