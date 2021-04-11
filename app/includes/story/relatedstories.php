@@ -1,6 +1,6 @@
 <?php foreach ($relatedStories as $relatedStory) : ?>
 <div class="card rounded-md mix mb-4 shadow-md<?php echo $relatedStory['catSlug'] ?>">
-  <div class="card__img h-52 w-full">
+  <div class="card__img h-32 w-full">
     <span class="pill"><?php echo $relatedStory['reading_time'] ?> mins</span>
     <img src='<?php echo BASE_URL . "/assets/imgs/travels/{$relatedStory['image']}" ?>'
       class="rounded-t-md w-full h-full object-cover" alt="">
