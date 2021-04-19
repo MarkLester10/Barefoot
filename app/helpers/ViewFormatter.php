@@ -18,6 +18,7 @@ function formattedLikes($count)
 
 function formattedTime($datetime, $isoFormat = false)
 {
+    date_default_timezone_set('Asia/Manila');
   if ($isoFormat) {
     return Carbon::parse($datetime)->isoFormat('MMMM Do YYYY, h:mm:ss A');
   } else {
