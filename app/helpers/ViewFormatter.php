@@ -18,10 +18,11 @@ function formattedLikes($count)
 
 function formattedTime($datetime, $isoFormat = false)
 {
-    date_default_timezone_set('Asia/Manila');
+     $now = new DateTime($datetime);
+    $now->setTimezone(new DateTimeZone('Asia/Manila'));
   if ($isoFormat) {
-    return Carbon::parse($datetime)->isoFormat('MMMM Do YYYY, h:mm:ss A');
+    return Carbon::parse($now)->isoFormat('MMMM Do YYYY, h:mm A');
   } else {
-    return Carbon::parse($datetime)->calendar();
+    return Carbon::parse($now)->calendar();
   }
 }
