@@ -23,6 +23,6 @@ function formattedTime($datetime, $isoFormat = false)
   if ($isoFormat) {
     return Carbon::parse($now)->isoFormat('MMMM Do YYYY, h:mm A');
   } else {
-    return Carbon::parse($now)->calendar();
+    return Carbon::parse($now)->diffForHumans();
   }
 }
