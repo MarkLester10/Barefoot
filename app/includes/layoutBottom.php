@@ -14,6 +14,7 @@
 <script src="<?php echo BASE_URL . '/assets/js/common.js' ?>"></script>
 <!-- <script src="<?php echo BASE_URL . '/assets/js/infinitescroll.js' ?>"></script> -->
 
+
 </body>
 
 </html>

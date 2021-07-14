@@ -9,6 +9,7 @@
       <li><?php echo "#{$tags['name']}" ?></li>
       <?php endforeach; ?>
     </ul>
+    <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons py-4"></div><!-- ShareThis END -->
   </div>
   <!-- Author -->
   <div class="flex md:items-center md:justify-between flex-col md:flex-row">

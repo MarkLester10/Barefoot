@@ -4,6 +4,11 @@
 <head>
   <title><?php echo $title ?></title>
   <meta charset="UTF-8" />
+<meta property="og:url" content="<?php echo $postUrl ?>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<?php echo $postTitle ?>" />
+<meta property="og:description" content="<?php echo $postBody ?>" />
+<meta property="og:image" content="<?php echo $postImage ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="apple-touch-icon" sizes="180x180"
     href="<?php echo BASE_URL . '/assets/imgs/favicon/apple-touch-icon.png' ?>">
@@ -23,10 +28,12 @@
   <link href="https://cdn.jsdelivr.net/npm/tom-select@1.1/dist/css/tom-select.css" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo BASE_URL . '/assets/scss/vendors/tailwind.css' ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . '/assets/css/main.min.css' ?>" />
+  <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60eeae47104ca3001988b87c&product=sop' async='async'></script>
 </head>
 
 <body>
   <div class="app" id="app">
+
     <?php
     include ROOT_PATH . '/app/includes/warning.php';
     include ROOT_PATH . '/app/includes/messages.php';

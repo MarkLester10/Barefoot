@@ -6,9 +6,14 @@ if (!empty($story)) {
   $relatedStories = selectPublicPosts(['p.is_published' => 1, 'p.category_id' => $story['catId']]);
 }
 $title = empty($story['title']) ? 'Barefoot Blog' : $story['title'];
+$postUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$postTitle = empty($story['title']) ? 'Barefoot Blog' : $story['title'];
+$postBody = empty($story['title']) ? 'Barefoot Blog' : substr_replace(strip_tags(html_entity_decode($story['body'])), "...", 200);
+$postImage = BASE_URL . "/assets/imgs/travels/{$story['image']}";
 include ROOT_PATH . '/app/includes/layoutTop.php';
 include ROOT_PATH . '/app/includes/loader.php';
 include ROOT_PATH . '/app/includes/sidebar.php';
+
 ?>
 
 
@@ -29,7 +34,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
       <div class="rounded-md px-3">
         <h1 class="text-lg font-semibold tracking-wide text__adaptive py-4 md:py-0">Check out this stories too! 🧐</h1>
         <div class="border my-4 border-red-400"></div>
-        <?php include ROOT_PATH . '/app/includes/story/relatedStories.php' ?>
+        <?php include ROOT_PATH . '/app/includes/story/relatedstories.php' ?>
       </div>
     </div>
   </section>
@@ -44,7 +49,7 @@ include ROOT_PATH . '/app/includes/sidebar.php';
 <!-- Modal -->
 <div class="confirmation__modal" :class="{'active':isModalOpen}" @click="toggleModal">
   <div class="modal__body rounded-md bg__adaptive px-4 py-4 w-11/12 md:w-10/12 md:px-6 md:py-6">
-    <iframe class="w-full" height="500" src="https://www.youtube.com/embed/<?php echo $story['youtube_url'] ?>"
+    <iframe class="w-full" style="height: 80vh" src="https://www.youtube.com/embed/<?php echo $story['youtube_url'] ?>"
       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
   </div>
